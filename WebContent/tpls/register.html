@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>SDM管理系统</title>
+<!-- meta info -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="add_interface">
+<meta name="author" content="Sun Ke">
+
+<!-- Le styles -->
+<link href="../style/bootstrap.min.css" rel="stylesheet">
+<link href="../style/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="../style/bootstrap-responsive.css" rel="stylesheet">
+<link href="../style/docs.css" rel="stylesheet">
+<link href="../style/prettify.css" rel="stylesheet">
+<link href="../style/main.css" rel="stylesheet">
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="//cdnjs.bootcss.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+
+<!-- Fav and touch icons -->
+<link rel="shortcut icon" href="../image/icon.png'/>">
+<script src="../js/jquery.min.js"></script>
+
+</head>
+
+<body>
+	<div align="center">
+		<img src="../image/csdf.jpg">
+		<h2 style="font-family: verdana">共享数据模型管理系统（SDM）</h2>
+	</div>
+	<hr>
+	<div class="container">
+		<form class="form-signin"  method="POST" >
+			<legend>注册新用户</legend>
+			<fieldset>
+				<div  id="div_username">
+					<!-- <label class="control-label">用户名&nbsp;</label> -->
+					<div class="controls">
+						<input type="text" placeholder="用户名" name="username" id="username" />
+						<span class="help-inline" id="help_username"></span>
+					</div>
+				</div>
+				<div  id="div_password">
+					<!-- <label class="control-label">密码&nbsp;</label> -->
+					<div class="controls">
+						<input type="password" placeholder="密码" name="password" id="password" /> 
+						<span class="help-inline" id="help_password"></span>
+					</div>
+				</div>
+				<div  id="div_repassword">
+					<!-- <label class="control-label">确认密码&nbsp;</label> -->
+					<div class="controls">
+						<input type="password" placeholder="确认密码" name="repassword" id="repassword" /> 
+						<span class="help-inline" id="help_repassword"></span>
+					</div>
+				</div>
+				<div >
+					<!-- <label class="control-label">手机号码&nbsp;</label> -->
+					<div class="controls">
+						<input type="text" placeholder="手机号码" name="phone" id="phone"/>
+					</div>
+				</div>
+				<div >
+					<!-- <label class="control-label">邮箱&nbsp;</label> -->
+					<div class="controls">
+						<input type="text" placeholder="邮箱" name="email" id="email"/>
+					</div>
+				</div>
+				<div >
+					<input class="btn" type="button" value="提交" id="submit"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<span style="margin-top: 20px">
+						已有帐户？<a href="login.html">登录</a>
+					</span>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<!-- /container -->
+
+	<hr>
+
+	<footer>
+		<center>
+			<p>SDM管理系统</p>
+		</center>
+	</footer>
+
+	</div>
+
+</body>
+</html>
+<script src="/ModelManage/js/cookie.js"></script>
+<script type="text/javascript">
+$('#submit').click(function(){
+	if(valid()){
+		$.ajax({
+		       type: "POST",
+		       url: "/ModelManage/register",
+		       dataType:"json",
+		       data: {username:$("#username").val(), password:$("#password").val(),
+		    	   phone:$("#phone").val(),email:$("#email").val()},
+		       success: function(data) {
+		         if(data!=null){
+		        	 setCookie("username",data.username,1);
+		        	 setCookie("phone",data.phone,1);
+		        	 setCookie("email",data.email,1);
+		        	 setCookie("authority",data.authority,1);
+		        	 window.location.href="home.html";
+		         }
+		         else 
+		        	 alert("注册失败！");
+		       }
+		     });
+	}
+	
+	
+});
+
+function valid() {
+		//$("#div_username").removeClass("control-group error");
+		//$("#div_username").addClass("control-group");
+		//$("#div_password").removeClass("control-group error");
+		//$("#div_password").addClass("control-group");
+		//$("#div_repassword").removeClass("control-group error");
+		//$("#div_repassword").addClass("control-group");
+		document.getElementById("help_username").innerHTML = "";
+		document.getElementById("help_password").innerHTML = "";
+		document.getElementById("help_repassword").innerHTML = "";
+		//trim()去掉字符串首尾空格
+		var username = $("#username").val().trim();
+		var password = $("#password").val().trim();
+		var repassword = $("#repassword").val().trim();
+		//alert("username"+username+"password"+password+"repassword"+repassword);
+		if (username == "") {
+			$("#div_username").removeClass("control-group");
+			$("#div_username").addClass("control-group error");
+			document.getElementById("help_username").innerHTML = "用户名不能为空";
+			return false;
+		}
+		if (password == "") {
+			$("#div_password").removeClass("control-group");
+			$("#div_password").addClass("control-group error");
+			document.getElementById("help_password").innerHTML = "密码不能为空";
+			return false;
+		}
+		if (repassword == "") {
+			$("#div_repassword").removeClass("control-group");
+			$("#div_repassword").addClass("control-group error");
+			document.getElementById("help_repassword").innerHTML = "确认密码不能为空";
+			return false;
+		}
+		if (password != repassword) {
+			$("#div_repassword").removeClass("control-group");
+			$("#div_repassword").addClass("control-group error");
+			document.getElementById("help_repassword").innerHTML = "确认密码与密码不一致";
+			return false;
+		}
+		return true;
+	}
+</script>
+

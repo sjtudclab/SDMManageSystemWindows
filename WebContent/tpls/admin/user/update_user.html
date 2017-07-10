@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>用户信息修改</title>
+  	<script src="/ModelManage/js/jquery.min.js"></script>
+	<script src="/ModelManage/js/bootstrap.min.js"></script>
+	 <link rel="stylesheet" href="/ModelManage/style/bootstrap.min2.css" type="text/css">
+  </head>
+
+  <body>
+  	<div align="left">
+		<img src="../../../image/csdf.jpg">
+	</div>
+    <nav class="navbar navbar-default" style="margin-bottom:0;border:0;border-radius:0;">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-grain"></span>&nbsp;SDM管理系统</a>
+        </div>
+       
+        <ul class="nav navbar-nav" style="float:right;">
+			<li class="dropdown" class="active">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					个人信息 
+					<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="update_user.html">修改个人信息</a></li>
+					<li><a href="update_pwd.html">修改密码</a></li>
+				</ul>
+			</li>
+			<li ><a href=" javascript:void(0)" onclick="logout()">退出登录</a></li>
+		</ul>
+       <span id="weluser" class="navbar-text"style="float:right;">欢迎登录，XXX</span>
+      </div>
+      </nav>
+
+    <div class="container"style="overflow:hidden;margin:0;width:100%;padding:0px;">
+
+      <div class="row">
+        <div class="col-xs-2"id="inn">
+          <ul class="nav nav-pills nav-stacked">
+           <li role="presentation" class="0"><a href="../../models/checkModel.html"><span class="glyphicon glyphicon-user"></span>&nbsp;查看模型</a></li>
+            <li role="presentation" class="1"><a href="../../models/download.html"><span class="glyphicon glyphicon-education"></span>&nbsp;下载模型</a></li>
+            <li role="presentation" class="2"><a href="../../models/createModel.html"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;新建模型</a></li>
+            <li role="presentation" class="2"><a href="../../models/checkCR.html"><span class="glyphicon glyphicon-book"></span>&nbsp;我的模型</a></li>
+            <li role="presentation" class="3"><a href="../../models/checkCR_CCB.html"><span class="glyphicon glyphicon-book"></span>&nbsp;审核模型</a></li>
+            <li role="presentation" class="5"><a href="../permission/manageUser.html"><span class="glyphicon glyphicon-user"></span>&nbsp;管理用户</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-6">
+          <p class="biao"><a href="../../home.html">首页></a><a>管理用户信息></a><a>修改个人信息</a></p>
+          <form class="form-horizontal" >
+            <div class="form-group">
+              <label for="code" class="col-xs-3 control-label"><span style="color:red">*</span>用户名：</label>
+              <div class="col-xs-6">
+                  <input type="text" class="form-control" id="username" name="username" disabled="disabled" >
+              </div>
+            </div>
+  <!--           <div class="form-group">
+              <label for="sex" class="col-xs-3 control-label"><span style="color:red">*</span>性别：</label>
+              <div class="col-xs-6">
+                  <input style="margin-top:0.5em;" type="radio"id="sex" name="sex" value="male">男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input style="margin-top:0.5em;" type="radio"name="sex" value="female">女
+              </div>
+            </div>
+            
+            
+            <div class="form-group">
+              <label for="id" class="col-xs-3 control-label"><span style="color:red">*</span>身份证号：</label>
+              <div class="col-xs-6">
+                  <input type="text" class="form-control" id="idCard" name="idCard">
+              </div>
+            </div>-->
+            <div class="form-group">
+              <label for="name" class="col-xs-3 control-label"><span style="color:red">*</span>邮箱：</label>
+              <div class="col-xs-6">
+                  <input type="text" class="form-control" id="email" name="email">
+              </div>
+            </div>
+          
+            <div class="form-group">
+              <label for="name" class="col-xs-3 control-label"><span style="color:red">*</span>电话：</label>
+              <div class="col-xs-6">
+                  <input type="text" class="form-control" id="phone" name="phone">
+              </div>
+            </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-offset-1 col-xs-4" align="center">
+                <button type="submit" onclick="infoChange()" class="btn btn-primary"style="font-size:1.5em;text-align:center;">确&nbsp;认&nbsp;提&nbsp;交</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="submit" class="btn btn-primary"style="font-size:1.5em;text-align:center;">取&nbsp;消</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+  </body>
+  <script src="/ModelManage/js/cookie.js"></script>
+  <script>
+  $(document).ready(function(){
+	  if(checkCookie()){
+	  var username=getCookie("username");
+	  var email=getCookie("email");
+	  var phone=getCookie("phone");
+	  document.getElementById("weluser").innerHTML="欢迎登录，"+username;
+	  document.getElementById("username").value=username;
+	  document.getElementById("email").value=email;
+	  document.getElementById("phone").value=phone;
+	  var authority=getCookie("authority");
+	 	 if(authority!=null){
+			  for(var i=0;i<6;i++)	  
+				  if($.inArray(i.toString(),authority.split(","))==-1)
+				  		$("."+i).remove();
+		  }  
+  }
+	  else
+		  alert("谢绝访问");
+  })
+  function infoChange(){
+	  $.ajax({
+	       type: "POST",
+	       url: "/ModelManage/infoChange",
+	       dataType:"json",
+	       data: {username:$("#username").val(), 
+	    	   phone:$("#phone").val(),email:$("#email").val()},
+	       success: function(data) {
+	         if(data==1){
+	        	 setCookie("phone",$("#phone").val(),1);
+	        	 setCookie("email",$("#email").val(),1);
+	        	 //document.getElementById("email").value=$("#email").val();
+	       	 	 //document.getElementById("phone").value=$("#phone").val();
+	       	 	 location.reload;
+	       	 	 alert("修改成功！");
+	         }
+	         else 
+	        	 alert("修改失败！");
+	       }
+	     });
+  }
+	function logout(){
+	  delCookie("username");
+	  window.location.href="../../login.html";
+  }
+  </script>
+</html>

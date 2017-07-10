@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SDM管理系统</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <script src="/ModelManage/js/jquery.min.js"></script>
+<script src="/ModelManage/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="/ModelManage/style/bootstrap.min2.css" type="text/css">
+</head>
+<body>
+	<div align="left">
+		<img src="/ModelManage/image/csdf.jpg">
+	</div>
+    <nav class="navbar navbar-default" style="margin-bottom:0;border:0;border-radius:0;">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-grain"></span>&nbsp;SDM管理系统</a>
+        </div>
+
+        <ul class="nav navbar-nav" style="float:right;">
+			<li class="dropdown" class="active">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					个人信息 
+					<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="admin/user/update_user.html">修改个人信息</a></li>
+					<li><a href="admin/user/update_pwd.html">修改密码</a></li>
+				</ul>
+			</li>
+			<li ><a href="../login.html">退出登录</a></li>
+		</ul>
+       <span id="weluser" class="navbar-text"style="float:right;">欢迎登录，XXX</span>
+      </div>
+      </nav>
+     
+<div class="row">
+        <div class="col-xs-2"id="inn">
+          <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" class="0"><a href="checkModel.html"><span class="glyphicon glyphicon-user"></span>&nbsp;查看模型</a></li>
+            <li role="presentation" class="1"><a href="download.html"><span class="glyphicon glyphicon-education"></span>&nbsp;下载模型</a></li>
+            <li role="presentation" class="2"><a href="createModel.html"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;新建模型</a></li>
+  			<li role="presentation" class="2"><a href="checkCR.html"><span class="glyphicon glyphicon-book"></span>&nbsp;我的模型</a></li>
+            <li role="presentation" class="3"><a href="checkCR_CCB.html"><span class="glyphicon glyphicon-book"></span>&nbsp;审核模型</a></li>
+            <li role="presentation" class="5"><a href="../../permission/manageUser.html"><span class="glyphicon glyphicon-user"></span>&nbsp;管理用户</a></li>
+          </ul>
+        </div>
+ <div class="col-xs-6">
+          <p class="biao"><a href="../../home.html">首页></a><a>审核模型</a></p>
+          <form class="form-horizontal" method="POST">
+            <div class="form-group">
+              <label for="elementID" class="col-xs-3 control-label"><span style="color:red">*</span>元素ID：</label>
+              <div class="col-xs-6">
+                  <p class="form-control" id="elementID"></p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="englishName" class="col-xs-3 control-label"><span style="color:red">*</span>元素英文名称：</label>
+              <div class="col-xs-6">
+                  <p class="form-control" id="englishName"></p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="chineseName" class="col-xs-3 control-label"><span style="color:red">*</span>元素中文名称：</label>
+              <div class="col-xs-6">
+                   <p class="form-control" id="chineseName"></p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="description" class="col-xs-3 control-label"><span style="color:red">*</span>描述：</label>
+              <div class="col-xs-6">
+                  <p class="form-control" id="description"></p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="creator" class="col-xs-3 control-label"><span style="color:red">*</span>创建者：</label>
+              <div class="col-xs-6">
+                  <p class="form-control" id="creator"></p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="createTime" class="col-xs-3 control-label"><span style="color:red">*</span>创建时间：</label>
+              <div class="col-xs-6">
+                  <p class="form-control" id="createTime"></p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="approvalNum" class="col-xs-3 control-label"><span style="color:red">*</span>通过票数：</label>
+              <div class="col-xs-6">
+                  <p class="form-control" id="approvalNum"></p>
+              </div>
+            </div>    
+            <div class="form-group">
+              <label for="disapprovalNum" class="col-xs-3 control-label"><span style="color:red">*</span>不通过票数：</label>
+              <div class="col-xs-6">
+                  <p class="form-control" id="disapprovalNum"></p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="abstainNum" class="col-xs-3 control-label"><span style="color:red">*</span>弃权票数：</label>
+              <div class="col-xs-6">
+                  <p class="form-control" id="abstainNum"></p>
+              </div>
+            </div> 
+            <div class="form-group">
+              <label for="vote" class="col-xs-3 control-label"><span style="color:red">*</span>投票：</label>
+              <div class="col-xs-6">
+                 <select id="vote" class="form-control">
+					<option value="1" id="approve">通过</option>
+					<option value="-1" id="disapprove">不通过</option>
+					<option value="0" id="abstain">弃权</option>
+				</select>
+				</div>
+			</div>
+			 <div class="form-group" id="reasonDiv">
+              <label for="reason" class="col-xs-3 control-label"><span style="color:red">*</span>理由：</label>
+              <div class="col-xs-6">
+                  <input type="text" class="form-control" id="reason" name="reason">
+              </div>
+            </div> 
+            <div class="form-group">
+              <div class="col-xs-offset-3 col-xs-6" align="center">
+                <input type="button" onclick="votere()" class="btn btn-primary" style="font-size:1.5em;text-align:center;" value="确&nbsp;认&nbsp;提&nbsp;交"/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="submit" class="btn btn-primary"style="font-size:1.5em;text-align:center;">取&nbsp;消</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+
+  </body>
+  <script src="/ModelManage/js/cookie.js"></script>
+  <script>
+  $(document).ready(function(){
+	  if(checkCookie()){
+	          var username=getCookie("username");
+	      	  document.getElementById("weluser").innerHTML="欢迎登录，"+username;
+	      	 var authority=getCookie("authority");
+		 	 if(authority!=null){
+				  for(var i=0;i<6;i++)	  
+					  if($.inArray(i.toString(),authority.split(","))==-1)
+					  		$("."+i).remove();
+			  }  
+	      	  getparm();
+	      } 
+	   $("#reasonDiv").hide();
+	   $("#vote").change(function(){
+	       var selected=$(this).children('option:selected').val()
+	       if(selected=="-1"){
+	    	   $("#reasonDiv").show();
+	       }
+	       else{
+	    	   $("#reason").val("");
+	    	   $("#reasonDiv").hide();
+	       }   
+	   })   
+  })
+ 
+	function logout(){
+	  delCookie("username");
+	  window.location.href="../login.html";
+  }
+	function getparm() 
+	{ 
+	var url=location.href; 
+	var tmp1=url.split("?")[1]; 
+	var elementID=tmp1.split("=")[1];  
+	 $.ajax({
+	       type: "POST",
+	       url: "/ModelManage/checkCRByElementID",
+	       dataType:"json",
+	       data: {elementID:elementID},
+	       success: function(data) {
+	         if(data!=null){
+	        	 document.getElementById("elementID").innerHTML=data.elementID;
+	        	 document.getElementById("englishName").innerHTML=data.englishName;
+	        	 document.getElementById("chineseName").innerHTML=data.chineseName;
+	        	 document.getElementById("description").innerHTML=data.description;
+	        	 document.getElementById("creator").innerHTML=data.creator;
+	        	 document.getElementById("createTime").innerHTML=data.createTime;
+	        	 document.getElementById("approvalNum").innerHTML=data.approvalNum;
+	        	 document.getElementById("disapprovalNum").innerHTML=data.disapprovalNum;
+	        	 document.getElementById("abstainNum").innerHTML=data.abstainNum;
+	         }
+	         else 
+	        	 alert("查询失败！");
+	       }
+	     });
+	} 
+	 function votere(){
+		 $.ajax({
+		       type: "POST",
+		       url: "/ModelManage/vote",
+		       dataType:"json",
+		       data: {eleID:document.getElementById("elementID").innerHTML,vote:$("#vote").val(),reason:$("#reason").val(),state:"1",votor:getCookie("username")},
+		       success: function(data) {
+		         if(data==1){
+		       	 	 alert("投票成功！");
+		         }
+		         else 
+		        	 alert("您已投票！");
+		       },
+		       error:function(e){
+		    	   alert("投票失败");
+		       }
+		     });
+		 //  data: {eleID:$("#elementID").val(),vote:$("#vote").val(),reason:$("#reason").val(),state:"1",votor:getCookie("username"),CRID:5},
+	  }
+  </script>
+</html>

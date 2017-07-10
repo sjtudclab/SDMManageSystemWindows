@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>用户密码修改</title>
+  <!-- <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->  
+  <script src="/ModelManage/js/jquery.min.js"></script>
+<script src="/ModelManage/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="/ModelManage/style/bootstrap.min2.css" type="text/css">
+  </head>
+
+  <body>
+  	<div align="left">
+		<img src="../../../image/csdf.jpg">
+	</div>
+    <nav class="navbar navbar-default" style="margin-bottom:0;border:0;border-radius:0;">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-grain"></span>&nbsp;SDM管理系统</a>
+        </div>
+
+        <ul class="nav navbar-nav" style="float:right;">
+			<li class="dropdown" class="active">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					个人信息 
+					<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="update_user.html">修改个人信息</a></li>
+					<li><a href="update_pwd.html">修改密码</a></li>
+				</ul>
+			</li>
+			<li ><a href="../../login.html">退出登录</a></li>
+		</ul>
+       <span id="weluser" class="navbar-text"style="float:right;">欢迎登录，XXX</span>
+      </div>
+      </nav>
+
+    <div class="container"style="overflow:hidden;margin:0;width:100%;padding:0px;">
+
+      <div class="row">
+        <div class="col-xs-2"id="inn">
+          <ul class="nav nav-pills nav-stacked">
+             <li role="presentation" class="0"><a href="../../models/checkModel.html"><span class="glyphicon glyphicon-user"></span>&nbsp;查看模型</a></li>
+            <li role="presentation" class="1"><a href="../../models/download.html"><span class="glyphicon glyphicon-education"></span>&nbsp;下载模型</a></li>
+            <li role="presentation" class="2"><a href="../../models/createModel.html"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;新建模型</a></li>
+            <li role="presentation" class="2"><a href="../../models/checkCR.html"><span class="glyphicon glyphicon-book"></span>&nbsp;我的模型</a></li>
+            <li role="presentation" class="3"><a href="../../models/checkCR_CCB.html"><span class="glyphicon glyphicon-book"></span>&nbsp;审核模型</a></li>
+            <li role="presentation" class="5"><a href="../permission/manageUser.html"><span class="glyphicon glyphicon-user"></span>&nbsp;管理用户</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-6">
+          <p class="biao"><a href="../../home.html">首页></a><a>管理用户信息></a><a>修改密码</a></p>
+          <form class="form-horizontal">
+            <h2>修改密码</h2>
+            <div class="form-group" id="div_old_password">
+              <label for="oldPwd" class="col-xs-3 control-label"><span style="color:red">*</span>原密码：</label>
+              <div class="col-xs-4">
+                  <input type="text" class="form-control" id="oldPwd" name="oldPwd">
+                  <span class="help-inline" id="help_password"></span>
+              </div>
+            </div>
+            <div class="form-group" id="div_new_password">
+              <label for="newPwd" class="col-xs-3 control-label"><span style="color:red">*</span>新密码：</label>
+              <div class="col-xs-4">
+                  <input type="password" class="form-control" id="newPwd" name="newPwd">
+                  <span class="help-inline" id="help_newPassword"></span>
+              </div>
+            </div>            
+            <div class="form-group" id="div_repassword">
+              <label for="ackPwd" class="col-xs-3 control-label"><span style="color:red">*</span>确认新密码：</label>
+              <div class="col-xs-4">
+                  <input type="password" class="form-control" id="ackPwd" name="ackPwd">
+                  <span class="help-inline" id="help_repassword"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-xs-offset-3 col-xs-5" >
+              <!-- 使用button会自动刷新页面，因此改成input -->
+                <!-- <button type="submit" onclick="pwdChange()" class="btn btn-primary"style="font-size:1.5em;text-align:center;">提&nbsp;交</button> --> 
+               <input class="btn btn-primary"style="font-size:1.5em;text-align:center;" type="button" value="提交" id="submit"/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="submit" class="btn btn-primary"style="font-size:1.5em;text-align:center;">取&nbsp;消</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </body>
+    <script src="/ModelManage/js/cookie.js"></script>
+<script type="text/javascript">
+var username="";
+$(document).ready(function(){
+	  if(checkCookie()){
+	  username=getCookie("username");
+	  document.getElementById("weluser").innerHTML="欢迎登录，"+username;
+	  var authority=getCookie("authority");
+	 	 if(authority!=null){
+			  for(var i=0;i<6;i++)	  
+				  if($.inArray(i.toString(),authority.split(","))==-1)
+				  		$("."+i).remove();
+		  }  
+	  }
+})
+$('#submit').click(function(){
+	if(valid()){
+		  $.ajax({
+		       type: "POST",
+		       url: "/ModelManage/pwdChange",
+		       dataType:"json",
+		       data: {username:username, password:$("#newPwd").val()},
+		       success: function(data) {
+		         if(data==1){
+		       	 	 alert("修改成功！");
+		         }
+		         else 
+		        	 alert("修改失败！");
+		       }
+		     });
+	}
+})
+function valid() {
+	//一下类型没有生效，不知道为什么
+	$("#div_old_password").removeClass("control-group error");
+	$("#div_old_password").addClass("control-group");
+	$("#div_new_password").removeClass("control-group error");
+	$("#div_new_password").addClass("control-group");
+	$("#div_repassword").removeClass("control-group error");
+	$("#div_repassword").addClass("control-group");
+	document.getElementById("help_password").innerHTML = "";
+	document.getElementById("help_newPassword").innerHTML = "";
+	document.getElementById("help_repassword").innerHTML = "";
+	var password = $("#oldPwd").val().trim();
+	var newPassword = $("#newPwd").val().trim();
+	var repassword = $("#ackPwd").val().trim();
+	if (password == "") {
+		$("#div_old_password").removeClass("control-group");
+		$("#div_old_password").addClass("control-group error");
+		document.getElementById("help_password").innerHTML = "原始密码不能为空";
+		return false;
+	}
+	if (newPassword == "") {
+		$("#div_new_password").removeClass("control-group");
+		$("#div_new_password").addClass("control-group error");
+		document.getElementById("help_newPassword").innerHTML = "新密码不能为空";
+		return false;
+	}
+	if (repassword == "") {
+		$("#div_repassword").removeClass("control-group");
+		$("#div_repassword").addClass("control-group error");
+		document.getElementById("help_repassword").innerHTML = "确认密码不能为空";
+		return false;
+	}
+	if (newPassword != repassword) {
+		$("#div_repassword").removeClass("control-group");
+		$("#div_repassword").addClass("control-group error");
+		document.getElementById("help_repassword").innerHTML = "确认密码与新密码不一致";
+		return false;
+	}
+	return true;
+}
+</script>
+
+</html>

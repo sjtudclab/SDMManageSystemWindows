@@ -1,0 +1,17 @@
+/* 设置数据行高 */
+.datagrid-row {
+    height: 35px;
+}
+/* 设置数据字体 */
+.datagrid-cell {
+    font-size:18px;
+}
+/* 设置列名称字体 */
+.datagrid-header .datagrid-cell span{
+    font-size:18px;
+    line-height:35px;
+}
+/* 设置列名称行高 */
+.datagrid-header .datagrid-cell {
+    height:35px;
+}

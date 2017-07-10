@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SDM管理系统</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <script src="/ModelManage/js/jquery.min.js"></script>
+<script src="/ModelManage/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="/ModelManage/style/bootstrap.min2.css" type="text/css">
+</head>
+<body>
+	<div align="left">
+		<img src="/ModelManage/image/csdf.jpg">
+	</div>
+    <nav class="navbar navbar-default" style="margin-bottom:0;border:0;border-radius:0;">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-grain"></span>&nbsp;SDM管理系统</a>
+        </div>
+
+        <ul class="nav navbar-nav" style="float:right;">
+			<li class="dropdown" class="active">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					个人信息 
+					<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="../admin/user/update_user.html">修改个人信息</a></li>
+					<li><a href="../admin/user/update_pwd.html">修改密码</a></li>
+				</ul>
+			</li>
+			<li ><a href="../login.html">退出登录</a></li>
+		</ul>
+       <span id="weluser" class="navbar-text"style="float:right;">欢迎登录，XXX</span>
+      </div>
+      </nav>
+     
+	<div class="row">
+        <div class="col-xs-2"id="inn">
+          <ul class="nav nav-pills nav-stacked">
+           <li role="presentation" class="0"><a href="checkModel.html"><span class="glyphicon glyphicon-user"></span>&nbsp;查看模型</a></li>
+            <li role="presentation" class="1"><a href="checkModel.html"><span class="glyphicon glyphicon-education"></span>&nbsp;下载模型</a></li>
+            <li role="presentation" class="2 active"><a href="#"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;新建模型</a></li>
+  			<li role="presentation" class="2"><a href="checkCR.html"><span class="glyphicon glyphicon-book"></span>&nbsp;我的模型</a></li>
+            <li role="presentation" class="3"><a href="checkCR_CCB.html"><span class="glyphicon glyphicon-book"></span>&nbsp;审核模型</a></li>
+            <li role="presentation" class="5"><a href="../../permission/manageUser.html"><span class="glyphicon glyphicon-user"></span>&nbsp;管理用户</a></li>
+          </ul>
+        </div>
+    <div class="col-xs-10">
+          <p class="biao"><a href="../../home.html">首页></a><a>新建模型</a></p>
+         <div class="col-xs-6">
+          <form class="form-horizontal" method="POST">
+           <div class="form-group">
+                <label for="bigClass" class="col-xs-3 control-label"><span style="color:red">*</span>模型层次:</label>
+                <div class="col-xs-3">
+                 	 <select id="bigClass" class="form-control">
+						<option value="1" id="basis">基础元素</option>
+						<option value="2" id="extends">扩展元素</option>
+					 </select>
+				</div>
+            </div>
+            <div class="form-group">
+                <label for="middleClass" class="col-xs-3 control-label"><span style="color:red">*</span>模型层次:</label>
+                <div class="col-xs-3">
+                 	 <select id="middleClass" class="form-control">
+						<option value="3" id="conceptual">概念模型</option>
+						<option value="4" id="logical">逻辑模型</option>
+					 </select>
+				</div>
+            </div>
+          <div class="form-group">
+                <label for="smallClass" class="col-xs-3 control-label"><span style="color:red">*</span>模型层次:</label>
+                <div class="col-xs-3">
+                 	 <select id="smallClass" class="form-control">
+						<option value="6" id="observable">可观测量</option>
+						<option value="15" id="conceptualEntity">概念实体</option>
+					 </select>
+				</div>
+            </div>
+            <div class="form-group">
+              <label for="ChineseName" class="col-xs-3 control-label"><span style="color:red">*</span>元素中文名称：</label>
+              <div class="col-xs-6">
+                  <input type="text" class="form-control" id="ChineseName" name="ChineseName"  >
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="EnglishName" class="col-xs-3 control-label"><span style="color:red">*</span>元素英语名称：</label>
+              <div class="col-xs-6">
+                  <input type="text" class="form-control" id="EnglishName" name="EnglishName">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="description" class="col-xs-3 control-label"><span style="color:red">*</span>描述：</label>
+              <div class="col-xs-6">
+                  <input type="text" class="form-control" id="description" name="description">
+              </div>
+            </div>
+             <div class="form-group">
+              <label for="SDMFile" class="col-xs-3 control-label"><span style="color:red">*</span>上传文件：</label>
+              <div class="col-xs-6">
+                  <input type="file" id="SDMFile" name="SDMFile">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-offset-3 col-xs-10" align="center">
+                <input type="button" onclick="createModel()" class="btn btn-primary"style="font-size:1.5em;text-align:center;" value="确&nbsp;认&nbsp;提&nbsp;交">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="submit" class="btn btn-primary"style="font-size:1.5em;text-align:center;">取&nbsp;消</button>
+              </div>
+            </div>
+          </form>
+        </div>
+</div>
+
+  </body>
+  <script src="/ModelManage/js/cookie.js"></script>
+  <script>
+  $(document).ready(function(){
+	  if(checkCookie()){
+	  var username=getCookie("username");
+	  document.getElementById("weluser").innerHTML="欢迎登录，"+username;
+	  var authority=getCookie("authority");
+	 	 if(authority!=null){
+			  for(var i=0;i<6;i++)	  
+				  if($.inArray(i.toString(),authority.split(","))==-1)
+				  		$("."+i).remove();
+		  }  
+  }
+  })
+   function createModel(){
+	  //var fileObj = document.getElementById("SDMFile").files[0];
+	  //var fileName=fileObj.name;
+	  //var path=uploadFile();
+	  //alert(path);
+	  var date=new Date(); 
+	  var dateString=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+	  $.ajax({
+	       type: "POST",
+	       url: "/ModelManage/createModel",    
+	       data: {bigClass:$("#bigClass").val(), middleClass:$("#middleClass").val(),smallClass:$("#smallClass").val(),
+	    	   ChineseName:$("#ChineseName").val(),EnglishName:$("#EnglishName").val(),
+	    	   description:$("#description").val(), creator:getCookie("username"),state:0,fileID:"",createTime:dateString},
+	       success: function(data) {
+	         if(data!=1){
+	        	 //alert(data);
+	        	 uploadFile(data);
+	       	 	 //alert("创建成功！");
+	         }
+	         else 
+	        	 alert("创建失败！");
+	       }
+	     });
+  }
+   function uploadFile(elementID){
+	 var formData =  new FormData(); 
+	 formData.append("SDMFile", $('#SDMFile')[0].files[0]);
+	 formData.append("elementID", elementID);
+	 //formData.append("SDMFile", "hello");
+	     $.ajax({  
+	          url: "/ModelManage/uploadModel" ,  
+	          type: "POST",
+	          data: formData,
+	          //dataType:'text',
+	          async: false,  
+	          cache: false,  
+	          contentType: false,  //不处理数据
+	          processData: false,  //不设置内容
+			 success: function(data) {
+				 if(data!=null)
+					alert("成功");
+				 else 
+					alert("失败");
+			 },
+			 error:function(){
+				 alert("失败");
+			 }
+	     });  
+
+}
+	function logout(){
+	  delCookie("username");
+	  window.location.href="../../login.html";
+  }
+  </script>
+</html>
+        

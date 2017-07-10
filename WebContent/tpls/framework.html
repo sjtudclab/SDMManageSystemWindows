@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SDM管理系统</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+ <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+  table{text-align:center}
+  td {height:45px}
+  select{width:80px}
+</style>
+</head>
+<body>
+	<div align="left">
+		<img src="/ModelManage/image/csdf.jpg">
+	</div>
+    <nav class="navbar navbar-default" style="margin-bottom:0;border:0;border-radius:0;">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-grain"></span>&nbsp;SDM管理系统</a>
+        </div>
+
+        <ul class="nav navbar-nav" style="float:right;">
+			<li class="dropdown" class="active">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					个人信息 
+					<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="admin/user/update_user.html">修改个人信息</a></li>
+					<li><a href="admin/user/update_pwd.html">修改密码</a></li>
+				</ul>
+			</li>
+			<li ><a href="login.html">退出登录</a></li>
+		</ul>
+       <span id="weluser" class="navbar-text"style="float:right;">欢迎登录，XXX</span>
+      </div>
+      </nav>
+
+    <div class="container"style="overflow:hidden;margin:0;width:100%;padding:0px;">
+
+  <div class="row">
+        <div class="col-xs-2"id="inn">
+          <ul class="nav nav-pills nav-stacked">
+            <li onClick="getclassname(this)" role="presentation" ><a href="models/download2.html" target="right"><span class="glyphicon glyphicon-user"></span>&nbsp;下载模型</a></li>
+            <li role="presentation" ><a href="models/upload2.html" target="right"><span class="glyphicon glyphicon-education"></span>&nbsp;上传模型</a></li>
+            <li role="presentation"><a href="models/update2.html" target="right"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;修改模型</a></li>
+            <li role="presentation"><a href="models/delete2.html" target="right"><span class="glyphicon glyphicon-book"></span>&nbsp;删除模型</a></li>
+          </ul>
+        </div>
+
+        <div class="col-xs-10" style="padding:0;">
+          <iframe id="biao"  marginheight="0" marginwidth="0" class="inner_navigation1" name="right" src="" frameborder="0" height="700px"
+                  style="width:100%;" onload="dyniframesize('biao')"></iframe>
+        </div>
+
+      </div>
+    </div>
+
+  </body>
+ <script src="/ModelManage/js/cookie.js"></script>
+<script type="text/javascript">
+var username="";
+$(document).ready(function(){
+	  if(checkCookie()){
+	  username=getCookie("username");
+	  document.getElementById("weluser").innerHTML="欢迎登录，"+username;
+	  }
+})
+</script>
+</html>

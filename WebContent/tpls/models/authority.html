@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SDM管理系统</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+ <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div align="left">
+		<img src="/ModelManage/image/csdf.jpg">
+	</div>
+    <nav class="navbar navbar-default" style="margin-bottom:0;border:0;border-radius:0;">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-grain"></span>&nbsp;符合性测试系统</a>
+        </div>
+
+        <ul class="nav navbar-nav" style="float:right;">
+			<li class="dropdown" class="active">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					个人信息 
+					<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="../user/update_user.html">修改个人信息</a></li>
+					<li><a href="../user/update_pwd.html">修改密码</a></li>
+				</ul>
+			</li>
+			<li ><a href="/ModelManage/tpls/login.html">退出登录</a></li>
+		</ul>
+       <span id="weluser" class="navbar-text"style="float:right;">欢迎登录</span>
+      </div>
+      </nav>
+     
+    <div class="row">
+        <div class="col-xs-2"id="inn">
+          <ul class="nav nav-pills nav-stacked">
+			<li role="presentation" ><a href="download.html"><span class="glyphicon glyphicon-user"></span>&nbsp;下载模型</a></li>
+            <li role="presentation" ><a href="upload.html"><span class="glyphicon glyphicon-education"></span>&nbsp;上传模型</a></li>
+           <li role="presentation"><a href="update.html"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;修改模型</a></li>
+            <li role="presentation"><a href="delete.html"><span class="glyphicon glyphicon-book"></span>&nbsp;删除模型</a></li>
+            <li role="presentation"><a href="authority.html"><span class="glyphicon glyphicon-book"></span>&nbsp;权限管理</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-10">
+          <p class="biao"><a>首页></a><a>用户管理</a></p>
+
+          <div class="row">
+            <div class="col-xs-10">
+              <table class="table table-striped table-bordered" id="userInfor">
+                <tr>
+                  <td style="background-color:#457AB8; color:#fff;width:10%;">角色名称</td>
+                  <td style="background-color:#457AB8; color:#fff;width:10%;">提交测试</td>
+                  <td style="background-color:#457AB8; color:#fff;width:10%;">查看测试</td>
+                  <td style="background-color:#457AB8; color:#fff;width:10%;">用户管理</td>
+                  <td style="background-color:#457AB8; color:#fff;width:10%;">待添加</td>
+                  <td style="background-color:#457AB8; color:#fff;width:10%;">待添加</td>
+                  <td style="background-color:#457AB8; color:#fff;width:10%;">删除</td>
+
+               <!--  </tr>
+                <tr id='3'>
+                  <td id='3' class="roleName">普通用户</td>
+                  <td><input style="zoom: 150%;" type="checkbox" checked="true" id="3" class="createModel"></td>
+                  <td><input style="zoom: 150%;" type="checkbox" checked="true" id="3" class="viewModel"><br/></td>
+                  <td><input style="zoom: 150%;" type="checkbox" checked="true" id="3" class="verifyModel"><br/></td>  
+                  <td><input style="zoom: 150%;" type="checkbox"  id="3" class="manage" ><br/></td> 
+                  <td><input style="zoom: 150%;" type="checkbox"  id="3" class="vote"><br/></td>  
+                  <td><button class="btn btn-primary modify">修改</button> <button class="btn btn-primary delete">删除</button></td>
+
+                </tr>
+
+                <tr id='2'>
+                  <td id='2' class="roleName">管理员</td>
+                  <td><input style="zoom: 150%;" type="checkbox" checked="true" id="2" class="createModel"></td>
+                  <td><input style="zoom: 150%;" type="checkbox" checked="true" id="2" class="viewModel"><br/></td>
+                  <td><input style="zoom: 150%;" type="checkbox" checked="true" id="2" class="verifyModel"><br/></td>     
+                  <td><input style="zoom: 150%;" type="checkbox" checked="true" id="2" class="manage"><br/></td> 
+                  <td><input style="zoom: 150%;" type="checkbox" checked="true" id="2" class="vote"><br/></td>                                                  
+                  <td><button class="btn btn-primary modify">修改</button> <button class="btn btn-primary delete">删除</button></td>
+                </tr> -->
+                </table>
+            </div>
+          </div> 
+          <button class="btn btn-primary add">增加</button>
+        </div>
+      </div>
+</body>
+</html>
+<script src="/ModelManage/js/cookie.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){  
+  var data='[{"roleId":11,"roleName":"普通用户1","authority":{"createModel":1,"viewModel":1,"verifyModel":1}},{"roleId":13,"roleName":"普通用户2","authority":{"viewModel":1,"verifyModel":1}},{"roleId":12,"roleName":"管理员","authority":{"viewModel":1,"vote":1,"manage":1}}]'; 
+        /*json = JSON.parse(data);
+        for(var i=0; i<json.length; i++)  {
+          var obj=json[i];
+          var id = obj.roleId;
+          var createModel='';
+          if (obj.authority.createModel=='1') {
+            createModel='checked="true"';
+          }
+          var viewModel='';
+          if (obj.authority.viewModel == '1')
+            viewModel='checked="true"';
+          var verifyModel='';
+          if (obj.authority.erifyModel == '1')
+            verifyModel='checked="true"';
+          var manage='';
+          if (obj.authority.manage == '1')
+            manage='checked="true"';
+          var vote='';
+          if (obj.authority.vote == '1')
+            vote='checked="true"';
+
+          var innerHtml='<tr id="'+id+'">'+ 
+                '<td>'+obj.roleName+'</td>'+
+                '<td><input style="zoom: 150%;" type="checkbox"' + createModel + 'id="'+id+'" class="createModel"></td>'+
+                '<td><input style="zoom: 150%;" type="checkbox"' + viewModel + 'id="'+id+'" class="viewModel"></td>'+
+                '<td><input style="zoom: 150%;" type="checkbox"' + verifyModel + 'id="'+id+'" class="verifyModel"></td>'+
+                '<td><input style="zoom: 150%;" type="checkbox"' + manage + 'id="'+id+'" class="manage"></td>'+
+                '<td><input style="zoom: 150%;" type="checkbox"' + vote + 'id="'+id+'" class="vote"></td>'+
+                '<td><button class="btn btn-primary modify">修改</button> <button class="btn btn-primary delete">删除</button></td>'+
+                '</tr>';
+          $("#userInfor").append(innerHtml);
+
+        }*/
+
+    $.ajax({
+      method: 'post',
+      url: "/ModelManage/author/initial",
+      success: function(data) {        
+        for(var i=0; i<data.length; i++)  {
+          var obj=data[i];      
+          var id = obj.roleId;
+          var createModel='';
+          if (obj.authority.createModel=='1') {
+            createModel='checked="true"';
+          }
+          var viewModel='';
+          if (obj.authority.viewModel == '1')
+            viewModel='checked="true"';
+          var verifyModel='';
+          if (obj.authority.verifyModel == '1')
+            verifyModel='checked="true"';
+          var manage='';
+          if (obj.authority.manage == '1')
+            manage='checked="true"';
+          var vote='';
+          if (obj.authority.vote == '1')
+            vote='checked="true"';
+
+          var innerHtml='<tr id="'+id+'">'+ 
+                '<td>'+obj.roleName+'</td>'+
+                '<td><input style="zoom: 150%;" type="checkbox"' + createModel + 'id="'+id+"createModel"+'" class="createModel"></td>'+
+                '<td><input style="zoom: 150%;" type="checkbox"' + viewModel + 'id="'+id+"viewModel"+'" class="viewModel"></td>'+
+                '<td><input style="zoom: 150%;" type="checkbox"' + verifyModel + 'id="'+id+"verifyModel"+'" class="verifyModel"></td>'+
+                '<td><input style="zoom: 150%;" type="checkbox"' + manage + 'id="'+id+"manage"+'" class="manage"></td>'+
+                '<td><input style="zoom: 150%;" type="checkbox"' + vote + 'id="'+id+"vote"+'" class="vote"></td>'+
+                '<td><button class="btn btn-primary modify">修改</button> <button class="btn btn-primary delete">删除</button></td>'+
+                '</tr>';
+          $("#userInfor").append(innerHtml);
+        }
+      }
+    });
+
+    $(document).on("click",'.modify',function(){
+      var id = $(this).parent().parent().attr('id');
+      var roleName = $('#'+id+'.roleName').html();
+      if (!roleName) {
+        roleName = $('#'+id+'.roleName').val();
+      }
+      var param = "roleId=" + id +
+                  "&roleName=" + roleName + 
+                  "&createModel=" + (document.getElementById(id+"createModel").checked+0) +
+                  "&viewModel=" + (document.getElementById(id+"viewModel").checked+0) +    
+                  "&verifyModel=" + (document.getElementById(id+"verifyModel").checked+0) + 
+                  "&manage=" + (document.getElementById(id+"manage").checked +0)+ 
+                  "&vote=" + (document.getElementById(id+"vote").checked+0);
+      $.ajax({
+        method: 'post',
+        url: "/ModelManage/author/authorModify",
+        data: param,
+        success: function(data) {
+
+   
+        }
+      });
+    });
+
+    function isChecked(ele) {
+      if (ele.attr('checked')) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+
+    $(document).on("click",'.delete',function(){
+      $(this).parent().parent().remove();
+    });
+    $(document).on("click",'.add',function(){
+      var id = parseInt($('table tr:last').attr('id')) + 1;
+      var innerHtml='<tr id="'+id+'">'+ 
+                    '<td><input style="width: 70px;" class="roleName" id="'+id+'" value="新建角色"></input></td>'+
+                    '<td><input style="zoom: 150%;" type="checkbox" checked="true" id="'+id+'" class="createModel"></td>'+
+                    '<td><input style="zoom: 150%;" type="checkbox" checked="true" id="'+id+'" class="viewModel"></td>'+
+                    '<td><input style="zoom: 150%;" type="checkbox" checked="true" id="'+id+'" class="verifyModel"></td>'+
+                    '<td><input style="zoom: 150%;" type="checkbox" checked="true" id="'+id+'" class="manage"></td>'+
+                    '<td><input style="zoom: 150%;" type="checkbox" checked="true" id="'+id+'" class="vote"></td>'+
+                    '<td><button class="btn btn-primary modify">修改</button> <button class="btn btn-primary delete">删除</button></td>'+
+                    '</tr>';
+      $("#userInfor").append(innerHtml);
+    })
+  })
+</script>

@@ -1,0 +1,63 @@
+@CHARSET "UTF-8";
+
+body {
+  margin: 0px;
+  font-size: 12px;
+  background: #F7F7F7;
+}
+
+.left_side {
+  padding-top: 30px;
+}
+
+.ques_body {
+  overflow: auto;
+  height: 800px;
+  width: 1000px;
+  padding-left: 50px;
+}
+
+.col-lg-9 {
+  padding-top: 50px;
+}
+
+.ques {
+  font-size: 30;
+}
+
+.top {
+  background: red;
+}
+
+.top_bar {
+  height: 520px;
+  background: red;
+}
+
+.login {
+  padding-top: 50px;
+  padding-left: 500px;
+}
+
+.head_nav
+.back {
+  width: 200px;
+  height: 71px;
+  position: absolute;
+  left: 0px;
+  color: #fff;
+  font-size: 30px;
+}
+
+.options {
+  width: 98%;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.single-select {
+  background: white;
+  padding-left: 20px;
+  border-radius: 15px;
+}

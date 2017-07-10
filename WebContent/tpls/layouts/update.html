@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SDM管理系统</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+ <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div align="left">
+		<img src="/ModelManage/image/csdf.jpg">
+	</div>
+    <nav class="navbar navbar-default" style="margin-bottom:0;border:0;border-radius:0;">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-grain"></span>&nbsp;SDM管理系统</a>
+        </div>
+
+        <ul class="nav navbar-nav" style="float:right;">
+			<li class="dropdown" class="active">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					个人信息 
+					<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="admin/user/update_user.html">修改个人信息</a></li>
+					<li><a href="admin/user/update_pwd.html">修改密码</a></li>
+				</ul>
+			</li>
+			<li ><a href="../login.html">退出登录</a></li>
+		</ul>
+       <span id="weluser" class="navbar-text"style="float:right;">欢迎登录，XXX</span>
+      </div>
+      </nav>
+     
+<div class="row">
+        <div class="col-xs-2"id="inn">
+          <ul class="nav nav-pills nav-stacked">
+          <li role="presentation" ><a href="download.html"><span class="glyphicon glyphicon-user"></span>&nbsp;下载模型</a></li>
+            <li role="presentation" ><a href="upload.html"><span class="glyphicon glyphicon-education"></span>&nbsp;上传模型</a></li>
+            <li role="presentation" class="active"><a href="#"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;修改模型</a></li>
+            <li role="presentation"><a href="delete.html"><span class="glyphicon glyphicon-book"></span>&nbsp;删除模型</a></li>
+          </ul>
+        </div>
+ <div class="col-xs-6">
+          <p class="biao"><a href="../../home.html">首页></a><a>修改模型</a></p>
+          <form class="form-horizontal" >
+            <div class="form-group">
+              <label for="observableName" class="col-xs-3 control-label"><span style="color:red">*</span>可观测量名：</label>
+              <div class="col-xs-6">
+                  <input type="text" class="form-control" id="observableName" name="observableName" disabled="disabled" >
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="version" class="col-xs-3 control-label"><span style="color:red">*</span>版本号：</label>
+              <div class="col-xs-6">
+                  <input type="text" class="form-control" id="version" name="version">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="description" class="col-xs-3 control-label"><span style="color:red">*</span>描述：</label>
+              <div class="col-xs-6">
+                  <input type="text" class="form-control" id="description" name="description">
+              </div>
+            </div>
+            
+            <div class="form-group">
+                    <label for="input" class="col-xs-3 control-label">xml文件：</label>
+                    <div class="col-xs-6">
+                        <input type="file" id="observableFile" name="observableFile" onchange="checkFileType()" >
+                        <p class="help-block">（提示：文件格式为xml且小于2M）</p>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="form-group">
+              <div class="col-xs-offset-3 col-xs-4" align="center">
+                <button type="submit" onclick="infoChange()" class="btn btn-primary"style="font-size:1.5em;text-align:center;">确&nbsp;认&nbsp;提&nbsp;交</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="submit" class="btn btn-primary"style="font-size:1.5em;text-align:center;">取&nbsp;消</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+
+  </body>
+  <script src="/ModelManage/js/cookie.js"></script>
+  <script>
+  $(document).ready(function(){
+	  
+	  if(checkCookie()){
+	          var username=getCookie("username");
+	      	  document.getElementById("weluser").innerHTML="欢迎登录，"+username;
+	      	  getparm();
+	      }  
+	 
+  })
+  function update(){
+	  $.ajax({
+	       type: "POST",
+	       url: "/ModelManage/update",
+	       dataType:"json",
+	       data: {observableName:$("#observableName").val(), 
+	    	   version:$("#version").val(),description:$("#description").val(),
+	    	   observableFile:$("#observableFile").val()},
+	       success: function(data) {
+	         if(data==1){
+	       	 	 alert("修改成功！");
+	         }
+	         else 
+	        	 alert("修改失败！");
+	       }
+	     });
+  }
+	function logout(){
+	  delCookie("username");
+	  window.location.href="../../login.html";
+  }
+	function getparm() 
+	{ 
+	var url=location.href; 
+	var tmp1=url.split("?")[1]; 
+	var tmp2=tmp1.split("&")[0]; 
+	var observableName=tmp2.split("=")[1]; 
+	var tmp3=tmp1.split("&")[1]; 
+	var description=tmp3.split("=")[1]; 
+	var tmp4=tmp1.split("&")[2]; 
+	var version=tmp4.split("=")[1]; 
+	 document.getElementById("observableName").value=observableName;
+ 	  document.getElementById("description").value=description;
+ 	  document.getElementById("version").value=version;
+	} 
+
+  </script>
+</html>
