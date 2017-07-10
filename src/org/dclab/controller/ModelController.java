@@ -46,13 +46,13 @@ public class ModelController {
 		//System.out.println("进入后台");
 		return modelService.uploadModel(SDMFile,elementID);
 	}
-	@RequestMapping(value="exportCode",method=RequestMethod.POST)
+	@RequestMapping(value="/exportCode")
 	public void exportCode(int elementID,HttpServletResponse response) throws IOException, InterruptedException{
 		modelService.getFile(elementID, response);
 	}
 	
-	@RequestMapping(value="oclValidate",method=RequestMethod.POST)
-	public String oclValidate(int elementID) throws DocumentException{
+	@RequestMapping(value="/oclValidate",method=RequestMethod.POST)
+	public String oclValidate(int elementID) throws DocumentException, IOException{
 		return modelService.oclValidate(elementID);
 	}
 }

@@ -1,5 +1,9 @@
 package org.dclab.util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -36,14 +40,17 @@ public class OclValidate {
 		return document;
 	}
 	
-	public static String validateOcl(String fileName) throws DocumentException{
+	public static String validateOcl(String fileName) throws DocumentException, IOException{
 		OclValidate oclValidate = new OclValidate();
-		Document document = oclValidate.read(fileName);
+		SAXReader reader = new SAXReader();
+		FileInputStream fileInputStream = new FileInputStream(new File(fileName));
+		Document document = reader.read(fileInputStream);
 		String returnCode = new String();
 		returnCode += oclValidate.isUniqueName(document);
 		returnCode += oclValidate.isBoundMatch(document);
 		returnCode += oclValidate.isComNameConflict(document);
 		returnCode += oclValidate.isHierarchyConsisten(document);
+		fileInputStream.close();
 		return returnCode;
 	}
 	

@@ -4,6 +4,7 @@ import java.awt.image.SampleModel;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import org.dclab.zk.*;  //暂时注释zookeeper，不可以删除
 import org.dom4j.DocumentException;
+import org.hamcrest.core.IsSame;
 
 @Service
 public class ModelService {
@@ -92,10 +94,11 @@ public class ModelService {
 	}
 	
 	
-	public String oclValidate(int elementId) throws DocumentException{
+	public String oclValidate(int elementId) throws DocumentException, IOException{
 		String path = modelMapperI.getFileIDByEId(elementId);
-		OclValidate oclValidate1 = new OclValidate();
-		String returnCode = oclValidate1.validateOcl(path);
+		OclValidate oclValidate;
+		oclValidate = new OclValidate();
+		String returnCode = oclValidate.validateOcl(path);
 		if(returnCode.length()==0){
 			returnCode = "符合OCL";
 		}
@@ -122,6 +125,7 @@ public class ModelService {
 			InputStream is = new FileInputStream(new File(dst));
 			org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
 			response.flushBuffer();
+			is.close();
 		} catch (IOException ex){
 			ex.printStackTrace();
 		}
