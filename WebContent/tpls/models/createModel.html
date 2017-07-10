@@ -67,6 +67,7 @@
                  	 <select id="middleClass" class="form-control">
 						<option value="3" id="conceptual">概念模型</option>
 						<option value="4" id="logical">逻辑模型</option>
+						<option value="5" id="paltform">平台模型</option>
 					 </select>
 				</div>
             </div>
@@ -76,6 +77,9 @@
                  	 <select id="smallClass" class="form-control">
 						<option value="6" id="observable">可观测量</option>
 						<option value="15" id="conceptualEntity">概念实体</option>
+						<option value="16" id="logicalEntity">逻辑实体</option>
+						
+						<option value="17" id="platformEntity">平台实体</option>
 					 </select>
 				</div>
             </div>
@@ -136,7 +140,7 @@
 	  //alert(path);
 	  var date=new Date(); 
 	  var dateString=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
-	  $.ajax({
+	   $.ajax({
 	       type: "POST",
 	       url: "/ModelManage/createModel",    
 	       data: {bigClass:$("#bigClass").val(), middleClass:$("#middleClass").val(),smallClass:$("#smallClass").val(),
@@ -151,7 +155,7 @@
 	         else 
 	        	 alert("创建失败！");
 	       }
-	     });
+	     }); 
   }
    function uploadFile(elementID){
 	 var formData =  new FormData(); 

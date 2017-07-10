@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<face:DataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:conceptual="http://www.opengroup.us/face/conceptual/2.1" xmlns:face="http://www.opengroup.us/face/2.1" xmlns:logical="http://www.opengroup.us/face/logical/2.1" xmlns:platform="http://www.opengroup.us/face/platform/2.1" xmlns:uop="http://www.opengroup.us/face/uop/2.1" xmi:id="0fd0fac7-315d-4755-a378-469310ff68c6" name="COP_Demo_USM">
+  <cdm xmi:type="face:ConceptualDataModel" xmi:id="d3c2d421-7c98-45d5-bf36-1d9ca5d95289" name="ConceptualDataModel">
+    <cdm xmi:type="face:ConceptualDataModel" xmi:id="b6645d07-6d09-48e4-a7d6-1e8418ebb106" name="COP_Demo_Conceptual_Model">
+      <element xmi:type="conceptual:Entity" xmi:id="437712b5-f156-4e40-be3f-ce2289587ec0" name="BSO">
+        <composition xmi:type="conceptual:Composition" xmi:id="8190e52b-fd6c-45f2-bd9b-6d8a31fb36ce" rolename="bsoID" type="b6594cbd-7032-4ee6-ad05-10beca964417"/>
+        <composition xmi:type="conceptual:Composition" xmi:id="f50a5b90-c686-47db-8222-52509138db65" rolename="location" type="2cf0e36f-5dc5-4271-9225-d6c5451e9686"/>
+        <composition xmi:type="conceptual:Composition" xmi:id="dc843699-c95d-4d47-8db6-527add2f80a5" rolename="symbol2525" type="1b0421d3-27e7-4dc0-bee0-0f51f4e11b25"/>
+        <composition xmi:type="conceptual:Composition" xmi:id="3c98eedc-1c02-42e5-9780-aa4cf0949616" rolename="uniqueID" type="995c5658-347e-4eb9-9cbe-44862f20ffc4"/>
+      </element>
+      <element xmi:type="conceptual:Entity" xmi:id="2fca8ccd-c963-4a49-be94-117dfd073994" name="Ownship">
+        <composition xmi:type="conceptual:Composition" xmi:id="93bb02ec-8eef-416c-8eb0-61c71d30a785" rolename="position" type="2cf0e36f-5dc5-4271-9225-d6c5451e9686"/>
+        <composition xmi:type="conceptual:Composition" xmi:id="126f96c5-68a5-4520-911f-84a45019b89c" rolename="uniqueID" type="995c5658-347e-4eb9-9cbe-44862f20ffc4"/>
+      </element>
+    </cdm>
+    <cdm xmi:type="face:ConceptualDataModel" xmi:id="fb83e8c6-1091-4380-82e6-fe90dc984802" name="SDM_Conceptual_Model">
+      <cdm xmi:type="face:ConceptualDataModel" xmi:id="5ad5463d-324f-4032-b6f3-7931ce75f56c" name="Observables">
+        <cdm xmi:type="face:ConceptualDataModel" xmi:id="93f7adae-318b-4fe8-9b8a-ecc7ce55df3f" name="InformationElement" description="Abstract information that applies to attributes of an entity (e.g., text, diagrams, labels, etc.)">
+          <cdm xmi:type="face:ConceptualDataModel" xmi:id="c35774f1-d34b-4c23-85c6-476b73e5b128" name="Description">
+            <element xmi:type="conceptual:Observable" xmi:id="1b0421d3-27e7-4dc0-bee0-0f51f4e11b25" name="Description" description="Summary level information about an item."/>
+          </cdm>
+          <cdm xmi:type="face:ConceptualDataModel" xmi:id="e6089e38-d8ad-4169-bc5d-e3775d1bd29b" name="Name">
+            <element xmi:type="conceptual:Observable" xmi:id="b6594cbd-7032-4ee6-ad05-10beca964417" name="Name" description="Human meaningful term for referring to an item.  Names are often but not always unique for a given entity."/>
+          </cdm>
+        </cdm>
+        <cdm xmi:type="face:ConceptualDataModel" xmi:id="09428dc6-a32a-4b9e-8e92-198b473980c4" name="Angle">
+          <element xmi:type="conceptual:Observable" xmi:id="9a83d1f1-ce45-4680-9404-d8a4183184ae" name="Angle" description="Divergence of two straight lines from a common point or of two planes from a common line."/>
+        </cdm>
+        <cdm xmi:type="face:ConceptualDataModel" xmi:id="8015d3e0-9492-4965-b72f-ea094bf635d0" name="Identifier">
+          <element xmi:type="conceptual:Observable" xmi:id="995c5658-347e-4eb9-9cbe-44862f20ffc4" name="UniqueIdentifier" description="Distinguishes an item from all other items."/>
+        </cdm>
+        <cdm xmi:type="face:ConceptualDataModel" xmi:id="93faed0f-857b-4459-b603-381bf5708098" name="Length">
+          <element xmi:type="conceptual:Observable" xmi:id="f29d5676-d507-45a9-aa18-816ea382fc21" name="Distance" description="Amount of separation between two points."/>
+        </cdm>
+        <cdm xmi:type="face:ConceptualDataModel" xmi:id="241611a5-6eb8-451b-9468-7ebe8dd0eb3e" name="Position">
+          <element xmi:type="conceptual:Observable" xmi:id="2cf0e36f-5dc5-4271-9225-d6c5451e9686" name="Position" description="Location of an item relative to a fixed reference frame."/>
+        </cdm>
+      </cdm>
+    </cdm>
+  </cdm>
+  <ldm xmi:type="face:LogicalDataModel" xmi:id="dd19b44c-d215-42fa-a7dd-54542f8346b9" name="LogicalDataModel">
+    <ldm xmi:type="face:LogicalDataModel" xmi:id="3ec85f31-2a81-44d0-8863-1b9aff0d43cf" name="COP_Demo_Logical_Models">
+      <element xmi:type="logical:Entity" xmi:id="d14ba662-1087-4379-b1b7-bb1121a858fa" name="Ownship" realizes="2fca8ccd-c963-4a49-be94-117dfd073994">
+        <composition xmi:type="logical:Composition" xmi:id="8d85c5ef-c9c8-4651-86b6-b28981034ac6" rolename="location" type="00cea05a-d888-44e1-b6a8-616244c7d771"/>
+      </element>
+      <element xmi:type="logical:Entity" xmi:id="aafa057f-d78f-4244-b833-64e8a02cd36b" name="BSO" realizes="437712b5-f156-4e40-be3f-ce2289587ec0">
+        <composition xmi:type="logical:Composition" xmi:id="61da4611-a215-4388-b443-9647d405cb9f" rolename="bsoID" type="9dca219c-accf-456b-a96a-362c304c7cfd"/>
+        <composition xmi:type="logical:Composition" xmi:id="b1dd0dc9-048c-4ef8-a2f2-a57e90ee37b4" rolename="location" type="00cea05a-d888-44e1-b6a8-616244c7d771"/>
+        <composition xmi:type="logical:Composition" xmi:id="0bc6b5c0-05a0-4805-a40d-cdb8f10e59d9" rolename="symbol2525" type="c3733490-eb24-4423-a88e-d9d5ab7db865"/>
+      </element>
+    </ldm>
+    <ldm xmi:type="face:LogicalDataModel" xmi:id="d1f7dc68-59a6-4025-a943-275f86e45ed6" name="SDM_Logical_Model">
+      <ldm xmi:type="face:LogicalDataModel" xmi:id="143d8d3d-cd7c-4ebe-b569-720e081b0282" name="CoordinateSystems">
+        <ldm xmi:type="face:LogicalDataModel" xmi:id="15fb3472-a60e-4527-bbc2-decf96c64ad2" name="Cartesian">
+          <element xmi:type="logical:CoordinateSystem" xmi:id="99c41fd0-b598-4595-b618-b79123d22ace" name="Cartesian1D" description="One dimensional Cartesian coordinate system." axis="22de2907-0448-4618-96ac-e136e8cfe865" axisRelationshipDescription="There is only one axis." angleEquation="n/a" distanceEquation="d = x2-x1"/>
+          <element xmi:type="logical:CoordinateSystem" xmi:id="4e38cd54-4fb2-4e58-8356-051b3c0304ce" name="Cartesian2D" description="Two dimensional Cartesian coordinate system." axis="22de2907-0448-4618-96ac-e136e8cfe865 398e3601-69cb-42b9-a7e8-821b4979c3a5" axisRelationshipDescription="Axes are orthogonal to each other." angleEquation="theta = inverse cos ((a dot b)/(|a|*|b|)), where a and b are vectors." distanceEquation="d=sqrt((x2-x1)^2+(y2-y1)^2)"/>
+          <element xmi:type="logical:CoordinateSystem" xmi:id="31ff7c91-6ddf-4e9f-bb2c-ce479ff6a808" name="Cartesian3D" description="Three dimensional Cartesian coordinate system." axis="22de2907-0448-4618-96ac-e136e8cfe865 398e3601-69cb-42b9-a7e8-821b4979c3a5 e27f78ca-a65e-4333-bfd3-174b9f51e533" axisRelationshipDescription="Axes are orthogonal to each other." angleEquation="theta = inverse cos ((a dot b)/(|a|*|b|)), where a and b are vectors." distanceEquation="d = sqrt((x2-x1)^2 + (y2-y1)^2 + (z2-z1)^2)"/>
+          <element xmi:type="logical:CoordinateSystem" xmi:id="04132bb5-8de7-4b31-a4f0-75ee761d60d7" name="Cartesian4D" description="4 dimensional Cartesian coordinate system." axis="35c2b767-43ca-4ef2-a51e-b6bc4dc10aca 22de2907-0448-4618-96ac-e136e8cfe865 398e3601-69cb-42b9-a7e8-821b4979c3a5 e27f78ca-a65e-4333-bfd3-174b9f51e533" axisRelationshipDescription="Axes are orthogonal to each other." angleEquation="theta = inverse cos ((a dot b)/(|a|*|b|)), where a and b are vectors." distanceEquation="d = sqrt((x2-x1)^2 + (y2-y1)^2 + (z2-z1)^2 + (t2-t1)^2)"/>
+          <element xmi:type="logical:CoordinateSystemAxis" xmi:id="35c2b767-43ca-4ef2-a51e-b6bc4dc10aca" name="CartesianTAxis" description="T (time) axis of Cartesian coordinate system"/>
+          <element xmi:type="logical:CoordinateSystemAxis" xmi:id="22de2907-0448-4618-96ac-e136e8cfe865" name="CartesianXAxis" description="X Axis of Cartesian coordinate system."/>
+          <element xmi:type="logical:CoordinateSystemAxis" xmi:id="398e3601-69cb-42b9-a7e8-821b4979c3a5" name="CartesianYAxis" description="Y Axis of Cartesian coordinate system"/>
+          <element xmi:type="logical:CoordinateSystemAxis" xmi:id="e27f78ca-a65e-4333-bfd3-174b9f51e533" name="CartesianZAxis" description="Z Axis of Cartesian coordinate system"/>
+        </ldm>
+        <ldm xmi:type="face:LogicalDataModel" xmi:id="9ab3ea02-cf6b-44e4-9413-070680f50edf" name="Discrete">
+          <element xmi:type="logical:CoordinateSystem" xmi:id="af5ddbd5-39f2-4b76-ae98-ee28d4d6fed0" name="Discrete1D" description="Coordinate system used to model sets of discrete states (e.g., enumerations)." axis="f2561710-9ae2-451d-9603-2e39a6e1d736" axisRelationshipDescription="n/a" angleEquation="n/a" distanceEquation="n/a"/>
+          <element xmi:type="logical:CoordinateSystemAxis" xmi:id="f2561710-9ae2-451d-9603-2e39a6e1d736" name="DiscreteSetAxis" description="The axis used to represent a set of discrete states (e.g., a set of enumerations)"/>
+        </ldm>
+        <ldm xmi:type="face:LogicalDataModel" xmi:id="6f21375b-3d11-4aa0-9831-076536862aa8" name="Polar3D">
+          <element xmi:type="logical:CoordinateSystem" xmi:id="120d63f1-2a17-4218-a0ca-d2cfb0eb13ad" name="Polar3D" description="Describes a two dimensional (2D) Polar coordinate system." axis="d8bf8110-8806-4496-af8f-44bace07941b 4b715324-2c74-482b-bb67-e347e451c623 0b1d7ed0-c05e-4c19-a7a0-a728f5e0d055" axisRelationshipDescription="" angleEquation="" distanceEquation=""/>
+          <element xmi:type="logical:CoordinateSystemAxis" xmi:id="d8bf8110-8806-4496-af8f-44bace07941b" name="Polar3DAngularAxis"/>
+          <element xmi:type="logical:CoordinateSystemAxis" xmi:id="4b715324-2c74-482b-bb67-e347e451c623" name="Polar3DAzimuthalAxis"/>
+          <element xmi:type="logical:CoordinateSystemAxis" xmi:id="0b1d7ed0-c05e-4c19-a7a0-a728f5e0d055" name="Polar3DRadialAxis"/>
+        </ldm>
+      </ldm>
+      <ldm xmi:type="face:LogicalDataModel" xmi:id="510ed06e-0dc4-4941-9778-79731df095da" name="LogicalValueTypes" description="The types available to represent the values of Measures">
+        <element xmi:type="logical:Boolean" xmi:id="f477cb77-4291-4e1c-9b1d-a6d524266da3" name="Boolean" description="A type that can represent only two values, often meaning True or False"/>
+        <element xmi:type="logical:Character" xmi:id="31cac88b-06c5-407b-b2d3-ffcfa9ae4dbc" name="Character" description="A type representing a single character in some written language"/>
+        <element xmi:type="logical:Integer" xmi:id="6d947eb5-f25a-457f-a5c0-fb5885fbd33f" name="Integer" description="A whole number in the range -infinity to +infinity"/>
+        <element xmi:type="logical:Natural" xmi:id="f54db89a-c690-492c-8fc4-790dedfcb955" name="Natural" description="A whole number ranging from +1 to +infinity; also called &quot;counting numbers&quot;"/>
+        <element xmi:type="logical:NonNegativeReal" xmi:id="f392b87d-b920-471e-80f9-dc7934c45d05" name="NonNegativeReal" description="A real number ranging from 0 to +infinity"/>
+        <element xmi:type="logical:Real" xmi:id="0a5c743d-1d15-4dfb-854e-feb8de66e914" name="Real" description="A type to represent any numeric quantity along a continuous line. Real numbers include all rational and irrational numbers"/>
+        <element xmi:type="logical:String" xmi:id="8d56660d-fe37-417c-9763-9cc399908fbc" name="String" description="A type used to represent an ordered set of characters in some written language"/>
+      </ldm>
+      <ldm xmi:type="face:LogicalDataModel" xmi:id="055c6654-f50e-4bfc-a000-1649776085e8" name="Measures" description="FACE data model logical measurements.">
+        <ldm xmi:type="face:LogicalDataModel" xmi:id="b19ec55a-5217-4dc7-9121-53947e04b13a" name="InformationElementMeasures">
+          <ldm xmi:type="face:LogicalDataModel" xmi:id="63a3f8b0-d1de-42b9-bbdb-9e439a66a87e" name="TextMeasurementSystem">
+            <element xmi:type="logical:ValueTypeUnit" xmi:id="82379246-feca-4c1b-8b20-9137f0dcfff0" name="StringUnitless" description="The StringUnitless ValueType is typically used for text based measurement systems." unit="3aa0ad57-3476-4eee-8bfb-0861e506133f" valueType="8d56660d-fe37-417c-9763-9cc399908fbc"/>
+            <element xmi:type="logical:MeasurementSystem" xmi:id="684f19d3-8c1d-4f50-baf7-53050d6f2d4b" name="TextUTF8MeasurementSystem" description="A TextMeasurementSystem supports definition of a single text element.  UTF-8 was chosen as the default string encoding." measurementSystemAxis="92499193-e45f-4f38-a2cd-ccb942df30be" coordinateSystem="af5ddbd5-39f2-4b76-ae98-ee28d4d6fed0" externalStandardReference="UTF-8" orientation="N/A"/>
+            <element xmi:type="logical:MeasurementSystemAxis" xmi:id="2abda120-c60f-46f1-99a4-713738c10a6d" name="SecondaryTextMeasurementSystemAxis" description="Representation of a secondary, orthogonal text based axis." axis="f2561710-9ae2-451d-9603-2e39a6e1d736" defaultValueTypeUnit="82379246-feca-4c1b-8b20-9137f0dcfff0"/>
+            <element xmi:type="logical:MeasurementSystemAxis" xmi:id="92499193-e45f-4f38-a2cd-ccb942df30be" name="TextUTF8MeasurementSystemAxis" description="Representation of a single text based axis." axis="f2561710-9ae2-451d-9603-2e39a6e1d736" defaultValueTypeUnit="82379246-feca-4c1b-8b20-9137f0dcfff0"/>
+            <element xmi:type="logical:Measurement" xmi:id="c3733490-eb24-4423-a88e-d9d5ab7db865" name="DescriptionMeasurement" description="Measurement representing a Description as a single element" measurementAxis="8110c1f4-8515-4c8e-a5ed-8ba556770a3a" measurementSystem="684f19d3-8c1d-4f50-baf7-53050d6f2d4b" realizes="1b0421d3-27e7-4dc0-bee0-0f51f4e11b25"/>
+            <element xmi:type="logical:Measurement" xmi:id="9dca219c-accf-456b-a96a-362c304c7cfd" name="NameMeasurement" description="Measurement for representing a name." measurementAxis="e136b412-b9b2-4baf-a42f-b5ec54551e81" measurementSystem="684f19d3-8c1d-4f50-baf7-53050d6f2d4b" realizes="b6594cbd-7032-4ee6-ad05-10beca964417"/>
+            <element xmi:type="logical:MeasurementAxis" xmi:id="8110c1f4-8515-4c8e-a5ed-8ba556770a3a" name="DescriptionMeasurementAxis" precision="1" measurementSystemAxis="92499193-e45f-4f38-a2cd-ccb942df30be" realizes="1b0421d3-27e7-4dc0-bee0-0f51f4e11b25"/>
+            <element xmi:type="logical:MeasurementAxis" xmi:id="e136b412-b9b2-4baf-a42f-b5ec54551e81" name="NameMeasurementAxis" precision="1" measurementSystemAxis="92499193-e45f-4f38-a2cd-ccb942df30be" realizes="b6594cbd-7032-4ee6-ad05-10beca964417"/>
+            <element xmi:type="logical:MeasurementAxis" xmi:id="50bccba7-9765-44df-a81f-ade5d81e58d7" name="NameTextPrimaryAxis" description="The primary name axis." precision="" measurementSystemAxis="92499193-e45f-4f38-a2cd-ccb942df30be" realizes="b6594cbd-7032-4ee6-ad05-10beca964417"/>
+          </ldm>
+        </ldm>
+        <ldm xmi:type="face:LogicalDataModel" xmi:id="74cf78fd-0215-48b7-8cf1-c72d864d5a4e" name="AngleMeasures">
+          <ldm xmi:type="face:LogicalDataModel" xmi:id="5ea3837c-d252-4d13-808d-c0da98711289" name="SharedAngularValueTypeUnits">
+            <element xmi:type="logical:ValueTypeUnit" xmi:id="cbf8a477-7788-4a7c-bb8c-c58987d3a146" name="RealDegrees" description="Angle rotations in degrees as a real numerical representation." unit="b1a10df2-a741-459f-afd9-59b30d6b1c68" valueType="0a5c743d-1d15-4dfb-854e-feb8de66e914"/>
+            <element xmi:type="logical:ValueTypeUnit" xmi:id="6d94c1a9-23f7-41a4-a9b7-0e8be3d21c2f" name="RealRadians" description="Radian rotations as a real numerical representation." unit="2e7d8bbb-c4ab-4d5d-97a5-eaf850d8a7fd" valueType="0a5c743d-1d15-4dfb-854e-feb8de66e914">
+              <constraint xmi:type="logical:RealRangeConstraint" xmi:id="b08dfbbd-e4cb-4f64-a331-7e351a726d21" name="RotationRange" upperBound="3.14159"/>
+            </element>
+          </ldm>
+        </ldm>
+        <ldm xmi:type="face:LogicalDataModel" xmi:id="b1ecfd2c-7504-40b1-866b-0c09445a5915" name="LengthMeasures">
+          <ldm xmi:type="face:LogicalDataModel" xmi:id="6964fc76-a12f-4f8c-a4c7-95e6dda7ea6b" name="DistanceMeasure">
+            <element xmi:type="logical:Measurement" xmi:id="ff0376b2-6e4c-4916-92af-6b50ad817fa6" name="DistanceMeasurement" description="Measurement for distance" measurementAxis="e2ed54d8-3a8b-4b07-aa0f-caba4259d944" measurementSystem="852fa475-dd3a-4cb9-a0e3-67cc7417277b" realizes="f29d5676-d507-45a9-aa18-816ea382fc21"/>
+            <element xmi:type="logical:MeasurementAxis" xmi:id="e2ed54d8-3a8b-4b07-aa0f-caba4259d944" name="DistanceMeasurementAxis" precision="0.0001" measurementSystemAxis="27a1c92b-ba6f-4742-8457-41d5de98d368" realizes="f29d5676-d507-45a9-aa18-816ea382fc21"/>
+            <ldm xmi:type="face:LogicalDataModel" xmi:id="6938cb0e-8de0-4fa4-8848-76590d36f8a0" name="DistanceMeasurementSystem">
+              <element xmi:type="logical:MeasurementSystem" xmi:id="852fa475-dd3a-4cb9-a0e3-67cc7417277b" name="DistanceMeasurementSystem" description="Measurement system for distance" measurementSystemAxis="27a1c92b-ba6f-4742-8457-41d5de98d368" coordinateSystem="99c41fd0-b598-4595-b618-b79123d22ace" externalStandardReference="" orientation="Value increases as distance increases">
+                <referencePoint xmi:type="logical:ReferencePoint" xmi:id="d502d0fc-2c72-437c-aedb-2e87f5a80c08" name="ZeroDistanceReferencePoint" description="zero distance reference point" landmark="8ec3810e-ab4f-4b1d-be5e-334084c4e1e9">
+                  <referencePointPart xmi:type="logical:ReferencePointPart" xmi:id="7cbb6e4e-1d68-4ca9-9c31-41e741e7bb89" axis="27a1c92b-ba6f-4742-8457-41d5de98d368" value="0.0" valueTypeUnit="2f7244f9-0088-4cf7-ae2c-2900f7c02f1b"/>
+                </referencePoint>
+                <referencePoint xmi:type="logical:ReferencePoint" xmi:id="3ad51a58-6868-45d0-adc9-9addf2bada40" name="OneMeterDistanceReferencePoint" description="Unit distance reference point" landmark="14a90371-4983-4ff4-820a-5b6791f64c1d">
+                  <referencePointPart xmi:type="logical:ReferencePointPart" xmi:id="758bcfbd-0e6f-4693-b078-0c4cd70d14e0" axis="27a1c92b-ba6f-4742-8457-41d5de98d368" value="1.0" valueTypeUnit="2f7244f9-0088-4cf7-ae2c-2900f7c02f1b"/>
+                </referencePoint>
+              </element>
+              <element xmi:type="logical:MeasurementSystemAxis" xmi:id="27a1c92b-ba6f-4742-8457-41d5de98d368" name="DistanceMeasurementSystemAxis" axis="22de2907-0448-4618-96ac-e136e8cfe865" defaultValueTypeUnit="2f7244f9-0088-4cf7-ae2c-2900f7c02f1b"/>
+            </ldm>
+          </ldm>
+          <ldm xmi:type="face:LogicalDataModel" xmi:id="69fc60c6-f938-4c80-a6e1-6bcea1dd1b79" name="LengthLandmarks">
+            <element xmi:type="logical:Landmark" xmi:id="14a90371-4983-4ff4-820a-5b6791f64c1d" name="OneMeterDistanceLandmark" description="One meter."/>
+            <element xmi:type="logical:Landmark" xmi:id="8ec3810e-ab4f-4b1d-be5e-334084c4e1e9" name="ZeroDistanceLandmark" description="Zero distance."/>
+          </ldm>
+          <ldm xmi:type="face:LogicalDataModel" xmi:id="0fbc43ec-08ed-43c2-a47e-c5f5cb2bab2d" name="LengthValueUnitType" description="Length measures common value unit pairs">
+            <element xmi:type="logical:ValueTypeUnit" xmi:id="2f7244f9-0088-4cf7-ae2c-2900f7c02f1b" name="NonNegativeRealMeter" description="Meter as a non-negative real numerical representation." unit="627b8963-2f83-4b1f-a6c3-9d064aa39075" valueType="f392b87d-b920-471e-80f9-dc7934c45d05"/>
+          </ldm>
+        </ldm>
+        <ldm xmi:type="face:LogicalDataModel" xmi:id="937af898-6742-47f1-a7a0-dd9e4d779a3d" name="PositionMeasures">
+          <ldm xmi:type="face:LogicalDataModel" xmi:id="8550f70f-ef0e-46b6-a597-6ec6317468c5" name="ECEFPosition">
+            <element xmi:type="logical:Measurement" xmi:id="623aa24b-4b38-4adf-8e39-7c88ed44c3d8" name="ECEFPositionMeasurement" description="Describes a position in the ECEF measurement system." measurementAxis="a5a55d3d-1d4f-42e3-85d0-5d843b356a97 3bbd1911-29fd-40af-8fa1-a0603a71f279 3eade29d-3319-4996-b055-94e4078629b5" measurementSystem="65ac1143-09e0-4e0c-8b01-7302dde993d9" realizes="2cf0e36f-5dc5-4271-9225-d6c5451e9686"/>
+            <element xmi:type="logical:MeasurementAxis" xmi:id="a5a55d3d-1d4f-42e3-85d0-5d843b356a97" name="ECEFPositionMeasurementXAxis" description="ECEF X axis." precision="0.001" measurementSystemAxis="f13b2fb8-6200-4530-b6d6-eb92808ce8a8" realizes="f29d5676-d507-45a9-aa18-816ea382fc21"/>
+            <element xmi:type="logical:MeasurementAxis" xmi:id="3bbd1911-29fd-40af-8fa1-a0603a71f279" name="ECEFPositionMeasurementYAxis" description="ECEF Y axis." precision="0.001" measurementSystemAxis="298bfd71-2735-4246-8559-279fbf4bf0a1" realizes="f29d5676-d507-45a9-aa18-816ea382fc21"/>
+            <element xmi:type="logical:MeasurementAxis" xmi:id="3eade29d-3319-4996-b055-94e4078629b5" name="ECEFPositionMeasurementZAxis" description="ECEF Z axis." precision="0.001" measurementSystemAxis="7417248d-788f-4cfc-aead-f63c0f31a971" realizes="f29d5676-d507-45a9-aa18-816ea382fc21"/>
+            <ldm xmi:type="face:LogicalDataModel" xmi:id="fd9f151d-d598-4dfd-b8fb-0e2a368e3770" name="ECEFPositionLandmarks">
+              <element xmi:type="logical:Landmark" xmi:id="38ed1889-c22b-4e84-af3b-3d5b04de4aef" name="EarthCenter" description="The center of the Mass of the Earth"/>
+              <element xmi:type="logical:Landmark" xmi:id="52175f40-8696-4272-ac4f-87381877da24" name="PrimeMeridianEquatorSurface" description="Describes the point of Intersection of the prime meridian, the equator, and the surface of the earth."/>
+            </ldm>
+            <ldm xmi:type="face:LogicalDataModel" xmi:id="335b76d8-0bbe-4dc5-8531-d66d2b2316ba" name="ECEFPositionMeasurementSystem">
+              <element xmi:type="logical:ValueTypeUnit" xmi:id="7c8e5808-16d6-4c01-b8ea-f0b3905867e0" name="ECEFPositionXRealMeters" description="Describes the ECEF X axis specification." unit="627b8963-2f83-4b1f-a6c3-9d064aa39075" valueType="0a5c743d-1d15-4dfb-854e-feb8de66e914"/>
+              <element xmi:type="logical:ValueTypeUnit" xmi:id="23623dbe-c391-4ee0-a6bf-2cdebc39b478" name="ECEFPositionYRealMeters" description="Describes the ECEF Y axis specification." unit="627b8963-2f83-4b1f-a6c3-9d064aa39075" valueType="0a5c743d-1d15-4dfb-854e-feb8de66e914"/>
+              <element xmi:type="logical:ValueTypeUnit" xmi:id="a263ce38-bdfa-40d1-848e-43b76af5ed53" name="ECEFPositionZRealMeters" description="Describes the ECEF Z axis specification." unit="627b8963-2f83-4b1f-a6c3-9d064aa39075" valueType="0a5c743d-1d15-4dfb-854e-feb8de66e914"/>
+              <element xmi:type="logical:MeasurementSystem" xmi:id="65ac1143-09e0-4e0c-8b01-7302dde993d9" name="ECEFPositionMeasurementSystem" description="Describes the Earth-centered, earth-fixed measurement system." measurementSystemAxis="f13b2fb8-6200-4530-b6d6-eb92808ce8a8 298bfd71-2735-4246-8559-279fbf4bf0a1 7417248d-788f-4cfc-aead-f63c0f31a971" coordinateSystem="31ff7c91-6ddf-4e9f-bb2c-ce479ff6a808" externalStandardReference="" orientation="">
+                <referencePoint xmi:type="logical:ReferencePoint" xmi:id="2dce6ade-8f9b-4b8b-b668-db9363e46aab" name="OriginReferencePoint" landmark="38ed1889-c22b-4e84-af3b-3d5b04de4aef">
+                  <referencePointPart xmi:type="logical:ReferencePointPart" xmi:id="94aaafb2-1794-4eb4-8f8e-417eae828407" axis="f13b2fb8-6200-4530-b6d6-eb92808ce8a8" value="0" valueTypeUnit="7c8e5808-16d6-4c01-b8ea-f0b3905867e0"/>
+                  <referencePointPart xmi:type="logical:ReferencePointPart" xmi:id="27e2606e-393c-4939-a050-e66ee2255f40" axis="298bfd71-2735-4246-8559-279fbf4bf0a1" value="0" valueTypeUnit="23623dbe-c391-4ee0-a6bf-2cdebc39b478"/>
+                  <referencePointPart xmi:type="logical:ReferencePointPart" xmi:id="19e2ac88-f472-4a1c-81ea-1277de3bfde3" axis="7417248d-788f-4cfc-aead-f63c0f31a971" value="0" valueTypeUnit="a263ce38-bdfa-40d1-848e-43b76af5ed53"/>
+                </referencePoint>
+                <referencePoint xmi:type="logical:ReferencePoint" xmi:id="5a4865c4-cbfe-4cd3-bbf1-f760ed7450bc" name="PrimeMeridianEquatorSurfaceReferencePoint" description="Describes the point of Intersection of the prime meridian, the equator, and the surface of the earth." landmark="52175f40-8696-4272-ac4f-87381877da24">
+                  <referencePointPart xmi:type="logical:ReferencePointPart" xmi:id="f7d87a3b-947c-4192-8296-07a5f285de48" axis="f13b2fb8-6200-4530-b6d6-eb92808ce8a8" value="Earths Surface" valueTypeUnit="7c8e5808-16d6-4c01-b8ea-f0b3905867e0"/>
+                  <referencePointPart xmi:type="logical:ReferencePointPart" xmi:id="c56d957f-5b4e-460c-be38-c60f5b648404" axis="298bfd71-2735-4246-8559-279fbf4bf0a1" value="0" valueTypeUnit="23623dbe-c391-4ee0-a6bf-2cdebc39b478"/>
+                  <referencePointPart xmi:type="logical:ReferencePointPart" xmi:id="1763e533-b6db-412e-8f29-7c8b754d7f0c" axis="7417248d-788f-4cfc-aead-f63c0f31a971" value="0" valueTypeUnit="a263ce38-bdfa-40d1-848e-43b76af5ed53"/>
+                </referencePoint>
+              </element>
+              <element xmi:type="logical:MeasurementSystemAxis" xmi:id="f13b2fb8-6200-4530-b6d6-eb92808ce8a8" name="ECEFPositionMeasurementSystemXAxis" description="Specifies a link to the ECEF X measurement system axis." axis="22de2907-0448-4618-96ac-e136e8cfe865" defaultValueTypeUnit="7c8e5808-16d6-4c01-b8ea-f0b3905867e0"/>
+              <element xmi:type="logical:MeasurementSystemAxis" xmi:id="298bfd71-2735-4246-8559-279fbf4bf0a1" name="ECEFPositionMeasurementSystemYAxis" description="Specifies a link to the ECEF Y measurement system axis." axis="398e3601-69cb-42b9-a7e8-821b4979c3a5" defaultValueTypeUnit="23623dbe-c391-4ee0-a6bf-2cdebc39b478"/>
+              <element xmi:type="logical:MeasurementSystemAxis" xmi:id="7417248d-788f-4cfc-aead-f63c0f31a971" name="ECEFPositionMeasurementSystemZAxis" description="Specifies a link to the ECEF Z measurement system axis." axis="e27f78ca-a65e-4333-bfd3-174b9f51e533" defaultValueTypeUnit="a263ce38-bdfa-40d1-848e-43b76af5ed53"/>
+            </ldm>
+          </ldm>
+          <ldm xmi:type="face:LogicalDataModel" xmi:id="23ee2112-b14a-44aa-a9d2-c8ba1a4b33a5" name="WGS84Position">
+            <element xmi:type="logical:Measurement" xmi:id="00cea05a-d888-44e1-b6a8-616244c7d771" name="WGS84PositionMeasurement" description="Describes a location relative to the WGS-84 frame of reference." measurementAxis="fde3c48b-dc42-44b7-8d74-c0d09caa5839 25ae487b-2736-4ba0-8cca-14ebd2a3d5dc 25587a72-41b9-44be-a591-48a0c4496b66" measurementSystem="cc7b9477-6a91-48e1-8c6f-a01c061cea27" realizes="2cf0e36f-5dc5-4271-9225-d6c5451e9686"/>
+            <element xmi:type="logical:MeasurementAxis" xmi:id="fde3c48b-dc42-44b7-8d74-c0d09caa5839" name="WGS84PositionLongitudeMeasurementAxis" description="Specifies the longitude component of location." precision="0.000001" measurementSystemAxis="a1a7b24c-bad6-4350-9eac-9ec7b184828c" realizes="9a83d1f1-ce45-4680-9404-d8a4183184ae"/>
+            <element xmi:type="logical:MeasurementAxis" xmi:id="25ae487b-2736-4ba0-8cca-14ebd2a3d5dc" name="WGS84PositionHeightMeasurementAxis" description="Specifies the height component of location." precision="0.000001" measurementSystemAxis="ac552dcd-a712-46c7-a021-357914c9e55f" realizes="f29d5676-d507-45a9-aa18-816ea382fc21"/>
+            <element xmi:type="logical:MeasurementAxis" xmi:id="25587a72-41b9-44be-a591-48a0c4496b66" name="WGS84PositionLatitudeMeasurementAxis" description="Specifies the latitude component of location." precision="0.000001" measurementSystemAxis="b5c1c442-851b-48de-a4ee-9bd4f83b7e99" realizes="9a83d1f1-ce45-4680-9404-d8a4183184ae"/>
+            <ldm xmi:type="face:LogicalDataModel" xmi:id="ba8d455d-dac7-4528-ae34-4ca7364faca2" name="WGS84PositionMeasurementSystem">
+              <element xmi:type="logical:ValueTypeUnit" xmi:id="7d31b932-74b8-42b5-80c9-32414ce9a4dc" name="WGS84PositionMeasurementSystemHeightRealMeters" unit="627b8963-2f83-4b1f-a6c3-9d064aa39075" valueType="0a5c743d-1d15-4dfb-854e-feb8de66e914"/>
+              <element xmi:type="logical:ValueTypeUnit" xmi:id="b0cf1673-ff77-4f66-a626-bebf2c8f09cb" name="WGS84PositionMeasurementSystemLatLongRealDegrees" unit="b1a10df2-a741-459f-afd9-59b30d6b1c68" valueType="0a5c743d-1d15-4dfb-854e-feb8de66e914"/>
+              <element xmi:type="logical:MeasurementSystem" xmi:id="cc7b9477-6a91-48e1-8c6f-a01c061cea27" name="WGS84PositionMeasurementSystem" description="Describes the WGS84 Frame of Reference in terms of coordinate system, origin, and axis orientation." measurementSystemAxis="ac552dcd-a712-46c7-a021-357914c9e55f b5c1c442-851b-48de-a4ee-9bd4f83b7e99 a1a7b24c-bad6-4350-9eac-9ec7b184828c" coordinateSystem="120d63f1-2a17-4218-a0ca-d2cfb0eb13ad" externalStandardReference="Reference: http://earth-info.nga.mil/GandG/publications/tr8350.2/wgs84fin.pdf&#xA;DEPARTMENT OF DEFENSE WORLD GEODETIC SYSTEM 1984 Its Definition and Relationships with Local Geodetic Systems" orientation="right-handed orthogonal">
+                <referencePoint xmi:type="logical:ReferencePoint" xmi:id="9c4b1f8c-a856-4a5b-bd8c-b1ad91e889d8" name="EarthCenter" description="Earths Center of Mass" landmark="38ed1889-c22b-4e84-af3b-3d5b04de4aef">
+                  <referencePointPart xmi:type="logical:ReferencePointPart" xmi:id="941e9ff9-b406-487b-9f2d-a5008e600a0e" axis="ac552dcd-a712-46c7-a021-357914c9e55f" value="Earths Center of mass (-height)" valueTypeUnit="7d31b932-74b8-42b5-80c9-32414ce9a4dc"/>
+                  <referencePointPart xmi:type="logical:ReferencePointPart" xmi:id="c4a34cd3-84e2-497c-b72e-5ab7bc5fa377" axis="b5c1c442-851b-48de-a4ee-9bd4f83b7e99" value="0" valueTypeUnit="b0cf1673-ff77-4f66-a626-bebf2c8f09cb"/>
+                  <referencePointPart xmi:type="logical:ReferencePointPart" xmi:id="9a010cfd-c5d4-418b-a961-f48baa317dd9" axis="a1a7b24c-bad6-4350-9eac-9ec7b184828c" value="0" valueTypeUnit="b0cf1673-ff77-4f66-a626-bebf2c8f09cb"/>
+                </referencePoint>
+                <referencePoint xmi:type="logical:ReferencePoint" xmi:id="0bcc5058-bb8b-423e-8e4b-26a157d6863e" name="PrimeMeridianEquatorSurface" description="Describes the point of Intersection of the prime meridian, the equator, and the surface of the earth." landmark="52175f40-8696-4272-ac4f-87381877da24">
+                  <referencePointPart xmi:type="logical:ReferencePointPart" xmi:id="70631b0c-33e9-4387-a479-9ef284c15800" axis="ac552dcd-a712-46c7-a021-357914c9e55f" value="0" valueTypeUnit="7d31b932-74b8-42b5-80c9-32414ce9a4dc"/>
+                  <referencePointPart xmi:type="logical:ReferencePointPart" xmi:id="ef5413a3-1330-4fb4-a039-6cf1cdced932" axis="b5c1c442-851b-48de-a4ee-9bd4f83b7e99" value="0" valueTypeUnit="b0cf1673-ff77-4f66-a626-bebf2c8f09cb"/>
+                  <referencePointPart xmi:type="logical:ReferencePointPart" xmi:id="cdfe93e0-ef49-4e1a-aee5-619e63f5c1b9" axis="a1a7b24c-bad6-4350-9eac-9ec7b184828c" value="0" valueTypeUnit="b0cf1673-ff77-4f66-a626-bebf2c8f09cb"/>
+                </referencePoint>
+              </element>
+              <element xmi:type="logical:MeasurementSystemAxis" xmi:id="ac552dcd-a712-46c7-a021-357914c9e55f" name="WGS84PositionMeasurementSystemHeightAxis" description="Specifies the height axis for WGS-84." axis="0b1d7ed0-c05e-4c19-a7a0-a728f5e0d055" defaultValueTypeUnit="7d31b932-74b8-42b5-80c9-32414ce9a4dc"/>
+              <element xmi:type="logical:MeasurementSystemAxis" xmi:id="b5c1c442-851b-48de-a4ee-9bd4f83b7e99" name="WGS84PositionMeasurementSystemLatitudeAxis" description="Specifies the latitude axis for WGS-84." axis="d8bf8110-8806-4496-af8f-44bace07941b" defaultValueTypeUnit="b0cf1673-ff77-4f66-a626-bebf2c8f09cb"/>
+              <element xmi:type="logical:MeasurementSystemAxis" xmi:id="a1a7b24c-bad6-4350-9eac-9ec7b184828c" name="WGS84PositionMeasurementSystemLongitudeAxis" description="Specifies the longitude axis for WGS-84." axis="4b715324-2c74-482b-bb67-e347e451c623" defaultValueTypeUnit="b0cf1673-ff77-4f66-a626-bebf2c8f09cb"/>
+            </ldm>
+          </ldm>
+        </ldm>
+      </ldm>
+      <ldm xmi:type="face:LogicalDataModel" xmi:id="68c5fdba-5f45-4ee8-81bc-29bc1f40faf1" name="Units">
+        <ldm xmi:type="face:LogicalDataModel" xmi:id="248fcbd4-e962-4f7b-b2d7-7eab410a8b60" name="Angle">
+          <element xmi:type="logical:Unit" xmi:id="b1a10df2-a741-459f-afd9-59b30d6b1c68" name="DegreesOfArc" description="Unit of measure for a plane angle representing 1/360 of a full rotation. Not an SI unit."/>
+          <element xmi:type="logical:Unit" xmi:id="823ddede-d6bd-4b04-bc96-f7261c99c66d" name="Gradians" description="Unit of measure for a pane angle representing 1/400 of a full rotation. Not an SI unit."/>
+          <element xmi:type="logical:Unit" xmi:id="4786cfbe-920e-46e2-9ac2-2b1ad09d957c" name="MinutesOfArc" description="Unit of measure for angular measurement equal to 1/60 of one degree, because one degree is 1/360 of a circle, one minute of arc is 1/21,600 of a circle."/>
+          <element xmi:type="logical:Unit" xmi:id="2e7d8bbb-c4ab-4d5d-97a5-eaf850d8a7fd" name="Radians" description="Unit of measure for angular measurement equal to the length of a corresponding arc of a unit circle, one radian is just under 57.3 degrees. It is a SI derived unit."/>
+          <element xmi:type="logical:Unit" xmi:id="ed11fcd3-01a5-475b-8f0d-14fc9f336384" name="SecondsOfArc" description="Unit of measure for angular measurement equal to 1/60 of one minute because one degree is 1/360 of a circle, one minute of arc is 1/21,600 of a circle and one second of arc is 1/1296000."/>
+          <element xmi:type="logical:Unit" xmi:id="d988f044-2392-417c-a3c5-7322fde4e830" name="Turns" description="Unit of measure for angular measurement equal to 360 degrees or 2 pi radians. 1 revolution."/>
+        </ldm>
+        <ldm xmi:type="face:LogicalDataModel" xmi:id="ceb49ffd-3779-4a47-8a82-e7781b176fe6" name="Length">
+          <element xmi:type="logical:Unit" xmi:id="8c20dd88-409c-4a23-beb0-a46ba90a9b1a" name="Angstroms" description="Unit of measure for representing length equal to one hundred-millionth of a centimeter mainly to express wavelengths and interatomic distances."/>
+          <element xmi:type="logical:Unit" xmi:id="3c8acb78-913f-4957-8c47-72835df6ac77" name="AstronomicalUnits" description="Unit of measure for representing the mean distance between the Earth and the Sun, equal to 149.6 million kilometers."/>
+          <element xmi:type="logical:Unit" xmi:id="0a92f3d0-ec9a-4bb5-bdfb-86f31db93f45" name="Cables" description="Unit of measure for representing length  as a nautical unit of measure equal to one tenth of a nautical mile or 100 fathoms."/>
+          <element xmi:type="logical:Unit" xmi:id="90e7b892-d3d9-497b-9891-6ac1f6e9aa2f" name="Centimeters" description="Unit of measure for representing length equal to one hundredth of a meter."/>
+          <element xmi:type="logical:Unit" xmi:id="0f4daa6f-906b-4407-b416-e69ec8843366" name="Chains" description="Unit of measure for representing  a geodetic measure used for land survey, equal to 66 feet."/>
+          <element xmi:type="logical:Unit" xmi:id="20cbcb8a-8d3e-4973-9d5e-2bde85891dc6" name="DataMiles" description="Unit of measure for representing radar related subjects and in JTIDS, is equal to 6000 feet or 0.987 nautical miles."/>
+          <element xmi:type="logical:Unit" xmi:id="96cf0eaf-3b8c-4e07-a799-7fd751fe93d4" name="Fathoms" description="Unit of measure for representing depth of water equal to 6 feet."/>
+          <element xmi:type="logical:Unit" xmi:id="22a893f1-a38d-4d0e-b32c-a672d23bb5de" name="Feet" description="Unit of measure for representing length as multiple units of the international foot, equal to 12 inches."/>
+          <element xmi:type="logical:Unit" xmi:id="86f2fcb8-dc35-426e-891c-1a551fac9000" name="Inches" description="Unit of measure for representing length in the imperial and US customary systems of measurement."/>
+          <element xmi:type="logical:Unit" xmi:id="8b706113-0cfe-418d-ab11-2377c91f956b" name="Kilometers" description="Unit of measure for representing length equal to 1000 meters."/>
+          <element xmi:type="logical:Unit" xmi:id="7abf2964-95ad-4dc7-a5fa-adabf649d94b" name="Links" description="Unit of measure for representing length equal to 7.92 survey inches formerly used in land surveying.&#x9;0"/>
+          <element xmi:type="logical:Unit" xmi:id="627b8963-2f83-4b1f-a6c3-9d064aa39075" name="Meters" description="Unit of measure for representing length equal to the distance traveled in a vacuum by light in 1/299, 782, 458 second or to about 39.37 inches. An SI Unit."/>
+          <element xmi:type="logical:Unit" xmi:id="b9e18996-b14e-4b13-9dbe-8c421d6dac44" name="MetricMiles" description="Unit of measure for representing length in international athletics of 1500 meters."/>
+          <element xmi:type="logical:Unit" xmi:id="bb866b14-f3af-46d9-b75e-21346e956c7d" name="Millimeters" description="Unit of measure for representing length equal to one thousandth of a meter."/>
+          <element xmi:type="logical:Unit" xmi:id="29ccc7ee-dbad-4b70-802b-dc2bf60e1b37" name="NauticalMiles" description="Unit of measure for representing length at sea or air travel equal to 1.15 miles"/>
+          <element xmi:type="logical:Unit" xmi:id="b328ba4b-6c86-4355-a3c0-6318f7bca922" name="ReciprocalMeters" description="Unit of measure for representing a measure of the shape of a curved surface equal to the reciprocal of the radius of curvature of a surface in meters."/>
+          <element xmi:type="logical:Unit" xmi:id="728474a3-722e-4820-bca2-649618ac1689" name="Rods" description="Unit of measure for representing length equal to 5 1/5 yards or 16 1/2 feet used in land surveying."/>
+          <element xmi:type="logical:Unit" xmi:id="ff3f1a52-8fe7-43e6-bced-ddf485da8712" name="StatuteMiles" description="Unit of measure for representing length on land in English speaking countries equal to 5,280 feet."/>
+          <element xmi:type="logical:Unit" xmi:id="64aa0dfb-1985-4b5e-bf93-20633c0dd73c" name="Yards" description="Unit of measure for representing length in the US Customary and British Imperial Systems equal to 3 feet."/>
+        </ldm>
+        <ldm xmi:type="face:LogicalDataModel" xmi:id="1ee37212-7337-4593-84f9-37face1f7c76" name="Unitless_Dimensionless">
+          <element xmi:type="logical:Unit" xmi:id="76cc6cef-69bc-42a8-85f5-ffcd8a1c6713" name="Percent" description="A number or rate that is expressed as a certain number of parts of something divided into 100 parts."/>
+          <element xmi:type="logical:Unit" xmi:id="695bf52b-4bd5-4f96-93e9-9bd7531edcf5" name="Ratio" description="A unit used to specify the ratio of one value to another having the same units"/>
+          <element xmi:type="logical:Unit" xmi:id="3aa0ad57-3476-4eee-8bfb-0861e506133f" name="Unitless" description="A &quot;placeholder&quot; to specify for values that have no engineering units or where units are not meaningful, but a Unit specification is required"/>
+        </ldm>
+      </ldm>
+    </ldm>
+  </ldm>
+  <pdm xmi:type="face:PlatformDataModel" xmi:id="e6e274af-decb-4065-8f33-1e689f80a97c" name="PlatformDataModel">
+    <pdm xmi:type="face:PlatformDataModel" xmi:id="14a47b35-3c47-4035-b5de-caee176567d9" name="COP_Demo_Platform_Model">
+      <element xmi:type="platform:Entity" xmi:id="43298793-2264-4f0b-b97f-23def4948bc7" name="Ownship">
+        <composition xmi:type="platform:Composition" xmi:id="253b3d30-00d5-457f-b525-a985393b0f91" rolename="location" type="3c521304-0269-429c-8863-41bdc463191a"/>
+      </element>
+      <element xmi:type="platform:Entity" xmi:id="19b55f27-61ac-4b20-a6a2-74269d072d52" name="BSO" realizes="aafa057f-d78f-4244-b833-64e8a02cd36b">
+        <composition xmi:type="platform:Composition" xmi:id="56f12209-d255-4a7f-95c5-30e13340866c" rolename="bsoID" type="74020be9-7443-476c-a63e-ff6dc83a6f23"/>
+        <composition xmi:type="platform:Composition" xmi:id="0dd7c30a-2f1b-4e92-8fed-0f1ed2046bd3" rolename="location" type="3c521304-0269-429c-8863-41bdc463191a"/>
+        <composition xmi:type="platform:Composition" xmi:id="4a8b1b5f-c6d5-493f-842b-c9afde21bc6f" rolename="symbol2525" type="8d9470a4-4652-4b85-b9a0-c7d3691ad775"/>
+      </element>
+      <pdm xmi:type="face:PlatformDataModel" xmi:id="72b0cb18-d3cc-461c-801e-e1cf10f3f62c" name="Views">
+        <element xmi:type="platform:View" xmi:id="5f5307ce-323a-4e11-8605-278d6a441fc6" name="BSOLocation">
+          <characteristic xmi:type="platform:CharacteristicProjection" xmi:id="cb7dae48-fe58-4240-b622-2749dd082400" projectedCharacteristic="19b55f27-61ac-4b20-a6a2-74269d072d52" rolename="bso_location" path=""/>
+        </element>
+      </pdm>
+      <pdm xmi:type="face:PlatformDataModel" xmi:id="73820d2d-cf75-425a-b4b7-918c62437989" name="IDLPrimitives">
+        <element xmi:type="platform:String" xmi:id="8d9470a4-4652-4b85-b9a0-c7d3691ad775" name="Symbol_2525" realizes="c3733490-eb24-4423-a88e-d9d5ab7db865"/>
+        <element xmi:type="platform:Double" xmi:id="d62ac0be-455d-44a7-8b96-b7931ce57103" name="WGS84PositionHeightMeasurementAxis" realizes="25ae487b-2736-4ba0-8cca-14ebd2a3d5dc"/>
+        <element xmi:type="platform:String" xmi:id="74020be9-7443-476c-a63e-ff6dc83a6f23" name="ID" realizes="9dca219c-accf-456b-a96a-362c304c7cfd"/>
+        <element xmi:type="platform:Double" xmi:id="764a735d-bd87-4d52-a1b5-64fd3b18f734" name="WGS84PositionLatitudeMeasurementAxis" realizes="25587a72-41b9-44be-a591-48a0c4496b66"/>
+        <element xmi:type="platform:Double" xmi:id="9b801752-9629-4e20-898e-3b0ac8d81d81" name="WGS84PositionLongitudeMeasurementAxis" realizes="fde3c48b-dc42-44b7-8d74-c0d09caa5839"/>
+        <element xmi:type="platform:IDLStruct" xmi:id="3c521304-0269-429c-8863-41bdc463191a" name="Location_alt_lat_long" realizes="00cea05a-d888-44e1-b6a8-616244c7d771">
+          <composition xmi:type="platform:IDLComposition" xmi:id="80a53af9-722d-4348-9001-d8405fff34e9" type="d62ac0be-455d-44a7-8b96-b7931ce57103" rolename="altitude"/>
+          <composition xmi:type="platform:IDLComposition" xmi:id="355f0a4c-3fb1-4d5d-9943-0fca8d4a0779" type="764a735d-bd87-4d52-a1b5-64fd3b18f734" rolename="latitude"/>
+          <composition xmi:type="platform:IDLComposition" xmi:id="ceb6e72b-70aa-4e7d-976f-8da76f9af79a" type="9b801752-9629-4e20-898e-3b0ac8d81d81" rolename="longitude"/>
+        </element>
+      </pdm>
+    </pdm>
+  </pdm>
+  <uopModel xmi:type="face:UoPModel" xmi:id="45d39a9f-7e56-40ca-9b07-6e16cd3bd342" name="UoPModel">
+    <uopModel xmi:type="face:UoPModel" xmi:id="665609fc-870c-41b3-b1b6-862ae49d9528" name="ARINC653">
+      <element xmi:type="uop:PortableComponent" xmi:id="94144f12-20c4-4f0d-ab40-43a944b30093" name="ownship_pc" partitionType="ARINC653" notes="">
+        <port xmi:type="uop:MessagePort" xmi:id="f68f84d7-f0d0-46ee-8532-0c5b30adfced" name="ownship_gps_subscriber" messageType="5f5307ce-323a-4e11-8605-278d6a441fc6"/>
+      </element>
+      <element xmi:type="uop:PlatformSpecificComponent" xmi:id="32704745-46e9-49de-9578-f1cf3e7c6386" name="gps_sensor_pss" partitionType="ARINC653" notes="">
+        <port xmi:type="uop:MessagePort" xmi:id="ac9562df-7976-49c6-9d53-f4ca5b0516b2" name="gps_location_publisher" messageType="5f5307ce-323a-4e11-8605-278d6a441fc6" messageExchangeType="OutboundMessage"/>
+      </element>
+    </uopModel>
+  </uopModel>
+</face:DataModel>

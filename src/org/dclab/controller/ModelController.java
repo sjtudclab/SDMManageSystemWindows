@@ -1,9 +1,13 @@
 package org.dclab.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.dclab.model.Model;
 import org.dclab.service.ModelService;
+import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,11 +38,21 @@ public class ModelController {
 	@RequestMapping(value="/createModel",method=RequestMethod.POST)
 	public int createModel(Model model) throws Exception{
 		//System.out.println(model.getCreateTime());
+		System.out.println("service");
 		return modelService.createModel(model);
 	}
 	@RequestMapping(value="/uploadModel",method=RequestMethod.POST)
 	public String uploadModel(@RequestParam(value="SDMFile")MultipartFile SDMFile,@RequestParam(value="elementID")int elementID) throws Exception{
 		//System.out.println("进入后台");
 		return modelService.uploadModel(SDMFile,elementID);
+	}
+	@RequestMapping(value="exportCode",method=RequestMethod.POST)
+	public void exportCode(int elementID,HttpServletResponse response) throws IOException, InterruptedException{
+		modelService.getFile(elementID, response);
+	}
+	
+	@RequestMapping(value="oclValidate",method=RequestMethod.POST)
+	public String oclValidate(int elementID) throws DocumentException{
+		return modelService.oclValidate(elementID);
 	}
 }

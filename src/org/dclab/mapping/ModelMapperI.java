@@ -34,5 +34,8 @@ public interface ModelMapperI {
 
 	@Update("UPDATE element SET fileID=#{path} where elementID=#{elementID}")
 	public int updatePath(@Param(value="elementID")int elementID,@Param(value="path")String path);
+	
+	@Select("SELECT fileID FROM `element` WHERE elementID=#{elementId}")
+	public String getFileIDByEId(int elementId);
 }
 

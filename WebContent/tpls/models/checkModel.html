@@ -76,6 +76,7 @@
                      <select id="middleClass" class="form-control">
 						<option value="3" id="conceptual">概念模型</option>
 						<option value="4" id="logical">逻辑模型</option>
+						<option value="5" id="paltform">平台模型</option>
 					 </select>
 					 </div>
 					 <div class="col-xs-3">
@@ -83,6 +84,8 @@
                      <select id="smallClass" class="form-control">
 						<option value="6" id="observable">可观测量</option>
 						<option value="15" id="conceptualEntity">概念实体</option>
+						<option value="16" id="logicalEntity">逻辑实体</option>
+						<option value="17" id="platformEntity">平台实体</option>
 					 </select>
 					 </div>
                   <input class="btn btn-primary" type="button" onclick="checkModel()" value="查询">
@@ -147,7 +150,8 @@ function checkModel(){
 		        	 "</td><td>"+ChineseName+"</td><td>"+description+
 		        	 "</td><td>"+creator+"</td><td>"+
 		              "<a href=\""+url+"\" download=\""+url+"\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>下载/</a>"+
-		              "<a href=\"javascript:void(0)\" onclick=\"exportCode("+elementID+")\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>导出代码</a>"+
+		              "<a href=\"javascript:void(0)\" onclick=\"oclValidate("+elementID+")\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>OCL验证</a>"+
+		              "<a href=\"javascript:void(0)\" onclick=\"exportCode("+elementID+")\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>导出代码 </a>"+
 		              "</td></tr>";
 		        	 $("#element").append(innerHtml);
 	        	}	 
@@ -166,6 +170,18 @@ function exportCode(elementID){
 	       data: {elementID:elementID},
 	       success: function(data) {
 	    	   alert("导出代码成功");
+	       }
+	});
+}
+
+function oclValidate(elementID){
+    $.ajax({
+	       type: "POST",
+	       url: "/ModelManage/oclValidate",
+	       dataType:"json",
+	       data: {elementID:elementID},
+	       success: function(data) {
+		   		alert(data);
 	       }
 	});
 }
