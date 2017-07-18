@@ -149,8 +149,8 @@ function checkModel(){
 		        	 var innerHtml="<tr><td>"+elementID+"</td><td>"+EnglishName+
 		        	 "</td><td>"+ChineseName+"</td><td>"+description+
 		        	 "</td><td>"+creator+"</td><td>"+
-		              "<a href=\""+url+"\" download=\""+url+"\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>下载/</a>"+
-		              "<a href=\"javascript:void(0)\" onclick=\"exportCode("+elementID+")\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>OCL验证</a>"+
+		              "<a href=\"/ModelManage/downloadModel?elementID="+elementID+"\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>下载/</a>"+
+		              "<a href=# onclick=\"oclValidate("+elementID+")\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>OCL验证</a>"+
 		              "<a href=\"/ModelManage/exportCode?elementID="+elementID+"\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>导出代码 </a>"+
 		              "</td></tr>";
 		        	 $("#element").append(innerHtml);
@@ -162,14 +162,17 @@ function checkModel(){
 	       }
 	     });
 }
-function exportCode(elementID){
+function oclValidate(elementID){
 	$.ajax({
 	       type: "POST",
 	       url: "/ModelManage/oclValidate",
-	       dataType:"json",
+	       //dataType:"json",
 	       data: {elementID:elementID},
 	       success: function(data) {
-	    	   alert("aaa");
+	    	   alert(data);
+	       },
+	       error: function(data) {
+		   		alert("验证失败");
 	       }
 	});
 }

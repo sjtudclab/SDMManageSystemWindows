@@ -30,9 +30,9 @@ public class ModelController {
 		return modelService.checkModel(bigClass, middleClass, smallClass);
 	}
 	
-	@RequestMapping(value="/downloadModel",method=RequestMethod.POST)
-	public String downloadModel(int elementID){
-		return modelService.downloadModel(elementID);
+	@RequestMapping(value="/downloadModel")
+	public void downloadModel(int elementID,HttpServletResponse response) throws IOException{
+		modelService.downloadModel(elementID,response);
 	}
 	
 	@RequestMapping(value="/createModel",method=RequestMethod.POST)

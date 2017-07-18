@@ -49,8 +49,16 @@ public class ModelService {
 		return modelMapperI.getElementByClass(bigClass, middleClass, smallClass);
 	}
 
-	public String downloadModel(int elementID) {
-		return modelMapperI.getUrlByElementID(elementID);
+	public void downloadModel(int elementID,HttpServletResponse response) throws IOException {
+		String path = modelMapperI.getFileIDByEId(elementID);
+		File file = new File(path);
+		if (!file.isDirectory()) {
+			InputStream iStream = new FileInputStream(file);
+			org.apache.commons.io.IOUtils.copy(iStream, response.getOutputStream());
+			response.flushBuffer();
+			iStream.close();
+		}
+		
 	}
 
 	public int createModel(Model model) throws Exception {
@@ -100,13 +108,13 @@ public class ModelService {
 		oclValidate = new OclValidate();
 		String returnCode = oclValidate.validateOcl(path);
 		if(returnCode.length()==0){
-			returnCode = "符合OCL";
+			returnCode = "conform OCL";
 		}
 		System.out.println("returnCode:"+returnCode);
 		return returnCode;
 	}
 	
-	public void getFile(@RequestParam int elementID, HttpServletResponse response) throws IOException, InterruptedException{
+	public void getFile(int elementID, HttpServletResponse response) throws IOException, InterruptedException{
 		String path = modelMapperI.getFileIDByEId(elementID);
 		
 		String dir = System.getProperty("project.root")+"files";
@@ -115,12 +123,13 @@ public class ModelService {
 		System.out.println("command1:"+command1);
 		process = Runtime.getRuntime().exec(command1, null, new File(dir));
 		process.waitFor();
-		
-		String src = dir+File.separator+"DM";
-		String dst = dir+File.separator+"DM.zip";
-		ZipTool.compress(src, dst);
-		
-		try {
+		String fileName = dir+File.separator+"DM";
+		File file = new File(fileName);
+		if(file.isDirectory()){
+			String src = dir+File.separator+"DM";
+			String dst = dir+File.separator+"DM.zip";
+			ZipTool.compress(src, dst);
+			try {
 			// get your file as InputStream
 			InputStream is = new FileInputStream(new File(dst));
 			org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
@@ -129,5 +138,16 @@ public class ModelService {
 		} catch (IOException ex){
 			ex.printStackTrace();
 		}
+		}else{
+			String filename1 = dir+File.separator+"DM.tar.gz";
+			InputStream iStream = new FileInputStream(new File(filename1));
+			org.apache.commons.io.IOUtils.copy(iStream, response.getOutputStream());
+			response.flushBuffer();
+			iStream.close();
+		}
+		
+	
+		
+		
 	}
 }
