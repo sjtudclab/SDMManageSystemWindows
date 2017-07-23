@@ -43,7 +43,7 @@ public class ModelController {
 	}
 	@RequestMapping(value="/uploadModel",method=RequestMethod.POST)
 	public String uploadModel(@RequestParam(value="SDMFile")MultipartFile SDMFile,@RequestParam(value="elementID")int elementID) throws Exception{
-		//System.out.println("进入后台");
+		System.out.println("进入后台");
 		return modelService.uploadModel(SDMFile,elementID);
 	}
 	@RequestMapping(value="/exportCode")

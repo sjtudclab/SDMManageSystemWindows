@@ -81,7 +81,7 @@ public class ModelService {
 
 	public String uploadModel(MultipartFile file,int elementID) throws Exception {
 		//String fileName = file.getOriginalFilename(); // 获取文件名
-		String path=System.getProperty("project.root")+"files"+File.separator;
+		String path=System.getProperty("project.root")+"files"+File.separator+"ModelManage"+File.separator;
 		//System.out.println(path);
 		//HashMap<String, String> map = new HashMap<String, String>();
 		try {
@@ -96,6 +96,8 @@ public class ModelService {
 			return null;
 		}
 		modelMapperI.updatePath(elementID, path+ file.getOriginalFilename());
+		GitLabService gitLabService=new GitLabService();
+		gitLabService.upLoad(path+ file.getOriginalFilename()); //上传文件到gitlab上
 		//map.put("info", "上传成功");
 		System.out.println(path + file.getOriginalFilename());
 		return path + file.getOriginalFilename();

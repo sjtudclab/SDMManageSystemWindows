@@ -105,8 +105,12 @@ public class CRService {
 			int authorityID=userMapperI.getAuthorityByUserName(cr.getVotor());
 			if(crMapperI.getCheckNum(elementID)==userMapperI.getUserNum(authorityID)){
 				int state=crMapperI.getResult(elementID);
-				if(state>0)
-				    return modelMapperI.updateState(elementID,1);
+				if(state>0){ //表示审核通过
+					//GitLabService gitLabService=new GitLabService();
+					//Model model = modelMapperI.getModelByEleID(elementID);
+					//gitLabService.upLoad(model.getFileID()); //上传文件到gitlab上
+					return modelMapperI.updateState(elementID,1);
+				}
 				else
 					return modelMapperI.updateState(elementID,-1);
 			}
