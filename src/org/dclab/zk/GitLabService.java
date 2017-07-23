@@ -1,4 +1,4 @@
-package org.dclab.service;
+package org.dclab.zk;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,8 +15,8 @@ public class GitLabService {
 	}
 	public void upLoad(String path) throws InterruptedException{	
 		int index=path.lastIndexOf("/");
-		String Directory=path.substring(0, index);
-		String fileName=path.substring(index+1, path.length());
+		String Directory=path.substring(0, index);  //目录
+		String fileName=path.substring(index+1, path.length());  //文件名
 		String shellL="#!/bin/bash"+'\n'+
 				"cd "+Directory+'\n'+
 				"git pull "+'\n'+
@@ -29,7 +29,7 @@ public class GitLabService {
 			 	FileOutputStream fos = new FileOutputStream(shPath);
 				fos.write(shellL.getBytes()); //覆盖之前文件内容
 				Process process=null;
-				String command1="chmod 777 "+shPath;
+				String command1="chmod 777 "+shPath;  //设置权限
 				process = Runtime.getRuntime().exec(command1);
 				process.waitFor();
 				String command2="/bin/sh "+shPath;
@@ -40,7 +40,6 @@ public class GitLabService {
 	            String line;
 	            while((line = input.readLine()) != null){
 	                System.out.println(line);
-	                //TODU 调用zookeeper通知用户审核情况
 	            }
 	            input.close();
 	            ir.close();

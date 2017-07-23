@@ -36,7 +36,7 @@ public class CRController {
 	}
 
 	@RequestMapping(value="/vote",method=RequestMethod.POST)
-    public int vote(CR cr){
+    public int vote(CR cr) throws InterruptedException{
     	return crService.vote(cr);
     }
 }

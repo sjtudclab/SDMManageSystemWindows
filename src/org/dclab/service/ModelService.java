@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import org.dclab.zk.*;  //暂时注释zookeeper，不可以删除
+import org.dclab.zk.*;  
 import org.dom4j.DocumentException;
 import org.hamcrest.core.IsSame;
 
@@ -34,9 +34,9 @@ public class ModelService {
 	@Autowired
 	private ModelMapperI modelMapperI;
 	@Autowired
-	private UserMapperI userMapperI;  //暂时注释zookeeper，不可以删除
-	// @Autowired
-	// private ZooKeeperService zooKeeperService;
+	private UserMapperI userMapperI;  
+	//@Autowired
+	//private ZooKeeperService zooKeeperService;
 	public static int CLIENT_PORT = 2181;
 	public static int TIME_OUT = 2000;
 
@@ -60,7 +60,6 @@ public class ModelService {
 		}
 		
 	}
-
 	public int createModel(Model model) throws Exception {
 		System.out.println("here:"+model.getDescription());
 		if ( modelMapperI.insertModel(model)==1) {
@@ -69,11 +68,12 @@ public class ModelService {
 			// ZkDemo.hello();
 			System.out.println("sucess");
 			//System.out.println(model.getElementID());
+			
+			//调用zookeeper通知成员审核元素
+			List<User> users = userMapperI.getUserByAuthority(model.getBigClass());
+			ZooKeeperService zookeeper = new ZooKeeperService();
+			zookeeper.zookeeperWatch(model, users);
 			return model.getElementID();
-			//暂时注释zookeeper，不可以删除
-			//List<User> users = userMapperI.getUserByAuthority(model.getBigClass());
-			//ZooKeeperService zookeeper = new ZooKeeperService();
-			//return zookeeper.zookeeperWatch(model, users);
 		} else {
 			return -1;
 		}
@@ -96,8 +96,6 @@ public class ModelService {
 			return null;
 		}
 		modelMapperI.updatePath(elementID, path+ file.getOriginalFilename());
-		GitLabService gitLabService=new GitLabService();
-		gitLabService.upLoad(path+ file.getOriginalFilename()); //上传文件到gitlab上
 		//map.put("info", "上传成功");
 		System.out.println(path + file.getOriginalFilename());
 		return path + file.getOriginalFilename();

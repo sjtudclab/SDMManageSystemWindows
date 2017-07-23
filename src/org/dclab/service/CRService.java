@@ -8,6 +8,7 @@ import org.dclab.mapping.ModelMapperI;
 import org.dclab.mapping.UserMapperI;
 import org.dclab.model.CR;
 import org.dclab.model.Model;
+import org.dclab.zk.GitLabService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -98,7 +99,7 @@ public class CRService {
 		else
 			return null;
 	}
-	public int vote(CR cr){
+	public int vote(CR cr) throws InterruptedException{
 		int elementID=cr.getEleID();
 		if(crMapperI.getUserState(elementID,cr.getVotor())==0){
 			crMapperI.insertCR(cr);
@@ -106,9 +107,9 @@ public class CRService {
 			if(crMapperI.getCheckNum(elementID)==userMapperI.getUserNum(authorityID)){
 				int state=crMapperI.getResult(elementID);
 				if(state>0){ //表示审核通过
-					//GitLabService gitLabService=new GitLabService();
-					//Model model = modelMapperI.getModelByEleID(elementID);
-					//gitLabService.upLoad(model.getFileID()); //上传文件到gitlab上
+					GitLabService gitLabService=new GitLabService();
+					gitLabService.upLoad(modelMapperI.getFileIDByEId(elementID)); //上传文件到gitlab上
+					//TODU 调用zookeeper通知用户审核情况
 					return modelMapperI.updateState(elementID,1);
 				}
 				else
