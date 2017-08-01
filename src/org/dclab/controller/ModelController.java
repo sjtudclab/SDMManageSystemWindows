@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.dclab.model.Model;
 import org.dclab.service.ModelService;
+import org.dclab.zk.GitLabService;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,7 @@ public class ModelController {
 	}
 	
 	@RequestMapping(value="/downloadModel")
-	public void downloadModel(int elementID,HttpServletResponse response) throws IOException{
+	public void downloadModel(int elementID,HttpServletResponse response) throws IOException, InterruptedException{
 		modelService.downloadModel(elementID,response);
 	}
 	
@@ -54,5 +55,10 @@ public class ModelController {
 	@RequestMapping(value="/oclValidate",method=RequestMethod.POST)
 	public String oclValidate(int elementID) throws DocumentException, IOException{
 		return modelService.oclValidate(elementID);
+	}
+	
+	@RequestMapping(value="eclipse/projectlist",method=RequestMethod.POST)
+	public List<String> projectlist(@RequestParam(value="userid")String username){
+		return modelService.projectlist(username);
 	}
 }

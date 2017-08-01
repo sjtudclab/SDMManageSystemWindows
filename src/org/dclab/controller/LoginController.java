@@ -29,4 +29,9 @@ public class LoginController {
 		//System.out.println("phone"+user.getPhone());
 		return loginService.register(user);
 	}
+	
+	@RequestMapping(value="eclipse/login",method=RequestMethod.POST)
+	public String eclipseLogin(@RequestParam(value="username")String username,@RequestParam(value="password")String password){
+		return loginService.eclipseLogin(username, password);
+	}
 }

@@ -43,5 +43,15 @@ public class LoginService {
 		else
 			return null;
 	}
-
+	public String eclipseLogin(String id, String password) {
+		User user = userMapperI.getUserById(id);
+		if (user != null) {
+			if (user.getPassword().equals(password)){
+				return user.getUsername();
+			}
+			else
+				return null;
+		} else
+			return null;
+	}
 }
