@@ -26,7 +26,7 @@ public interface UserMapperI {
 	@Update("UPDATE `user` SET email=#{email}, phone=#{phone} WHERE username=#{username}")
 	public int updateInfo(@Param(value="email")String email,@Param(value="phone")String phone,@Param(value="username")String username);
 	
-	@Select("SELECT authority FROM `user` WHERE username=#{username}")
+	@Select("SELECT rid FROM `user` WHERE username=#{username}")
 	public int getAuthorityByUserName(String username);
 
 	@Select("SELECT count(*) FROM `user` WHERE authority=#{authority}")
