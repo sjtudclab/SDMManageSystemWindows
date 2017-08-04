@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.dclab.model.Model;
+import org.dclab.model.ProjectList;
 import org.dclab.service.ModelService;
 import org.dclab.zk.GitLabService;
 import org.dom4j.DocumentException;
@@ -58,7 +59,7 @@ public class ModelController {
 	}
 	
 	@RequestMapping(value="eclipse/projectlist",method=RequestMethod.POST)
-	public List<String> projectlist(@RequestParam(value="userid")String username){
+	public List<ProjectList> projectlist(@RequestParam(value="userid")String username){
 		return modelService.projectlist(username);
 	}
 }

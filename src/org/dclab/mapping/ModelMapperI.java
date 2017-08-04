@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.dclab.model.Model;
+import org.dclab.model.ProjectList;
 
 public interface ModelMapperI {
 	@Select("SELECT * FROM `element` WHERE bigClass=#{bigClass} AND middleClass=#{middleClass} AND smallClass=#{smallClass} AND state=1")
@@ -38,7 +39,7 @@ public interface ModelMapperI {
 	@Select("SELECT fileID FROM `element` WHERE elementID=#{elementId}")
 	public String getFileIDByEId(int elementId);
 	
-	@Select("SELECT fileID FROM `element` WHERE creator=#{username}")
-	public List<String> getProjectlist(String username);
+	@Select("SELECT EnglishName,fileID,elementID FROM `element` WHERE creator=#{username}")
+	public List<ProjectList> getProjectlist(String username);
 }
 

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.dclab.mapping.ModelMapperI;
 import org.dclab.mapping.UserMapperI;
 import org.dclab.model.Model;
+import org.dclab.model.ProjectList;
 import org.dclab.model.User; 
 import org.dclab.util.OclValidate;
 import org.dclab.util.ZipTool;
@@ -143,7 +144,7 @@ public class ModelService {
 
 	}
 	
-	public List<String> projectlist(String username) {
+	public List<ProjectList> projectlist(String username) {
 		System.out.println("文件列表");
 		return modelMapperI.getProjectlist(username);
 	}
