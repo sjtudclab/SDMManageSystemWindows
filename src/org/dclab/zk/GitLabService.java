@@ -11,7 +11,9 @@ import java.io.LineNumberReader;
 import javax.servlet.http.HttpServletResponse;
 
 import org.dclab.util.ZipTool;
+import org.springframework.stereotype.Service;
 
+@Service
 public class GitLabService {
 
 	public GitLabService() {
@@ -117,15 +119,16 @@ public class GitLabService {
 		}
 		String dir = System.getProperty("project.root") + "files";
 		String dir1 = dir + File.separator + "newDemo_TMP";
-		Process process = null;
+		//先注释，之后改完python版本再消除注释
+/*		Process process = null;
 		String command1 = "python " + "cg.py";
 		System.out.println("command1:" + command1);
 		process = Runtime.getRuntime().exec(command1, null, new File(dir1));
-		process.waitFor();
+		process.waitFor();*/
 		File file = new File(dir1);
 		if (file.isDirectory()) {
 			String src = dir1;
-			String dst = dir + File.separator + "DM.zip";
+			String dst = dir + File.separator + "Demo.zip";
 			ZipTool.compress(src, dst);
 			try {
 				// get your file as InputStream
@@ -136,12 +139,6 @@ public class GitLabService {
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
-		} else {
-			String filename1 = dir + File.separator + "DM.tar.gz";
-			InputStream iStream = new FileInputStream(new File(filename1));
-			org.apache.commons.io.IOUtils.copy(iStream, response.getOutputStream());
-			response.flushBuffer();
-			iStream.close();
 		}
 	}
 }

@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ComponentController {
 	@Autowired
 	private GitLabService gitLabService;
-	
+	public void setGitLabService(GitLabService gitLabService) {
+		this.gitLabService = gitLabService;
+	}
 	@RequestMapping(value="/eclipse/getIntegration")
 	public void getIntegration(@RequestParam(value="TSStype")String TSStype,@RequestParam(value="MessageType")String MessageType,@RequestParam(value="SourceComponent")String SourceComponent,@RequestParam(value="DestinationConponent")String DestinationConponent,
 			@RequestParam(value="SourceComponentType")String SourceComponentType,@RequestParam(value="DestinationConponentType")String DestinationConponentType,HttpServletResponse response) throws IOException, InterruptedException{
