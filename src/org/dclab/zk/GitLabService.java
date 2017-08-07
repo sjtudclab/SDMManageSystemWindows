@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -119,12 +120,16 @@ public class GitLabService {
 		}
 		String dir = System.getProperty("project.root") + "files";
 		String dir1 = dir + File.separator + "newDemo_TMP";
-		//先注释，之后改完python版本再消除注释
-/*		Process process = null;
-		String command1 = "python " + "cg.py";
+		
+		String filename = "Demo.zip";
+		response.setHeader("content-disposition", "attachment;filename="  
+                + URLEncoder.encode(filename, "UTF-8"));
+		
+		Process process = null;
+		String command1 = "python3 " + "cg.py "+ DestinationConponent+" "+SourceComponent+" "+MessageType+" "+TSStype;
 		System.out.println("command1:" + command1);
 		process = Runtime.getRuntime().exec(command1, null, new File(dir1));
-		process.waitFor();*/
+		process.waitFor();
 		File file = new File(dir1);
 		if (file.isDirectory()) {
 			String src = dir1;

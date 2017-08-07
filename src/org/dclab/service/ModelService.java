@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -49,6 +50,10 @@ public class ModelService {
 		GitLabService gitLabService = new GitLabService();
 		gitLabService.download(path);
 		File file = new File(path);
+		String filename = path.substring(path.lastIndexOf("/")+1);
+		response.setHeader("content-disposition", "attachment;filename="  
+                + URLEncoder.encode(filename, "UTF-8"));
+		
 		if (!file.isDirectory()) {
 			InputStream iStream = new FileInputStream(file);
 			org.apache.commons.io.IOUtils.copy(iStream, response.getOutputStream());
@@ -113,14 +118,22 @@ public class ModelService {
 	public void getFile(int elementID, HttpServletResponse response) throws IOException, InterruptedException {
 		String path = modelMapperI.getFileIDByEId(elementID);
 
-		String dir = System.getProperty("project.root") + "files";
+		String dir = System.getProperty("project.root") + "files"+File.separator + "ModelManage";
 		Process process = null;
-		String command1 = "python " + "codegen.py";
+		
+		String modelFileName = path.substring(path.lastIndexOf("/")+1);
+		System.out.println("modelname:"+modelFileName);
+		String command1 = "python " + "codegen.py "+ modelFileName;
 		System.out.println("command1:" + command1);
 		process = Runtime.getRuntime().exec(command1, null, new File(dir));
 		process.waitFor();
 		String fileName = dir + File.separator + "DM";
 		File file = new File(fileName);
+
+		String filename = "DM.zip";
+		response.setHeader("content-disposition", "attachment;filename="  
+                + URLEncoder.encode(filename, "UTF-8"));
+		
 		if (file.isDirectory()) {
 			String src = dir + File.separator + "DM";
 			String dst = dir + File.separator + "DM.zip";
@@ -135,7 +148,7 @@ public class ModelService {
 				ex.printStackTrace();
 			}
 		} else {
-			String filename1 = dir + File.separator + "DM.tar.gz";
+			String filename1 = dir + File.separator + "DM.zip";
 			InputStream iStream = new FileInputStream(new File(filename1));
 			org.apache.commons.io.IOUtils.copy(iStream, response.getOutputStream());
 			response.flushBuffer();
