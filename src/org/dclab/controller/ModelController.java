@@ -21,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class ModelController {
 	@Autowired
 	private ModelService modelService;
+	@Autowired
+	private GitLabService getLabService;
 
 	public void setModelService(ModelService modelService) {
 		this.modelService = modelService;
@@ -61,5 +63,12 @@ public class ModelController {
 	@RequestMapping(value="eclipse/projectlist",method=RequestMethod.POST)
 	public List<ProjectList> projectlist(@RequestParam(value="userid")String username){
 		return modelService.projectlist(username);
+	}
+	
+	@RequestMapping(value="/eclipse/uploadModel",method=RequestMethod.POST)
+	public void uploadModelEclipse(@RequestParam(value="SDMFile")MultipartFile SDMFile,@RequestParam(value="elementID")int elementID) throws Exception{
+		System.out.println("enter eclipse uploadModel");
+		String path=modelService.uploadModel(SDMFile,elementID);
+		getLabService.upLoad(path);
 	}
 }

@@ -91,33 +91,12 @@ public class GitLabService {
 	}
 	public void getIntegration(String TSStype,String MessageType,String SourceComponent,String DestinationConponent,
 			String SourceComponentType,String DestinationConponentType,HttpServletResponse response) throws InterruptedException, IOException{
-		String Directory="/home/sy/env/apache-tomcat-7.0.79/webapps/ModelManage/files/newDemo_TMP";
-		String shellL = "#!/bin/bash" + '\n' + "cd " + Directory + '\n' + "git pull " + '\n' + "echo 'pwd'";
+		String Directory="/home/sy/env/apache-tomcat-7.0.79/webapps/ModelManage/files";
+		String shellL = "#!/bin/bash" + '\n' + "cd " + Directory + '\n'
+				+"rm -rf newDemo_TMP"+ '\n' 
+				+ "git clone git@192.168.1.125:root/newDemo_TMP.git" + '\n' + "echo 'pwd'";
 		String shPath = System.getProperty("project.root") + "script" + File.separator + "call_integration.sh";
-		try {
-			FileOutputStream fos = new FileOutputStream(shPath);
-			fos.write(shellL.getBytes()); // 覆盖之前文件内容
-			Process process = null;
-			String command1 = "chmod 777 " + shPath; // 设置权限
-			process = Runtime.getRuntime().exec(command1);
-			process.waitFor();
-			String command2 = "/bin/sh " + shPath;
-			process = Runtime.getRuntime().exec(command2);
-			process.waitFor();
-			InputStreamReader ir = new InputStreamReader(process.getInputStream());
-			LineNumberReader input = new LineNumberReader(ir);
-			String line;
-			while ((line = input.readLine()) != null) {
-				System.out.println(line);
-			}
-			input.close();
-			ir.close();
-			// fos.flush();
-			fos.close();
-		} catch (IOException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+		execShell(shellL,shPath);
 		String dir = System.getProperty("project.root") + "files";
 		String dir1 = dir + File.separator + "newDemo_TMP";
 		
@@ -144,6 +123,35 @@ public class GitLabService {
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
+		}
+		String shellL2 = "#!/bin/bash" + '\n' + "cd " + Directory + '\n'
+				+"rm -rf newDemo_TMP"+ '\n'  + "echo 'pwd'";
+		execShell(shellL2,shPath);
+	}
+	public void execShell(String shellL,String shPath) throws InterruptedException{
+		try {
+			FileOutputStream fos = new FileOutputStream(shPath);
+			fos.write(shellL.getBytes()); // 覆盖之前文件内容
+			Process process = null;
+			String command1 = "chmod 777 " + shPath; // 设置权限
+			process = Runtime.getRuntime().exec(command1);
+			process.waitFor();
+			String command2 = "/bin/sh " + shPath;
+			process = Runtime.getRuntime().exec(command2);
+			process.waitFor();
+			InputStreamReader ir = new InputStreamReader(process.getInputStream());
+			LineNumberReader input = new LineNumberReader(ir);
+			String line;
+			while ((line = input.readLine()) != null) {
+				System.out.println(line);
+			}
+			input.close();
+			ir.close();
+			// fos.flush();
+			fos.close();
+		} catch (IOException e) {
+			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 }
