@@ -90,7 +90,7 @@ public class GitLabService {
 		}
 	}
 	public void getIntegration(String TSStype,String MessageType,String SourceComponent,String DestinationConponent,
-			String SourceComponentType,String DestinationConponentType,HttpServletResponse response) throws InterruptedException, IOException{
+			String SourceComponentType,String DestinationConponentType,String IOname,String IOtype,HttpServletResponse response) throws InterruptedException, IOException{
 		String Directory="/home/sy/env/apache-tomcat-7.0.79/webapps/ModelManage/files";
 		String shellL = "#!/bin/bash" + '\n' + "cd " + Directory + '\n'
 				+"rm -rf newDemo_TMP"+ '\n' 
@@ -105,7 +105,7 @@ public class GitLabService {
                 + URLEncoder.encode(filename, "UTF-8"));
 		
 		Process process = null;
-		String command1 = "python3 " + "cg.py "+ DestinationConponent+" "+SourceComponent+" "+MessageType+" "+TSStype;
+		String command1 = "python3 " + "cg.py "+ DestinationConponent+" "+SourceComponent+" "+MessageType+" "+TSStype+" "+IOname+" "+IOtype;
 		System.out.println("command1:" + command1);
 		process = Runtime.getRuntime().exec(command1, null, new File(dir1));
 		process.waitFor();
