@@ -19,8 +19,9 @@ public class ComponentController {
 	}
 	@RequestMapping(value="/eclipse/getIntegration")
 	public void getIntegration(@RequestParam(value="TSStype")String TSStype,@RequestParam(value="MessageType")String MessageType,@RequestParam(value="SourceComponent")String SourceComponent,@RequestParam(value="DestinationConponent")String DestinationConponent,
-			@RequestParam(value="SourceComponentType")String SourceComponentType,@RequestParam(value="DestinationConponentType")String DestinationConponentType,HttpServletResponse response) throws IOException, InterruptedException{
-		gitLabService.getIntegration(TSStype,MessageType,SourceComponent,DestinationConponent,SourceComponentType,DestinationConponentType, response);
+			@RequestParam(value="SourceComponentType")String SourceComponentType,@RequestParam(value="IOname")String IOname,
+			@RequestParam(value="IOtype")String IOtype,@RequestParam(value="DestinationConponentType")String DestinationConponentType,HttpServletResponse response) throws IOException, InterruptedException{
+		gitLabService.getIntegration(TSStype,MessageType,SourceComponent,DestinationConponent,SourceComponentType,DestinationConponentType,IOname,IOtype, response);
 	}
 	public ComponentController() {
 		// TODO Auto-generated constructor stub
