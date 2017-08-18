@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SDM管理系统</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <script src="/ModelManage/js/jquery.min.js"></script>
+<script src="/ModelManage/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="/ModelManage/style/bootstrap.min2.css" type="text/css">
+</head>
+<body>
+	<div align="left">
+		<img src="/ModelManage/image/csdf.jpg">
+	</div>
+    <nav class="navbar navbar-default" style="margin-bottom:0;border:0;border-radius:0;">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-grain"></span>&nbsp;SDM管理系统</a>
+        </div>
+
+        <ul class="nav navbar-nav" style="float:right;">
+			<li class="dropdown" class="active">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					个人信息 
+					<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="../admin/user/update_user.html">修改个人信息</a></li>
+					<li><a href="../admin/user/update_pwd.html">修改密码</a></li>
+				</ul>
+			</li>
+			<li ><a href="../login.html">退出登录</a></li>
+		</ul>
+       <span id="weluser" class="navbar-text"style="float:right;">欢迎登录，XXX</span>
+      </div>
+      </nav>
+     
+    <div class="row">
+        <div class="col-xs-2"id="inn">
+           <ul class="nav nav-pills nav-stacked" id="functionTab">
+            <li class="0 active" role="presentation"><a href="#SDM" class="nav-header collapsed" data-toggle="collapse"><span class="glyphicon glyphicon-user"></span>&nbsp;SDM</a>
+             <ul id="SDM" class="nav nav-list secondmenu collapse" role="tabpanel" style="height: 0px;text-indent: 2em">
+                <li onClick="getclassname(this)" ><a href="#" target="right" style="color: grey">查看并下载</a></li>
+                <li onClick="getclassname(this)"><a href="models/createModel.html" target="right" style="color: grey">新建SDM</a></li>
+              </ul></li>
+            <li class="2"><a href="#myModel" class="nav-header collapsed" data-toggle="collapse"><span class="glyphicon glyphicon-education"></span>&nbsp;我的模型</a>
+            <ul id="myModel" class="nav nav-list secondmenu collapse" style="height: 0px;text-indent: 2em">
+                <li onClick="getclassname(this)"><a href="models/checkCR.html" target="right" style="color: grey">查看并下载</a></li>
+                <li onClick="getclassname(this)"><a href="models/createModel.html" target="right" style="color: grey">新建模型</a></li>
+                <li onClick="getclassname(this)"><a href="models/createModel.html" target="right" style="color: grey">更新模型</a></li>
+              </ul></li>
+            <li class="2"><a href="#code" class="nav-header collapsed" data-toggle="collapse"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;消息代码</a>
+            <ul id="code" class="nav nav-list secondmenu collapse" style="height: 0px;text-indent: 2em">
+                <li onClick="getclassname(this)"><a href="models/checkModel.html" target="right" style="color: grey">代码导出</a></li>
+              </ul></li>
+            <li role="presentation" class="3"><a href="models/checkCR_CCB.html"><span class="glyphicon glyphicon-book"></span>&nbsp;审核模型</a></li>
+            <li role="presentation" class="5"><a href="admin/permission/manageUser.html"><span class="glyphicon glyphicon-user"></span>&nbsp;管理用户</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-10">
+          <p class="biao"><a>首页></a><a>查看模型</a></p>
+          <div class="row" class="col-xs-12">
+          <div class="col-xs-3">
+              <form class="form-inline">
+              <div class="input-group" class="col-xs-3;">
+                <input type="text" class="form-control" placeholder="关键字...">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">搜索</button>
+                </span>
+              </div>
+            </form>
+            </div>
+            <div class="col-xs-9">
+              <form class="form-inline">
+                <div class="col-xs-3">
+                  <label for="bigClass">模型层次</label>&nbsp;&nbsp;&nbsp;
+                  <!-- <input type="text" class="form-control" id="search" name="search" style="width:3em;"> -->
+                 	 <select id="bigClass" class="form-control">
+						<option value="1" id="basis">基础元素</option>
+						<option value="2" id="extends">扩展元素</option>
+					 </select>
+				</div>
+				<div class="col-xs-3">
+                  <label for="middleClass">模型</label>&nbsp;&nbsp;&nbsp;
+                     <select id="middleClass" class="form-control">
+						<option value="3" id="conceptual">概念模型</option>
+						<option value="4" id="logical">逻辑模型</option>
+						<option value="5" id="paltform">平台模型</option>
+					 </select>
+					 </div>
+					 <div class="col-xs-3">
+				 <label for="smallClass">类型</label>&nbsp;&nbsp;&nbsp;
+                     <select id="smallClass" class="form-control">
+						<option value="6" id="observable">可观测量</option>
+						<option value="15" id="conceptualEntity">概念实体</option>
+						<option value="16" id="logicalEntity">逻辑实体</option>
+						<option value="17" id="platformEntity">平台实体</option>
+					 </select>
+					 </div>
+                  <input class="btn btn-primary" type="button" onclick="checkModel()" value="查询">
+              </form>
+            </div>
+            
+          
+          </div>
+
+          <div class="row" style="margin-top:1em">
+            <div class="col-xs-10">
+              <table class="table table-striped table-bordered" id="element">
+                <tr>
+                  <td style="background-color:#3fb4c6; color:#fff;width:15%;">模型ID</td>
+                  <td style="background-color:#3fb4c6; color:#fff;width:20%;">模型英文名称</td>
+                  <td style="background-color:#3fb4c6; color:#fff;width:10%;">模型中文名称</td>
+                  <td style="background-color:#3fb4c6; color:#fff;width:30%;">描述</td>
+                  <td style="background-color:#3fb4c6; color:#fff;width:10%;">创建者</td>
+                  <td style="background-color:#3fb4c6; color:#fff;">操作</td>
+                </tr>
+                </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+   <div style="width: 200px;">
+      <div class="panel-group" id="accordion2">
+      
+        <div class="panel panel-default">
+          <div class="panel-heading nav nav-pills nav-stacked" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+            
+            <a href="#SDM" class="nav-header collapsed" data-toggle="collapse"><span class="glyphicon glyphicon-user"></span>&nbsp;SDM</a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse"
+            style="height: 0px;">
+            <div class="panel-body">
+              <ul class="nav nav-pills nav-stacked">
+                <li onClick="getclassname(this)" ><a href="#" target="right" style="color: grey">查看并下载</a></li>
+                <li onClick="getclassname(this)"><a href="models/createModel.html" target="right" style="color: grey">新建SDM</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" data-toggle="collapse"
+            data-parent="#accordion2" href="#collapseTwo">
+            <a class="accordion-toggle">数据库</a>
+          </div>
+          <div id="collapseTwo" class="panel-collapse collapse"
+            style="height: 0px;">
+            <div class="panel-body">
+              <ul class="nav nav-pills nav-stacked">
+                <li><a href="#">SQL基础</a></li>
+                <li><a href="#">Oracle</a></li>
+                <li><a href="#">MySQL</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" data-toggle="collapse"
+            data-parent="#accordion2" href="#collapseThree">
+            <a class="accordion-toggle">技术前沿</a>
+          </div>
+          <div id="collapseThree" class="panel-collapse in"
+            style="height: 0px;">
+            <div class="panel-body">
+              <ul class="nav nav-pills nav-stacked">
+                <li><a href="#">NoSQL</a></li>
+                <li><a href="#">Hadoop</a></li>
+                <li><a href="#">WebService</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+</html>
+ <script src="/ModelManage/js/cookie.js"></script>
+<script type="text/javascript">
+var username="";
+$(document).ready(function(){
+	  if(checkCookie()){
+	  username=getCookie("username");
+	  document.getElementById("weluser").innerHTML="欢迎登录，"+username;
+	  var authority=getCookie("authority");
+	 	 if(authority!=null){
+			  for(var i=0;i<6;i++)	  
+				  if($.inArray(i.toString(),authority.split(","))==-1)
+				  		$("."+i).remove();
+		  }  
+	  }  
+})
+function checkModel(){
+	$("tr:gt(0)").empty();
+	 $.ajax({
+	       type: "POST",
+	       url: "/ModelManage/checkModel",
+	       dataType:"json",
+	       data: {bigClass:$("#bigClass").val(), middleClass:$("#middleClass").val(),smallClass:$("#smallClass").val()},
+	       success: function(data) {
+	         if(data!=null){
+	        	for(var i=0;i<data.length;i++){
+	        		 var elementID=data[i].elementID;
+		        	 var EnglishName=data[i].englishName;
+		        	 var ChineseName=data[i].chineseName;
+		        	 var description=data[i].description;
+		        	 var creator=data[i].creator;
+		        	 var url=data[i].fileID;
+		        	 var fileName=url.split("/").pop();
+		        	 var innerHtml="<tr><td>"+elementID+"</td><td>"+EnglishName+
+		        	 "</td><td>"+ChineseName+"</td><td>"+description+
+		        	 "</td><td>"+creator+"</td><td>"+
+		              "<a href=\"/ModelManage/downloadModel?elementID="+elementID+"\" download=\""+fileName+"\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>下载/</a>"+
+		              "<a href=# onclick=\"oclValidate("+elementID+")\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>OCL验证</a>"+
+		              "<a href=\"/ModelManage/exportCode?elementID="+elementID+"\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>导出代码 </a>"+
+		              "</td></tr>";
+		        	 $("#element").append(innerHtml);
+	        	}	 
+	       	 	// alert("下载成功！");
+	         }
+	         else 
+	        	 alert("下载失败！");
+	       }
+	     });
+}
+function oclValidate(elementID){
+	$.ajax({
+	       type: "POST",
+	       url: "/ModelManage/oclValidate",
+	       //dataType:"json",
+	       data: {elementID:elementID},
+	       success: function(data) {
+	    	   alert(data);
+	       },
+	       error: function(data) {
+		   		alert("验证失败");
+	       }
+	});
+}
+
+</script>

@@ -40,14 +40,14 @@
     <div class="row">
         <div class="col-xs-2"id="inn">
            <ul class="nav nav-pills nav-stacked" id="functionTab">
-            <li class="0 "><a href="#SDM" class="nav-header collapsed" data-toggle="collapse" data-parent="#functionTab"><span class="glyphicon glyphicon-user"></span>&nbsp;SDM</a>
+            <li class="0 active"><a href="#SDM" class="nav-header collapsed" data-toggle="collapse" data-parent="#functionTab"><span class="glyphicon glyphicon-user"></span>&nbsp;SDM</a>
              <ul id="SDM" class="nav nav-list secondmenu collapse " role="tabpanel" style="height: 0px;text-indent: 2em">
-                <li class="active" role="presentation" onClick="getclassname(this)" ><a href="checkSDM.html" target="right" style="color: grey">查看并下载</a></li>
+                <li class="active" role="presentation" onClick="getclassname(this)" ><a href="#" target="right" style="color: grey">查看并下载</a></li>
                 <li onClick="getclassname(this)"><a href="createSDM.html" target="right" style="color: grey">新建SDM</a></li>
               </ul></li>
-            <li class="2 active"><a href="#myModel" class="nav-header collapsed" data-toggle="collapse" data-parent="#functionTab"><span class="glyphicon glyphicon-education"></span>&nbsp;我的模型</a>
+            <li class="2"><a href="#myModel" class="nav-header collapsed" data-toggle="collapse" data-parent="#functionTab"><span class="glyphicon glyphicon-education"></span>&nbsp;我的模型</a>
             <ul id="myModel" class="nav nav-list secondmenu collapse" style="height: 0px;text-indent: 2em">
-                <li onClick="getclassname(this)"><a href="#" target="right" style="color: grey">查看并下载</a></li>
+                <li onClick="getclassname(this)"><a href="checkModel.html" target="right" style="color: grey">查看并下载</a></li>
                 <li onClick="getclassname(this)"><a href="createModel.html" target="right" style="color: grey">新建模型</a></li>
                 <li onClick="getclassname(this)"><a href="updateModel.html" target="right" style="color: grey">更新模型</a></li>
               </ul></li>
@@ -60,7 +60,7 @@
           </ul>
         </div>
         <div class="col-xs-10">
-          <p class="biao"><a>首页></a><a>我的模型></a><a>查看模型</a></p>
+          <p class="biao"><a>首页></a><a>SDM></a><a>查看并下载SDM</a></p>
           <div class="row" class="col-xs-12">
           <div class="col-xs-3">
               <form class="form-inline">
@@ -72,7 +72,36 @@
               </div>
             </form>
             </div>
-
+            <div class="col-xs-9">
+              <form class="form-inline">
+                <div class="col-xs-3">
+                  <label for="bigClass">模型层次</label>&nbsp;&nbsp;&nbsp;
+                  <!-- <input type="text" class="form-control" id="search" name="search" style="width:3em;"> -->
+                 	 <select id="bigClass" class="form-control">
+						<option value="1" id="basis">基础元素</option>
+						<option value="2" id="extends">扩展元素</option>
+					 </select>
+				</div>
+				<div class="col-xs-3">
+                  <label for="middleClass">模型</label>&nbsp;&nbsp;&nbsp;
+                     <select id="middleClass" class="form-control">
+						<option value="3" id="conceptual">概念模型</option>
+						<option value="4" id="logical">逻辑模型</option>
+						<option value="5" id="paltform">平台模型</option>
+					 </select>
+					 </div>
+					 <div class="col-xs-3">
+				 <label for="smallClass">类型</label>&nbsp;&nbsp;&nbsp;
+                     <select id="smallClass" class="form-control">
+						<option value="6" id="observable">可观测量</option>
+						<option value="15" id="conceptualEntity">概念实体</option>
+						<option value="16" id="logicalEntity">逻辑实体</option>
+						<option value="17" id="platformEntity">平台实体</option>
+					 </select>
+					 </div>
+                  <input class="btn btn-primary" type="button" onclick="checkModel()" value="查询">
+              </form>
+            </div>
             
           
           </div>
@@ -101,7 +130,7 @@
 <script type="text/javascript">
 var username="";
 $(document).ready(function(){
-	$("#myModel").collapse('show');
+	$("#SDM").collapse('show');
 	  if(checkCookie()){
 	  username=getCookie("username");
 	  document.getElementById("weluser").innerHTML="欢迎登录，"+username;
@@ -112,15 +141,14 @@ $(document).ready(function(){
 				  		$("."+i).remove();
 		  }  
 	  }  
-	  checkModel();
 })
 function checkModel(){
 	$("tr:gt(0)").empty();
 	 $.ajax({
 	       type: "POST",
-	       url: "/ModelManage/checkModel",
+	       url: "/ModelManage/checkSDM",
 	       dataType:"json",
-	       data: {username:getCookie("username")},
+	       data: {bigClass:$("#bigClass").val(), middleClass:$("#middleClass").val(),smallClass:$("#smallClass").val()},
 	       success: function(data) {
 	         if(data!=null){
 	        	for(var i=0;i<data.length;i++){
@@ -129,13 +157,12 @@ function checkModel(){
 		        	 var ChineseName=data[i].chineseName;
 		        	 var description=data[i].description;
 		        	 var creator=data[i].creator;
-		        	 var url=data[i].fileUrl;
+		        	 var url=data[i].fileID;
 		        	 var fileName=url.split("/").pop();
 		        	 var innerHtml="<tr><td>"+elementID+"</td><td>"+EnglishName+
 		        	 "</td><td>"+ChineseName+"</td><td>"+description+
 		        	 "</td><td>"+creator+"</td><td>"+
-		              "<a href=\"/ModelManage/downloadModel?elementID="+elementID+"\" download=\""+fileName+"\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>下载/</a>"+
-		              "<a href=# onclick=\"oclValidate("+elementID+")\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>OCL验证</a>"+
+		              "<a href=\"/ModelManage/downloadSDM?elementID="+elementID+"\" download=\""+fileName+"\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>下载</a>"+
 		              "</td></tr>";
 		        	 $("#element").append(innerHtml);
 	        	}	 

@@ -5,13 +5,17 @@ import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 import org.dclab.model.Model;
 import org.dclab.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.ZooDefs.Ids;
-
+@Service
 public class ZooKeeperService {
+	@Autowired
+	private EmailService emailService;
 	public static int CLIENT_PORT = 2181;
 	public static int TIME_OUT = 2000;
 	//public static int flag = 1;
@@ -25,9 +29,8 @@ public class ZooKeeperService {
 			public void process(WatchedEvent event) {
 				System.out.println("已经触发了" + event.getType() + "事件！");
 				if (users != null) { //用户列表不为空，则调用EmailService发送邮件
-					EmailService email = new EmailService();
 					try {
-						email.sendEmail(users, model);//发送邮件
+						emailService.sendEmail(users, model);//发送邮件
 						//flag = 1;
 					} catch (Exception e) {
 						// TODO Auto-generated catch block

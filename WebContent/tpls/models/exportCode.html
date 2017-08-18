@@ -45,22 +45,22 @@
                 <li class="active" role="presentation" onClick="getclassname(this)" ><a href="checkSDM.html" target="right" style="color: grey">查看并下载</a></li>
                 <li onClick="getclassname(this)"><a href="createSDM.html" target="right" style="color: grey">新建SDM</a></li>
               </ul></li>
-            <li class="2 active"><a href="#myModel" class="nav-header collapsed" data-toggle="collapse" data-parent="#functionTab"><span class="glyphicon glyphicon-education"></span>&nbsp;我的模型</a>
+            <li class="2"><a href="#myModel" class="nav-header collapsed" data-toggle="collapse" data-parent="#functionTab"><span class="glyphicon glyphicon-education"></span>&nbsp;我的模型</a>
             <ul id="myModel" class="nav nav-list secondmenu collapse" style="height: 0px;text-indent: 2em">
-                <li onClick="getclassname(this)"><a href="#" target="right" style="color: grey">查看并下载</a></li>
+                <li onClick="getclassname(this)"><a href="checkModel.html" target="right" style="color: grey">查看并下载</a></li>
                 <li onClick="getclassname(this)"><a href="createModel.html" target="right" style="color: grey">新建模型</a></li>
                 <li onClick="getclassname(this)"><a href="updateModel.html" target="right" style="color: grey">更新模型</a></li>
               </ul></li>
-            <li class="2"><a href="#code" class="nav-header collapsed" data-toggle="collapse" data-parent="#functionTab"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;消息代码</a>
+            <li class="2 active"><a href="#code" class="nav-header collapsed" data-toggle="collapse" data-parent="#functionTab"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;消息代码</a>
             <ul id="code" class="nav nav-list secondmenu collapse" style="height: 0px;text-indent: 2em">
-                <li onClick="getclassname(this)"><a href="exportCode.html" target="right" style="color: grey">代码导出</a></li>
+                <li onClick="getclassname(this)"><a href="#" target="right" style="color: grey">代码导出</a></li>
               </ul></li>
             <li role="presentation" class="3"><a href="checkCR_CCB.html"><span class="glyphicon glyphicon-book"></span>&nbsp;审核模型</a></li>
             <li role="presentation" class="5"><a href="admin/permission/manageUser.html"><span class="glyphicon glyphicon-user"></span>&nbsp;管理用户</a></li>
           </ul>
         </div>
         <div class="col-xs-10">
-          <p class="biao"><a>首页></a><a>我的模型></a><a>查看模型</a></p>
+          <p class="biao"><a>首页></a><a>消息代码></a><a>代码导出</a></p>
           <div class="row" class="col-xs-12">
           <div class="col-xs-3">
               <form class="form-inline">
@@ -88,6 +88,14 @@
                   <td style="background-color:#3fb4c6; color:#fff;width:10%;">创建者</td>
                   <td style="background-color:#3fb4c6; color:#fff;">操作</td>
                 </tr>
+                <tr>
+                  <td>97</td>
+                  <td>GPS</td>
+                  <td>GPS</td>
+                  <td>GPS数据</td>
+                  <td>11</td>
+                  <td><a href=""  class="change"><span class="glyphicon glyphicon-pencil"></span>导出代码</a></td>
+                </tr>
                 </table>
             </div>
           </div>
@@ -101,7 +109,7 @@
 <script type="text/javascript">
 var username="";
 $(document).ready(function(){
-	$("#myModel").collapse('show');
+	$("#code").collapse('show');
 	  if(checkCookie()){
 	  username=getCookie("username");
 	  document.getElementById("weluser").innerHTML="欢迎登录，"+username;
@@ -118,7 +126,7 @@ function checkModel(){
 	$("tr:gt(0)").empty();
 	 $.ajax({
 	       type: "POST",
-	       url: "/ModelManage/checkModel",
+	       url: "/ModelManage/checkModelCode",
 	       dataType:"json",
 	       data: {username:getCookie("username")},
 	       success: function(data) {
@@ -134,8 +142,7 @@ function checkModel(){
 		        	 var innerHtml="<tr><td>"+elementID+"</td><td>"+EnglishName+
 		        	 "</td><td>"+ChineseName+"</td><td>"+description+
 		        	 "</td><td>"+creator+"</td><td>"+
-		              "<a href=\"/ModelManage/downloadModel?elementID="+elementID+"\" download=\""+fileName+"\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>下载/</a>"+
-		              "<a href=# onclick=\"oclValidate("+elementID+")\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>OCL验证</a>"+
+		              "<a href=\"/ModelManage/exportCode?elementID="+elementID+"\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>导出代码 </a>"+
 		              "</td></tr>";
 		        	 $("#element").append(innerHtml);
 	        	}	 
@@ -146,19 +153,6 @@ function checkModel(){
 	       }
 	     });
 }
-function oclValidate(elementID){
-	$.ajax({
-	       type: "POST",
-	       url: "/ModelManage/oclValidate",
-	       //dataType:"json",
-	       data: {elementID:elementID},
-	       success: function(data) {
-	    	   alert(data);
-	       },
-	       error: function(data) {
-		   		alert("验证失败");
-	       }
-	});
-}
+
 
 </script>

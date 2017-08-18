@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.dclab.model.Model;
+import org.dclab.model.MyModel;
 import org.dclab.model.ProjectList;
 import org.dclab.service.ModelService;
 import org.dclab.zk.GitLabService;
@@ -30,8 +31,23 @@ public class ModelController {
 	
 
 	@RequestMapping(value="/checkModel",method=RequestMethod.POST)
-	public List<Model> checkModel(@RequestParam(value="bigClass")int bigClass,@RequestParam(value="middleClass")int middleClass,@RequestParam(value="smallClass")int smallClass){
-		return modelService.checkModel(bigClass, middleClass, smallClass);
+	public List<MyModel> checkModel(String username){
+		return modelService.checkModel(username,0);
+	}
+	
+	@RequestMapping(value="/checkModelCode",method=RequestMethod.POST)
+	public List<MyModel> checkModelCode(String username){
+		return modelService.checkModel(username,1);
+	}
+	
+	@RequestMapping(value="/checkSDM",method=RequestMethod.POST)
+	public List<Model> checkSDM(@RequestParam(value="bigClass")int bigClass,@RequestParam(value="middleClass")int middleClass,@RequestParam(value="smallClass")int smallClass){
+		return modelService.checkSDM(bigClass, middleClass, smallClass);
+	}
+	
+	@RequestMapping(value="/downloadSDM")
+	public void downloadSDM(int elementID,HttpServletResponse response) throws IOException, InterruptedException{
+		modelService.downloadSDM(elementID,response);
 	}
 	
 	@RequestMapping(value="/downloadModel")
@@ -39,17 +55,26 @@ public class ModelController {
 		modelService.downloadModel(elementID,response);
 	}
 	
+	@RequestMapping(value="/createSDM",method=RequestMethod.POST)
+	public int createSDM(Model model) throws Exception{
+		//System.out.println(model.getCreateTime());
+		System.out.println("service");
+		return modelService.createSDM(model);
+	}
+	
 	@RequestMapping(value="/createModel",method=RequestMethod.POST)
-	public int createModel(Model model) throws Exception{
+	public int createModel(MyModel model) throws Exception{
 		//System.out.println(model.getCreateTime());
 		System.out.println("service");
 		return modelService.createModel(model);
 	}
+	
 	@RequestMapping(value="/uploadModel",method=RequestMethod.POST)
 	public String uploadModel(@RequestParam(value="SDMFile")MultipartFile SDMFile,@RequestParam(value="elementID")int elementID) throws Exception{
 		System.out.println("进入后台");
-		return modelService.uploadModel(SDMFile,elementID);
+		return modelService.uploadSDM(SDMFile,elementID);
 	}
+	
 	@RequestMapping(value="/exportCode")
 	public void exportCode(int elementID,HttpServletResponse response) throws IOException, InterruptedException{
 		modelService.getFile(elementID, response);
@@ -66,9 +91,9 @@ public class ModelController {
 	}
 	
 	@RequestMapping(value="/eclipse/uploadModel",method=RequestMethod.POST)
-	public void uploadModelEclipse(@RequestParam(value="SDMFile")MultipartFile SDMFile,@RequestParam(value="elementID")int elementID) throws Exception{
+	public void uploadModelEclipse(@RequestParam(value="ModelFile")MultipartFile ModelFile,@RequestParam(value="elementID")int elementID) throws Exception{
 		System.out.println("enter eclipse uploadModel");
-		String path=modelService.uploadModel(SDMFile,elementID);
+		String path=modelService.uploadModel(ModelFile,elementID);
 		getLabService.upLoad(path);
 	}
 }

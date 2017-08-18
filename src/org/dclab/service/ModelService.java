@@ -11,8 +11,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.dclab.mapping.ModelMapperI;
+import org.dclab.mapping.MyModelMapperI;
 import org.dclab.mapping.UserMapperI;
 import org.dclab.model.Model;
+import org.dclab.model.MyModel;
 import org.dclab.model.ProjectList;
 import org.dclab.model.User; 
 import org.dclab.util.OclValidate;
@@ -30,7 +32,13 @@ public class ModelService {
 	@Autowired
 	private ModelMapperI modelMapperI;
 	@Autowired
+	private MyModelMapperI myModelMapperI;
+	@Autowired
 	private UserMapperI userMapperI;
+	@Autowired
+	private ZooKeeperService zookeeperService;
+	@Autowired
+	private GitLabService gitLabService;
 	// @Autowired
 	// private ZooKeeperService zooKeeperService;
 	public static int CLIENT_PORT = 2181;
@@ -40,14 +48,20 @@ public class ModelService {
 		this.modelMapperI = modelMapperI;
 	}
 
-	public List<Model> checkModel(int bigClass, int middleClass, int smallClass) {
+	public List<MyModel> checkModel(String username,int validation) {
+		if(validation==1)
+			return myModelMapperI.getModelCodeByUserID(username);
+		else 
+			return myModelMapperI.getModelByUserID(username);
+	}
+	
+	public List<Model> checkSDM(int bigClass, int middleClass, int smallClass) {
 		System.out.println("samll:" + smallClass);
 		return modelMapperI.getElementByClass(bigClass, middleClass, smallClass);
 	}
 
 	public void downloadModel(int elementID, HttpServletResponse response) throws InterruptedException, IOException {
-		String path = modelMapperI.getFileIDByEId(elementID);
-		GitLabService gitLabService = new GitLabService();
+		String path = myModelMapperI.getFileIDByEId(elementID);
 		gitLabService.download(path);
 		File file = new File(path);
 		String filename = path.substring(path.lastIndexOf("/")+1);
@@ -61,8 +75,22 @@ public class ModelService {
 			iStream.close();
 		}
 	}
-
-	public int createModel(Model model) throws Exception {
+	public void downloadSDM(int elementID, HttpServletResponse response) throws InterruptedException, IOException {
+		String path = modelMapperI.getFileIDByEId(elementID);
+		gitLabService.download(path);
+		File file = new File(path);
+		String filename = path.substring(path.lastIndexOf("/")+1);
+		response.setHeader("content-disposition", "attachment;filename="  
+                + URLEncoder.encode(filename, "UTF-8"));
+		
+		if (!file.isDirectory()) {
+			InputStream iStream = new FileInputStream(file);
+			org.apache.commons.io.IOUtils.copy(iStream, response.getOutputStream());
+			response.flushBuffer();
+			iStream.close();
+		}
+	}
+	public int createSDM(Model model) throws Exception {
 		System.out.println("here:" + model.getDescription());
 		if (modelMapperI.insertModel(model) == 1) {
 			// zooKeeperService.zookeeperWatch(model);
@@ -73,19 +101,25 @@ public class ModelService {
 
 			// 调用zookeeper通知成员审核元素
 			List<User> users = userMapperI.getUserByAuthority(model.getBigClass());
-			ZooKeeperService zookeeper = new ZooKeeperService();
-			zookeeper.zookeeperWatch(model, users);
+			zookeeperService.zookeeperWatch(model, users);
 			return model.getElementID();
 		} else {
 			return -1;
 		}
 	}
-
-	public String uploadModel(MultipartFile file, int elementID) throws Exception {
-		// String fileName = file.getOriginalFilename(); // 获取文件名
-		String path = System.getProperty("project.root") + "files" + File.separator + "ModelManage" + File.separator;
-		// System.out.println(path);
-		// HashMap<String, String> map = new HashMap<String, String>();
+	
+	public int createModel(MyModel model) throws Exception {
+		System.out.println("here:" + model.getDescription());
+		if (myModelMapperI.insertModel(model) == 1) {
+			System.out.println("sucess");
+			System.out.println(model.getElementID());
+			return model.getElementID();
+		} else {
+			return -1;
+		}
+	}
+	public String uploadSDM(MultipartFile file, int elementID) throws Exception {
+		String path = System.getProperty("project.root") + "files" + File.separator + "SDMFile" + File.separator;
 		try {
 			FileOutputStream fos = new FileOutputStream(path + file.getOriginalFilename());
 			fos.write(file.getBytes());
@@ -93,8 +127,6 @@ public class ModelService {
 			fos.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-			// map.put("info", "上传失败");
-			// return map;
 			return null;
 		}
 		modelMapperI.updatePath(elementID, path + file.getOriginalFilename());
@@ -102,21 +134,38 @@ public class ModelService {
 		System.out.println(path + file.getOriginalFilename());
 		return path + file.getOriginalFilename();
 	}
+	public String uploadModel(MultipartFile file, int elementID) throws Exception {
+		String path = System.getProperty("project.root") + "files" + File.separator + "ModelManage" + File.separator;
+		try {
+			FileOutputStream fos = new FileOutputStream(path + file.getOriginalFilename());
+			fos.write(file.getBytes());
+			fos.flush();
+			fos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		myModelMapperI.updatePath(elementID, path + file.getOriginalFilename());
+		// map.put("info", "上传成功");
+		System.out.println(path + file.getOriginalFilename());
+		return path + file.getOriginalFilename();
+	}
 
 	public String oclValidate(int elementId) throws DocumentException, IOException {
-		String path = modelMapperI.getFileIDByEId(elementId);
+		String path = myModelMapperI.getFileIDByEId(elementId);
 		OclValidate oclValidate;
 		oclValidate = new OclValidate();
 		String returnCode = oclValidate.validateOcl(path);
 		if (returnCode.length() == 0) {
 			returnCode = "conform OCL";
+			myModelMapperI.updateValidation(elementId,1);
 		}
 		System.out.println("returnCode:" + returnCode);
 		return returnCode;
 	}
 
 	public void getFile(int elementID, HttpServletResponse response) throws IOException, InterruptedException {
-		String path = modelMapperI.getFileIDByEId(elementID);
+		String path = myModelMapperI.getFileIDByEId(elementID);
 
 		String dir = System.getProperty("project.root") + "files"+File.separator + "ModelManage";
 		Process process = null;
@@ -159,6 +208,6 @@ public class ModelService {
 	
 	public List<ProjectList> projectlist(String username) {
 		System.out.println("文件列表");
-		return modelMapperI.getProjectlist(username);
+		return myModelMapperI.getProjectlist(username);
 	}
 }

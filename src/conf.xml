@@ -33,7 +33,9 @@
         <mapper class="org.dclab.mapping.AuthorityMapperI"/>
         <mapper class="org.dclab.mapping.ModelMapperI"/>
         <mapper class="org.dclab.mapping.CRMapperI"/>
-         <mapper class="org.dclab.mapping.AuthorMapperI"/>  
+         <mapper class="org.dclab.mapping.AuthorMapperI"/> 
+         <mapper class="org.dclab.mapping.MyModelMapperI"/> 
+          
         
     </mappers>
     

@@ -10,7 +10,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.dclab.model.Model;
 import org.dclab.model.User;
-
+import org.springframework.stereotype.Service;
+@Service
 public class EmailService {
 	// 发件人的 邮箱 和 密码（替换为自己的邮箱和密码）
 	// 126邮箱给 SMTP 客户端设置了“授权码”, 这里的邮箱密码必需使用这个授权码

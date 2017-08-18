@@ -33,30 +33,7 @@ public class GitLabService {
 				"git push origin master"+'\n'+
 				"echo 'pwd'";
 		String shPath=System.getProperty("project.root")+"script"+File.separator+"call_mkdir.sh";
-		 try {
-			 	FileOutputStream fos = new FileOutputStream(shPath);
-				fos.write(shellL.getBytes()); //覆盖之前文件内容
-				Process process=null;
-				String command1="chmod 777 "+shPath;  //设置权限
-				process = Runtime.getRuntime().exec(command1);
-				process.waitFor();
-				String command2="/bin/sh "+shPath;
-	            process = Runtime.getRuntime().exec(command2);
-	            process.waitFor();
-	            InputStreamReader ir = new InputStreamReader(process.getInputStream());
-	            LineNumberReader input = new LineNumberReader(ir);
-	            String line;
-	            while((line = input.readLine()) != null){
-	                System.out.println(line);
-	            }
-	            input.close();
-	            ir.close();
-	            //fos.flush();
-				fos.close();
-	        } catch (IOException e) {
-	            // TODO: handle exception
-	            e.printStackTrace();
-	        }
+		execShell(shellL,shPath);
 	}
 	public void download(String path) throws InterruptedException{
 		int index = path.lastIndexOf("/");
@@ -64,30 +41,7 @@ public class GitLabService {
 		// String fileName=path.substring(index+1, path.length()); //文件名
 		String shellL = "#!/bin/bash" + '\n' + "cd " + Directory + '\n' + "git pull " + '\n' + "echo 'pwd'";
 		String shPath = System.getProperty("project.root") + "script" + File.separator + "call_pull.sh";
-		try {
-			FileOutputStream fos = new FileOutputStream(shPath);
-			fos.write(shellL.getBytes()); // 覆盖之前文件内容
-			Process process = null;
-			String command1 = "chmod 777 " + shPath; // 设置权限
-			process = Runtime.getRuntime().exec(command1);
-			process.waitFor();
-			String command2 = "/bin/sh " + shPath;
-			process = Runtime.getRuntime().exec(command2);
-			process.waitFor();
-			InputStreamReader ir = new InputStreamReader(process.getInputStream());
-			LineNumberReader input = new LineNumberReader(ir);
-			String line;
-			while ((line = input.readLine()) != null) {
-				System.out.println(line);
-			}
-			input.close();
-			ir.close();
-			// fos.flush();
-			fos.close();
-		} catch (IOException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+		execShell(shellL,shPath);
 	}
 	public void getIntegration(String TSStype,String MessageType,String SourceComponent,String DestinationConponent,
 			String SourceComponentType,String DestinationConponentType,HttpServletResponse response) throws InterruptedException, IOException{
