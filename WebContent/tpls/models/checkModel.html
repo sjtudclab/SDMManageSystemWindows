@@ -130,7 +130,7 @@ function checkModel(){
 		        	 var description=data[i].description;
 		        	 var creator=data[i].creator;
 		        	 var url=data[i].fileUrl;
-		        	 var fileName=url.split("/").pop();
+		        	 var fileName=url.split("\\").pop();
 		        	 var innerHtml="<tr><td>"+elementID+"</td><td>"+EnglishName+
 		        	 "</td><td>"+ChineseName+"</td><td>"+description+
 		        	 "</td><td>"+creator+"</td><td>"+

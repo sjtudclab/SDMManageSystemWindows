@@ -47,7 +47,7 @@
               </ul></li>
             <li class="2 active"><a href="#myModel" class="nav-header collapsed" data-toggle="collapse" data-parent="#functionTab"><span class="glyphicon glyphicon-education"></span>&nbsp;我的模型</a>
             <ul id="myModel" class="nav nav-list secondmenu collapse" style="height: 0px;text-indent: 2em">
-                <li onClick="getclassname(this)"><a href="#" target="right" style="color: grey">查看并下载</a></li>
+                <li onClick="getclassname(this)"><a href="checkModel.html" target="right" style="color: grey">查看并下载</a></li>
                 <li onClick="getclassname(this)"><a href="createModel.html" target="right" style="color: grey">新建模型</a></li>
                 <li onClick="getclassname(this)"><a href="updateModel.html" target="right" style="color: grey">更新模型</a></li>
               </ul></li>
@@ -138,7 +138,7 @@ function checkModel(){
 		        	 var description=data[i].description;
 		        	 var creator=data[i].creator;
 		        	 var url=data[i].fileUrl;
-		        	 var fileName=url.split("/").pop();
+		        	 var fileName=url.split("\\").pop();
 		        	 var innerHtml="<tr><td>"+elementID+"</td><td>"+EnglishName+
 		        	 "</td><td>"+ChineseName+"</td><td>"+description+
 		        	 "</td><td>"+creator+"</td><td>"+

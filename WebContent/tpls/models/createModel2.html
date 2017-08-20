@@ -63,33 +63,31 @@
           <p class="biao"><a href="../../home.html">首页></a><a>我的模型></a><a>新建模型</a></p>
          <div class="col-xs-6">
           <form class="form-horizontal" method="POST">
+
+
          
-            <div class="form-group" id="div_ChineseName">
+            <div class="form-group">
               <label for="ChineseName" class="col-xs-3 control-label"><span style="color:red">*</span>元素中文名称：</label>
-              <div class="col-xs-9">
-                  <input type="text" class="form-control" id="ChineseName" name="ChineseName"  style="width:70%;float:left">
-                  <span class="help-inline" id="help_ChineseName" style="color:red;float:right"></span>
+              <div class="col-xs-6">
+                  <input type="text" class="form-control" id="ChineseName" name="ChineseName"  required="required">
               </div>
             </div>
-            <div class="form-group" id="div_EnglishName">
+            <div class="form-group">
               <label for="EnglishName" class="col-xs-3 control-label"><span style="color:red">*</span>元素英语名称：</label>
-              <div class="col-xs-9">
-                  <input type="text" class="form-control" id="EnglishName" name="EnglishName" style="width:70%;float:left">
-                  <span class="help-inline" id="help_EnglishName" style="color:red;float:right"></span>
+              <div class="col-xs-6">
+                  <input type="text" class="form-control" id="EnglishName" name="EnglishName" required="required">
               </div>
             </div>
-            <div class="form-group" id="div_description">
+            <div class="form-group">
               <label for="description" class="col-xs-3 control-label"><span style="color:red">*</span>描述：</label>
-              <div class="col-xs-9">
-                  <input type="text" class="form-control" id="description" name="description" style="width:70%;float:left">
-                  <span class="help-inline" id="help_description" style="color:red;float:right"></span>
+              <div class="col-xs-6">
+                  <input type="text" class="form-control" id="description" name="description" required="required">
               </div>
             </div>
-             <div class="form-group" id="div_ModelFile">
+             <div class="form-group">
               <label for="ModelFile" class="col-xs-3 control-label"><span style="color:red">*</span>上传文件：</label>
-              <div class="col-xs-9">
-                  <input type="file" id="ModelFile" name="ModelFile" required="required" style="width:70%;float:left">
-                  <span class="help-inline" id="help_ModelFile" style="color:red;float:right"></span>
+              <div class="col-xs-6">
+                  <input type="file" id="ModelFile" name="ModelFile" required="required">
               </div>
             </div>
             <div class="form-group">
@@ -119,55 +117,24 @@
 		  }  
   }
   })
-  function valid() {
-	//一下类型没有生效，不知道为什么
-	document.getElementById("help_ChineseName").innerHTML = "";
-	document.getElementById("help_EnglishName").innerHTML = "";
-	document.getElementById("help_description").innerHTML = "";
-	document.getElementById("help_ModelFile").innerHTML = "";
-	var ChineseName = $("#ChineseName").val().trim();
-	var EnglishName = $("#EnglishName").val().trim();
-	var description = $("#description").val().trim();
-	var ModelFile = $("#ModelFile").val();
-	if (ChineseName == "") {
-		document.getElementById("help_ChineseName").innerHTML = "中文名字不能为空";
-		return false;
-	}
-	if (EnglishName == "") {
-		document.getElementById("help_EnglishName").innerHTML = "英文名字不能为空";
-		return false;
-	}
-	if (description == "") {
-		document.getElementById("help_description").innerHTML = "描述不能为空";
-		return false;
-	}
-	if (ModelFile == "") {
-		document.getElementById("help_ModelFile").innerHTML = "文件不能为空";
-		return false;
-	}
-	return true;
-}
    function createModel(){
-	  if(valid()){
-		  var date=new Date(); 
-		  var dateString=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
-		   $.ajax({
-		       type: "POST",
-		       url: "/ModelManage/createModel",    
-		       data: {ChineseName:$("#ChineseName").val(),EnglishName:$("#EnglishName").val(),
-		    	   description:$("#description").val(), creator:getCookie("username"),validation:0,fileUrl:"",createTime:dateString},
-		       success: function(data) {
-		         if(data!=1){
-		        	 //alert(data);
-		        	 uploadFile(data);
-		       	 	 //alert("创建成功！");
-		         }
-		         else 
-		        	 alert("创建失败！");
-		       }
-		     }); 
-	  }
-	 
+	  var date=new Date(); 
+	  var dateString=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+	   $.ajax({
+	       type: "POST",
+	       url: "/ModelManage/createModel",    
+	       data: {ChineseName:$("#ChineseName").val(),EnglishName:$("#EnglishName").val(),
+	    	   description:$("#description").val(), creator:getCookie("username"),validation:0,fileUrl:"",createTime:dateString},
+	       success: function(data) {
+	         if(data!=1){
+	        	 //alert(data);
+	        	 uploadFile(data);
+	       	 	 //alert("创建成功！");
+	         }
+	         else 
+	        	 alert("创建失败！");
+	       }
+	     }); 
   }
    function uploadFile(elementID){
 	 var formData =  new FormData(); 

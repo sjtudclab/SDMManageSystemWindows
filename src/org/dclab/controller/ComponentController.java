@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.dclab.zk.GitLabService;
+import org.dclab.service.ComponentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ComponentController {
 	@Autowired
-	private GitLabService gitLabService;
-	public void setGitLabService(GitLabService gitLabService) {
+	private ComponentService gitLabService;
+	public void setGitLabService(ComponentService gitLabService) {
 		this.gitLabService = gitLabService;
 	}
 	@RequestMapping(value="/eclipse/getIntegration")

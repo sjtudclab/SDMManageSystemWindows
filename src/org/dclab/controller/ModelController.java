@@ -9,7 +9,6 @@ import org.dclab.model.Model;
 import org.dclab.model.MyModel;
 import org.dclab.model.ProjectList;
 import org.dclab.service.ModelService;
-import org.dclab.zk.GitLabService;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class ModelController {
 	@Autowired
 	private ModelService modelService;
-	@Autowired
-	private GitLabService getLabService;
 
 	public void setModelService(ModelService modelService) {
 		this.modelService = modelService;
@@ -93,7 +90,6 @@ public class ModelController {
 	@RequestMapping(value="/eclipse/uploadModel",method=RequestMethod.POST)
 	public void uploadModelEclipse(@RequestParam(value="ModelFile")MultipartFile ModelFile,@RequestParam(value="elementID")int elementID) throws Exception{
 		System.out.println("enter eclipse uploadModel");
-		String path=modelService.uploadModel(ModelFile,elementID);
-		getLabService.upLoad(path);
+		modelService.uploadModel(ModelFile,elementID);
 	}
 }

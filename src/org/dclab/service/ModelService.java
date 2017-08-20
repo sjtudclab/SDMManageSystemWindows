@@ -12,18 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.dclab.mapping.ModelMapperI;
 import org.dclab.mapping.MyModelMapperI;
-import org.dclab.mapping.UserMapperI;
 import org.dclab.model.Model;
 import org.dclab.model.MyModel;
-import org.dclab.model.ProjectList;
-import org.dclab.model.User; 
+import org.dclab.model.ProjectList; 
 import org.dclab.util.OclValidate;
 import org.dclab.util.ZipTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import org.dclab.zk.*;
 import org.dom4j.DocumentException;
 
 //import org.python.util.PythonInterpreter;
@@ -33,14 +29,6 @@ public class ModelService {
 	private ModelMapperI modelMapperI;
 	@Autowired
 	private MyModelMapperI myModelMapperI;
-	@Autowired
-	private UserMapperI userMapperI;
-	@Autowired
-	private ZooKeeperService zookeeperService;
-	@Autowired
-	private GitLabService gitLabService;
-	// @Autowired
-	// private ZooKeeperService zooKeeperService;
 	public static int CLIENT_PORT = 2181;
 	public static int TIME_OUT = 2000;
 
@@ -62,9 +50,8 @@ public class ModelService {
 
 	public void downloadModel(int elementID, HttpServletResponse response) throws InterruptedException, IOException {
 		String path = myModelMapperI.getFileIDByEId(elementID);
-		gitLabService.download(path);
 		File file = new File(path);
-		String filename = path.substring(path.lastIndexOf("/")+1);
+		String filename = path.substring(path.lastIndexOf("\\")+1);
 		response.setHeader("content-disposition", "attachment;filename="  
                 + URLEncoder.encode(filename, "UTF-8"));
 		
@@ -77,9 +64,8 @@ public class ModelService {
 	}
 	public void downloadSDM(int elementID, HttpServletResponse response) throws InterruptedException, IOException {
 		String path = modelMapperI.getFileIDByEId(elementID);
-		gitLabService.download(path);
 		File file = new File(path);
-		String filename = path.substring(path.lastIndexOf("/")+1);
+		String filename = path.substring(path.lastIndexOf("\\")+1);
 		response.setHeader("content-disposition", "attachment;filename="  
                 + URLEncoder.encode(filename, "UTF-8"));
 		
@@ -93,15 +79,7 @@ public class ModelService {
 	public int createSDM(Model model) throws Exception {
 		System.out.println("here:" + model.getDescription());
 		if (modelMapperI.insertModel(model) == 1) {
-			// zooKeeperService.zookeeperWatch(model);
-			// zookeeper(model);
-			// ZkDemo.hello();
 			System.out.println("sucess");
-			// System.out.println(model.getElementID());
-
-			// 调用zookeeper通知成员审核元素
-			List<User> users = userMapperI.getUserByAuthority(model.getBigClass());
-			zookeeperService.zookeeperWatch(model, users);
 			return model.getElementID();
 		} else {
 			return -1;
@@ -170,7 +148,7 @@ public class ModelService {
 		String dir = System.getProperty("project.root") + "files"+File.separator + "ModelManage";
 		Process process = null;
 		
-		String modelFileName = path.substring(path.lastIndexOf("/")+1);
+		String modelFileName = path.substring(path.lastIndexOf("\\")+1);
 		System.out.println("modelname:"+modelFileName);
 		String command1 = "python " + "codegen.py "+ modelFileName;
 		System.out.println("command1:" + command1);
