@@ -30,10 +30,10 @@ public class ComponentService {
 		String filename = "Demo.zip";
 		response.setHeader("content-disposition", "attachment;filename="  
                 + URLEncoder.encode(filename, "UTF-8"));
-		ZipTool.unzip(dir+File.separator+"newDemo_TMP.zip","newDemo_TMP");
+		ZipTool.unzip(dir+File.separator+"newDemo_IO_TMP.zip","newDemo_TMP");
 		fileDir=new File(dir1);
 		Process process = null;
-		String command1 = "python3 " + "cg.py "+ DestinationConponent+" "+SourceComponent+" "+MessageType+" "+TSStype+" "+IOname+" "+IOtype;
+		String command1 = "python " + "cg.py "+ DestinationConponent+" "+SourceComponent+" "+MessageType+" "+TSStype+" "+IOname+" "+IOtype;
 		System.out.println("command1:" + command1);
 		process = Runtime.getRuntime().exec(command1, null, new File(dir1));
 		process.waitFor();

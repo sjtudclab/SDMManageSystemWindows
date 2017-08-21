@@ -37,21 +37,21 @@
       </div>
       </nav>
      
-<div class="row">
+ <div class="row">
         <div class="col-xs-2"id="inn">
-          <ul class="nav nav-pills nav-stacked" id="functionTab">
-            <li class="0"><a href="#SDM" class="nav-header collapsed" data-toggle="collapse"><span class="glyphicon glyphicon-user"></span>&nbsp;SDM</a>
-             <ul id="SDM" class="nav nav-list secondmenu collapse" style="height: 0px;text-indent: 2em">
-                <li onClick="getclassname(this)"><a href="models/checkSDM.html" target="right" style="color: grey">查看并下载</a></li>
+           <ul class="nav nav-pills nav-stacked" id="functionTab">
+            <li class="0"><a href="#SDM" class="nav-header collapsed" data-toggle="collapse" data-parent="#functionTab"><span class="glyphicon glyphicon-user"></span>&nbsp;SDM</a>
+             <ul id="SDM" class="nav nav-list secondmenu collapse " role="tabpanel" style="height: 0px;text-indent: 2em">
+                <li onClick="getclassname(this)" ><a href="models/checkSDM.html" target="right" style="color: grey">查看并下载</a></li>
                 <li onClick="getclassname(this)"><a href="models/createSDM.html" target="right" style="color: grey">新建SDM</a></li>
               </ul></li>
-            <li class="2"><a href="#myModel" class="nav-header collapsed" data-toggle="collapse"><span class="glyphicon glyphicon-education"></span>&nbsp;我的模型</a>
+            <li class="2"><a href="#myModel" class="nav-header collapsed" data-toggle="collapse" data-parent="#functionTab"><span class="glyphicon glyphicon-education"></span>&nbsp;我的模型</a>
             <ul id="myModel" class="nav nav-list secondmenu collapse" style="height: 0px;text-indent: 2em">
                 <li onClick="getclassname(this)"><a href="models/checkModel.html" target="right" style="color: grey">查看并下载</a></li>
                 <li onClick="getclassname(this)"><a href="models/createModel.html" target="right" style="color: grey">新建模型</a></li>
                 <li onClick="getclassname(this)"><a href="models/updateModel.html" target="right" style="color: grey">更新模型</a></li>
               </ul></li>
-            <li class="2"><a href="#code" class="nav-header collapsed" data-toggle="collapse"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;消息代码</a>
+            <li class="2"><a href="#code" class="nav-header collapsed" data-toggle="collapse" data-parent="#functionTab"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;消息代码</a>
             <ul id="code" class="nav nav-list secondmenu collapse" style="height: 0px;text-indent: 2em">
                 <li onClick="getclassname(this)"><a href="models/exportCode.html" target="right" style="color: grey">代码导出</a></li>
               </ul></li>
