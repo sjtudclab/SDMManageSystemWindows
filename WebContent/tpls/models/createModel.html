@@ -5,13 +5,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <script src="/ModelManage/js/jquery.min.js"></script>
-<script src="/ModelManage/js/bootstrap.min.js"></script>
- <link rel="stylesheet" href="/ModelManage/style/bootstrap.min2.css" type="text/css">
+  <script src="/ModelManageWindows/js/jquery.min.js"></script>
+<script src="/ModelManageWindows/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="/ModelManageWindows/style/bootstrap.min2.css" type="text/css">
 </head>
 <body>
 	<div align="left">
-		<img src="/ModelManage/image/csdf.jpg">
+		<img src="/ModelManageWindows/image/csdf.jpg">
 	</div>
     <nav class="navbar navbar-default" style="margin-bottom:0;border:0;border-radius:0;">
       <div class="container-fluid">
@@ -56,7 +56,8 @@
             <ul id="code" class="nav nav-list secondmenu collapse" style="height: 0px;text-indent: 2em">
                 <li onClick="getclassname(this)"><a href="exportCode.html" target="_parent" style="color: grey">代码导出</a></li>
               </ul></li>
-            <li role="presentation" class="3"><a href="models/checkCR_CCB.html"><span class="glyphicon glyphicon-book"></span>&nbsp;审核模型</a></li>
+            <li role="presentation" class="3"><a href="checkCR_CCB.html"><span class="glyphicon glyphicon-book"></span>&nbsp;审核模型</a></li>
+            <li role="presentation" class="4"><a href="checkCR_CCB.html"><span class="glyphicon glyphicon-book"></span>&nbsp;审核模型</a></li>
             <li role="presentation" class="5"><a href="admin/permission/manageUser.html"><span class="glyphicon glyphicon-user"></span>&nbsp;管理用户</a></li>
           </ul>
         </div>
@@ -105,7 +106,7 @@
 </div>
 
   </body>
-  <script src="/ModelManage/js/cookie.js"></script>
+  <script src="/ModelManageWindows/js/cookie.js"></script>
   <script>
   $(document).ready(function(){
 	  $("#myModel").collapse('show');
@@ -154,7 +155,7 @@
 		  var dateString=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
 		   $.ajax({
 		       type: "POST",
-		       url: "/ModelManage/createModel",    
+		       url: "/ModelManageWindows/createModel",    
 		       data: {ChineseName:$("#ChineseName").val(),EnglishName:$("#EnglishName").val(),
 		    	   description:$("#description").val(), creator:getCookie("username"),validation:0,fileUrl:"",createTime:dateString},
 		       success: function(data) {
@@ -176,7 +177,7 @@
 	 formData.append("elementID", elementID);
 	 //formData.append("SDMFile", "hello");
 	     $.ajax({  
-	          url: "/ModelManage/eclipse/uploadModel" ,  
+	          url: "/ModelManageWindows/eclipse/uploadModel" ,  
 	          type: "POST",
 	          data: formData,
 	          //dataType:'text',

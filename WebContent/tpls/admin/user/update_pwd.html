@@ -43,14 +43,27 @@
 
     <div class="container"style="overflow:hidden;margin:0;width:100%;padding:0px;">
 
-      <div class="row">
+       <div class="row">
         <div class="col-xs-2"id="inn">
-          <ul class="nav nav-pills nav-stacked">
-             <li role="presentation" class="0"><a href="../../models/checkModel.html"><span class="glyphicon glyphicon-user"></span>&nbsp;查看模型</a></li>
-            <li role="presentation" class="1"><a href="../../models/download.html"><span class="glyphicon glyphicon-education"></span>&nbsp;下载模型</a></li>
-            <li role="presentation" class="2"><a href="../../models/createModel.html"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;新建模型</a></li>
-            <li role="presentation" class="2"><a href="../../models/checkCR.html"><span class="glyphicon glyphicon-book"></span>&nbsp;我的模型</a></li>
+          <ul class="nav nav-pills nav-stacked" id="functionTab">
+            <li class="0"><a href="#SDM" class="nav-header collapsed" data-toggle="collapse"><span class="glyphicon glyphicon-user"></span>&nbsp;SDM</a>
+             <ul id="SDM" class="nav nav-list secondmenu collapse" style="height: 0px;text-indent: 2em">
+                <li onClick="getclassname(this)"><a href="../../models/checkSDM.html" target="_parent" style="color: grey">查看并下载</a></li>
+                <li onClick="getclassname(this)"><a href="../../models/createSDM.html" target="_parent" style="color: grey">新建SDM</a></li>
+                <li onClick="getclassname(this)"><a href="../../models/checkCR.html" target="_parent" style="color: grey">我的变更</a></li>
+              </ul></li>
+            <li class="2"><a href="#myModel" class="nav-header collapsed" data-toggle="collapse"><span class="glyphicon glyphicon-education"></span>&nbsp;我的模型</a>
+            <ul id="myModel" class="nav nav-list secondmenu collapse" style="height: 0px;text-indent: 2em">
+                <li onClick="getclassname(this)"><a href="../../models/checkModel.html" target="_parent" style="color: grey">查看并下载</a></li>
+                <li onClick="getclassname(this)"><a href="../../models/createModel.html" target="_parent" style="color: grey">新建模型</a></li>
+                <li onClick="getclassname(this)"><a href="../../models/updateModel.html" target="_parent" style="color: grey">更新模型</a></li>
+              </ul></li>
+            <li class="2"><a href="#code" class="nav-header collapsed" data-toggle="collapse"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;消息代码</a>
+            <ul id="code" class="nav nav-list secondmenu collapse" style="height: 0px;text-indent: 2em">
+                <li onClick="getclassname(this)"><a href="../../models/exportCode.html" target="_parent" style="color: grey">代码导出</a></li>
+              </ul></li>
             <li role="presentation" class="3"><a href="../../models/checkCR_CCB.html"><span class="glyphicon glyphicon-book"></span>&nbsp;审核模型</a></li>
+            <li role="presentation" class="4"><a href="../../models/checkCR_CCB.html"><span class="glyphicon glyphicon-book"></span>&nbsp;审核模型</a></li>
             <li role="presentation" class="5"><a href="../permission/manageUser.html"><span class="glyphicon glyphicon-user"></span>&nbsp;管理用户</a></li>
           </ul>
         </div>
