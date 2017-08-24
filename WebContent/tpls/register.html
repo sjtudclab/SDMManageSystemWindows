@@ -102,7 +102,7 @@ $('#submit').click(function(){
 	if(valid()){
 		$.ajax({
 		       type: "POST",
-		       url: "/ModelManageWindows/register",
+		       url: "/ModelManage/register",
 		       dataType:"json",
 		       data: {username:$("#username").val(), password:$("#password").val(),
 		    	   phone:$("#phone").val(),email:$("#email").val()},

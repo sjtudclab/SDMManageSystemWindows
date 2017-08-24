@@ -5,13 +5,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <script src="/ModelManageWindows/js/jquery.min.js"></script>
-<script src="/ModelManageWindows/js/bootstrap.min.js"></script>
- <link rel="stylesheet" href="/ModelManageWindows/style/bootstrap.min2.css" type="text/css">
+  <script src="/ModelManage/js/jquery.min.js"></script>
+<script src="/ModelManage/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="/ModelManage/style/bootstrap.min2.css" type="text/css">
 </head>
 <body>
 	<div align="left">
-		<img src="/ModelManageWindows/image/csdf.jpg">
+		<img src="/ModelManage/image/csdf.jpg">
 	</div>
     <nav class="navbar navbar-default" style="margin-bottom:0;border:0;border-radius:0;">
       <div class="container-fluid">
@@ -99,7 +99,7 @@
 
 </body>
 </html>
- <script src="/ModelManageWindows/js/cookie.js"></script>
+ <script src="/ModelManage/js/cookie.js"></script>
 <script type="text/javascript">
 var username="";
 $(document).ready(function(){
@@ -120,7 +120,7 @@ function checkModel(){
 	$("tr:gt(0)").empty();
 	 $.ajax({
 	       type: "POST",
-	       url: "/ModelManageWindows/checkModel",
+	       url: "/ModelManage/checkModel",
 	       dataType:"json",
 	       data: {username:getCookie("username")},
 	       success: function(data) {
@@ -136,7 +136,7 @@ function checkModel(){
 		        	 var innerHtml="<tr><td>"+elementID+"</td><td>"+EnglishName+
 		        	 "</td><td>"+ChineseName+"</td><td>"+description+
 		        	 "</td><td>"+creator+"</td><td>"+
-		              "<a href=\"/ModelManageWindows/downloadModel?elementID="+elementID+"\" download=\""+fileName+"\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>下载/</a>"+
+		              "<a href=\"/ModelManage/downloadModel?elementID="+elementID+"\" download=\""+fileName+"\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>下载/</a>"+
 		              "<a href=# onclick=\"oclValidate("+elementID+")\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>OCL验证</a>"+
 		              "</td></tr>";
 		        	 $("#element").append(innerHtml);
@@ -151,7 +151,7 @@ function checkModel(){
 function oclValidate(elementID){
 	$.ajax({
 	       type: "POST",
-	       url: "/ModelManageWindows/oclValidate",
+	       url: "/ModelManage/oclValidate",
 	       //dataType:"json",
 	       data: {elementID:elementID},
 	       success: function(data) {

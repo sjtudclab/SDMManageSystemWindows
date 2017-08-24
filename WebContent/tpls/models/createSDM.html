@@ -5,13 +5,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <script src="/ModelManageWindows/js/jquery.min.js"></script>
-<script src="/ModelManageWindows/js/bootstrap.min.js"></script>
- <link rel="stylesheet" href="/ModelManageWindows/style/bootstrap.min2.css" type="text/css">
+  <script src="/ModelManage/js/jquery.min.js"></script>
+<script src="/ModelManage/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="/ModelManage/style/bootstrap.min2.css" type="text/css">
 </head>
 <body>
 	<div align="left">
-		<img src="/ModelManageWindows/image/csdf.jpg">
+		<img src="/ModelManage/image/csdf.jpg">
 	</div>
     <nav class="navbar navbar-default" style="margin-bottom:0;border:0;border-radius:0;">
       <div class="container-fluid">
@@ -136,7 +136,7 @@
 </div>
 
   </body>
-  <script src="/ModelManageWindows/js/cookie.js"></script>
+  <script src="/ModelManage/js/cookie.js"></script>
   <script>
   $(document).ready(function(){
 	  $("#SDM").collapse('show');
@@ -185,7 +185,7 @@
 			  var dateString=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
 			   $.ajax({
 			       type: "POST",
-			       url: "/ModelManageWindowsWindows/createSDM",    
+			       url: "/ModelManageWindows/createSDM",    
 			       data: {bigClass:$("#bigClass").val(), middleClass:$("#middleClass").val(),smallClass:$("#smallClass").val(),
 			    	   ChineseName:$("#ChineseName").val(),EnglishName:$("#EnglishName").val(),
 			    	   description:$("#description").val(), creator:getCookie("username"),state:0,fileID:"",createTime:dateString},
@@ -206,7 +206,7 @@
 	 formData.append("SDMFile", $('#SDMFile')[0].files[0]);
 	 formData.append("elementID", elementID);
 	     $.ajax({  
-	          url: "/ModelManageWindows/uploadModel" ,  
+	          url: "/ModelManage/uploadModel" ,  
 	          type: "POST",
 	          data: formData,
 	          //dataType:'text',

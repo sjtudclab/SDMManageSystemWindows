@@ -67,7 +67,7 @@
  $('#submit').click(function() {
      $.ajax({
        type: "POST",
-       url: "/ModelManageWindows/login",
+       url: "/ModelManage/login",
        dataType:"json",
        data: {username:$("#username").val(), password:$("#password").val()},
        success: function(data) {
