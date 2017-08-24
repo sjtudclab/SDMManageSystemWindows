@@ -185,7 +185,7 @@
 			  var dateString=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
 			   $.ajax({
 			       type: "POST",
-			       url: "/ModelManageWindows/createSDM",    
+			       url: "/ModelManage/createSDM",    
 			       data: {bigClass:$("#bigClass").val(), middleClass:$("#middleClass").val(),smallClass:$("#smallClass").val(),
 			    	   ChineseName:$("#ChineseName").val(),EnglishName:$("#EnglishName").val(),
 			    	   description:$("#description").val(), creator:getCookie("username"),state:0,fileID:"",createTime:dateString},
