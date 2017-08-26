@@ -29,7 +29,7 @@ public interface UserMapperI {
 	@Select("SELECT rid FROM `user` WHERE username=#{username}")
 	public int getAuthorityByUserName(String username);
 
-	@Select("SELECT count(*) FROM `user` WHERE authority=#{authority}")
+	@Select("SELECT count(*) FROM `user` WHERE rid=#{authority}")
 	public int getUserNum(int authority);
 	
 	@Update("UPDATE `user` SET `rid`=#{rid} WHERE username=#{username}")

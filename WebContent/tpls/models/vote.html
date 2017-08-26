@@ -65,27 +65,21 @@
           <p class="biao"><a href="../../home.html">首页></a><a>审核模型</a></p>
           <form class="form-horizontal" method="POST">
             <div class="form-group">
-              <label for="elementID" class="col-xs-3 control-label"><span style="color:red">*</span>元素ID：</label>
-              <div class="col-xs-6">
-                  <p class="form-control" id="elementID"></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="englishName" class="col-xs-3 control-label"><span style="color:red">*</span>元素英文名称：</label>
+              <label for="englishName" class="col-xs-3 control-label"><span style="color:red">*</span>元素名称：</label>
               <div class="col-xs-6">
                   <p class="form-control" id="englishName"></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="chineseName" class="col-xs-3 control-label"><span style="color:red">*</span>元素中文名称：</label>
-              <div class="col-xs-6">
-                   <p class="form-control" id="chineseName"></p>
               </div>
             </div>
             <div class="form-group">
               <label for="description" class="col-xs-3 control-label"><span style="color:red">*</span>描述：</label>
               <div class="col-xs-6">
                   <p class="form-control" id="description"></p>
+              </div>
+            </div>
+             <div class="form-group">
+              <label for="content" class="col-xs-3 control-label"><span style="color:red">*</span>元素内容：</label>
+              <div class="col-xs-6">
+                  <p class="form-control" id="content"></p>
               </div>
             </div>
             <div class="form-group">
@@ -148,6 +142,7 @@
   </body>
   <script src="/ModelManage/js/cookie.js"></script>
   <script>
+  var elementID="";
   $(document).ready(function(){
 	  if(checkCookie()){
 	          var username=getCookie("username");
@@ -181,7 +176,7 @@
 	{ 
 	var url=location.href; 
 	var tmp1=url.split("?")[1]; 
-	var elementID=tmp1.split("=")[1];  
+	elementID=tmp1.split("=")[1];  
 	 $.ajax({
 	       type: "POST",
 	       url: "/ModelManage/checkCRByElementID",
@@ -189,10 +184,9 @@
 	       data: {elementID:elementID},
 	       success: function(data) {
 	         if(data!=null){
-	        	 document.getElementById("elementID").innerHTML=data.elementID;
-	        	 document.getElementById("englishName").innerHTML=data.englishName;
-	        	 document.getElementById("chineseName").innerHTML=data.chineseName;
+	        	 document.getElementById("englishName").innerHTML=data.englishName;   	
 	        	 document.getElementById("description").innerHTML=data.description;
+	        	 document.getElementById("content").innerHTML=data.content;
 	        	 document.getElementById("creator").innerHTML=data.creator;
 	        	 document.getElementById("createTime").innerHTML=data.createTime;
 	        	 document.getElementById("approvalNum").innerHTML=data.approvalNum;
@@ -209,7 +203,7 @@
 		       type: "POST",
 		       url: "/ModelManage/vote",
 		       dataType:"json",
-		       data: {eleID:document.getElementById("elementID").innerHTML,vote:$("#vote").val(),reason:$("#reason").val(),state:"1",votor:getCookie("username")},
+		       data: {eleID:elementID,vote:$("#vote").val(),reason:$("#reason").val(),state:"1",votor:getCookie("username")},
 		       success: function(data) {
 		         if(data==1){
 		       	 	 alert("投票成功！");

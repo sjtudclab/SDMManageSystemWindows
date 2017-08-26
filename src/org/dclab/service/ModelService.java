@@ -62,10 +62,10 @@ public class ModelService {
 			iStream.close();
 		}
 	}
-	public void downloadSDM(int elementID, HttpServletResponse response) throws InterruptedException, IOException {
-		String path = modelMapperI.getFileIDByEId(elementID);
+	public void downloadSDM(HttpServletResponse response) throws InterruptedException, IOException {
+		String filename = "SDM.face";
+		String path = System.getProperty("project.root") + "files" + File.separator + "SDMFile" + File.separator + filename;
 		File file = new File(path);
-		String filename = path.substring(path.lastIndexOf("\\")+1);
 		response.setHeader("content-disposition", "attachment;filename="  
                 + URLEncoder.encode(filename, "UTF-8"));
 		

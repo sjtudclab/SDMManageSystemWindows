@@ -43,8 +43,8 @@ public class ModelController {
 	}
 	
 	@RequestMapping(value="/downloadSDM")
-	public void downloadSDM(int elementID,HttpServletResponse response) throws IOException, InterruptedException{
-		modelService.downloadSDM(elementID,response);
+	public void downloadSDM(HttpServletResponse response) throws IOException, InterruptedException{
+		modelService.downloadSDM(response);
 	}
 	
 	@RequestMapping(value="/downloadModel")

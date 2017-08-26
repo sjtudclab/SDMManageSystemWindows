@@ -62,7 +62,7 @@
           </ul>
         </div>
         <div class="col-xs-10">
-          <p class="biao"><a>首页></a><a>我的模型</a></p>
+          <p class="biao"><a>首页></a><a>SDM></a><a>我的模型</a></p>
           <div class="row" class="col-xs-12">
           <div class="col-xs-3">
               <form class="form-inline">
@@ -81,15 +81,14 @@
             <div class="col-xs-11">
               <table class="table table-striped table-bordered" id="element">
                 <tr>
-                  <td style="background-color:#3fb4c6; color:#fff;width:10%;">模型ID</td>
-                  <td style="background-color:#3fb4c6; color:#fff;width:10%;">模型英文名称</td>
-                  <td style="background-color:#3fb4c6; color:#fff;width:10%;">模型中文名称</td>
-                  <td style="background-color:#3fb4c6; color:#fff;width:20%;">描述</td>
+                  <td style="background-color:#3fb4c6; color:#fff;width:10%;">元素名称</td>
+                  <td style="background-color:#3fb4c6; color:#fff;width:10%;">描述</td>
+                  <td style="background-color:#3fb4c6; color:#fff;width:27%;">内容</td>
                   <td style="background-color:#3fb4c6; color:#fff;width:8%;">状态</td>
                   <td style="background-color:#3fb4c6; color:#fff;width:8%;">通过票数</td>
                   <td style="background-color:#3fb4c6; color:#fff;width:9%;">不通过票数</td>
                   <td style="background-color:#3fb4c6; color:#fff;width:8%;">弃权票数</td>
-                  <td style="background-color:#3fb4c6; color:#fff;width:20%;">建议</td>
+                  <td style="background-color:#3fb4c6; color:#fff;width:10%;">建议</td>
                 </tr>
                 </table>
             </div>
@@ -150,24 +149,21 @@ function checkCR(){
 	        	for(var i=0;i<data.length;i++){
 	        		 var elementID=data[i].elementID;
 		        	 var EnglishName=data[i].englishName;
-		        	 var ChineseName=data[i].chineseName;
 		        	 var description=data[i].description;
+		        	 var content=data[i].content;
 		        	 var state=data[i].state;  //表示元素的审核结果，0表示未审核，1表示通过，-1表示未通过
 		        	 var approvalNum=data[i].approvalNum;
 		        	 var disapprovalNum=data[i].disapprovalNum;
 		        	 var abstainNum=data[i].abstainNum;
 		        	 var reason=data[i].reason;
-		        	 var innerHtml="<tr><td>"+elementID+"</td><td>"+EnglishName+
-		        	 "</td><td>"+ChineseName+"</td><td>"+description+"</td><td>"+map.get(state)+
-		        	"</td><td>"+approvalNum+"</td><td>"+disapprovalNum+"</td><td>"+abstainNum+"</td><td>"+reason+"</td>"
-		        	// "<td><a href=\"javascript:void(0);\" onclick=\"delete(elementID)\""+" class=\"delete\"><span class=\"glyphicon glyphicon-trash\"></span>删除</a></td>"
-		        	+"</tr>";
+		        	 var innerHtml="<tr><td>"+EnglishName+"</td><td>"+description+"</td><td>"+content+"</td><td>"+map.get(state)+
+		        	"</td><td>"+approvalNum+"</td><td>"+disapprovalNum+"</td><td>"+abstainNum+"</td><td>"+reason+"</td></tr>";
 		        	 $("#element").append(innerHtml);
 	        	}	 
 	       	 	// alert("下载成功！");
 	         }
 	         else 
-	        	 alert("下载失败！");
+	        	 alert("查看失败！");
 	       }
 	     });
 }

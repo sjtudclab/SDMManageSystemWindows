@@ -17,7 +17,7 @@ public interface ModelMapperI {
 	@Select("SELECT url FROM element,SDMfile WHERE elementID=#{elementID} AND element.fileID = SDMfile.fileID")
 	public String getUrlByElementID(int elementID);
 	
-	@Insert("INSERT INTO `element`(EnglishName,ChineseName,description,fileID,smallClass,middleClass,bigClass,creator,createTime,state) VALUES (#{EnglishName},#{ChineseName},#{description},#{fileID},#{smallClass},#{middleClass},#{bigClass},#{creator},#{createTime},#{state})")
+	@Insert("INSERT INTO `element`(EnglishName,description,smallClass,middleClass,bigClass,content,creator,createTime,state) VALUES (#{EnglishName},#{description},#{smallClass},#{middleClass},#{bigClass},#{content},#{creator},#{createTime},#{state})")
 	@Options(useGeneratedKeys = true, keyProperty = "elementID",keyColumn = "elementID")
 	public int insertModel(Model model);
 	

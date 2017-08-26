@@ -6,14 +6,13 @@ public class Model {
 
 	private int elementID;
 	private String EnglishName;
-	private String ChineseName;
 	private String description;
-	private String fileID;
 	private int smallClass;
 	private int middleClass;
 	private int bigClass;	
 	private String creator;
 	private String createTime;
+	private String content;
 	private int state;  //记录元素状态 0表示未审核，1表示通过，-1表示未通过
 	private List<CR> crs;
 	private int approvalNum;  //统计元素通过的票数
@@ -22,6 +21,14 @@ public class Model {
 	private String reason;  //表示审核员们给出的建议或理由
     private int vote;     //CCB的投票
     
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 	public int getVote() {
 		return vote;
 	}
@@ -87,13 +94,6 @@ public class Model {
 		EnglishName = englishName;
 	}
 
-	public String getChineseName() {
-		return ChineseName;
-	}
-
-	public void setChineseName(String chineseName) {
-		ChineseName = chineseName;
-	}
 
 	public String getDescription() {
 		return description;
@@ -103,13 +103,6 @@ public class Model {
 		this.description = description;
 	}
 
-	public String getFileID() {
-		return fileID;
-	}
-
-	public void setFileID(String fileID) {
-		this.fileID = fileID;
-	}
 
 	public int getSmallClass() {
 		return smallClass;
@@ -162,6 +155,9 @@ public class Model {
 	public Model() {
 		// TODO Auto-generated constructor stub
 		vote=2;
+		description="";
+		creator="";
+		createTime="";
 	}
 
 }

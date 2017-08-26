@@ -64,9 +64,9 @@
         <div class="col-xs-10">
           <p class="biao"><a>首页></a><a>SDM></a><a>查看并下载SDM</a></p>
           <div class="row" class="col-xs-12">
-          <div class="col-xs-3">
+          <div class="col-xs-2">
               <form class="form-inline">
-              <div class="input-group" class="col-xs-3;">
+              <div class="input-group" class="col-xs-2;">
                 <input type="text" class="form-control" placeholder="关键字...">
                 <span class="input-group-btn">
                   <button class="btn btn-default" type="button">搜索</button>
@@ -74,7 +74,7 @@
               </div>
             </form>
             </div>
-            <div class="col-xs-9">
+            <div class="col-xs-10">
               <form class="form-inline">
                 <div class="col-xs-3">
                   <label for="bigClass">模型层次</label>&nbsp;&nbsp;&nbsp;
@@ -84,24 +84,34 @@
 						<option value="2" id="extends">扩展元素</option>
 					 </select>
 				</div>
-				<div class="col-xs-3">
+				<div class="col-xs-7">
+				<div class="row" class="col-xs-12">
+				 <div class="col-xs-6">
                   <label for="middleClass">模型</label>&nbsp;&nbsp;&nbsp;
                      <select id="middleClass" class="form-control">
-						<option value="3" id="conceptual">概念模型</option>
-						<option value="4" id="logical">逻辑模型</option>
-						<option value="5" id="paltform">平台模型</option>
+						<option value="3" id="conceptual">Conceptual_Model</option>
+						<option value="5" id="logical">Logical_Model</option>
 					 </select>
 					 </div>
-					 <div class="col-xs-3">
+					 <div class="col-xs-6">
 				 <label for="smallClass">类型</label>&nbsp;&nbsp;&nbsp;
                      <select id="smallClass" class="form-control">
-						<option value="6" id="observable">可观测量</option>
-						<option value="15" id="conceptualEntity">概念实体</option>
-						<option value="16" id="logicalEntity">逻辑实体</option>
-						<option value="17" id="platformEntity">平台实体</option>
+						<option value="4" id="Observables">Observables</option>
+						<option value="6" id="CoordinateSystems">CoordinateSystems</option>
+						<option value="7" id="LogicalValueTypes">LogicalValueTypes</option>
+						<option value="8" id="Units">Units</option>
+						<option value="9" id="ValueTypeUnits">ValueTypeUnits</option>
+						<option value="10" id="LandMarks">LandMarks</option>
+						<option value="11" id="ReferencePoints">ReferencePoints</option>
+						<option value="12" id="Constraints">Constraints</option>
+						<option value="13" id="MeasurementSystems">MeasurementSystems</option>
+						<option value="14" id="Measurements">Measurements</option>
+						<option value="15" id="Enumerations">Enumerations</option>
 					 </select>
-					 </div>
+					 </div></div></div>
+			
                   <input class="btn btn-primary" type="button" onclick="checkModel()" value="查询">
+                  <a href="/ModelManage/downloadSDM" download="SDM.face" class="change"><span class="glyphicon glyphicon-pencil"></span>下载</a>
               </form>
             </div>
             
@@ -112,12 +122,10 @@
             <div class="col-xs-10">
               <table class="table table-striped table-bordered" id="element">
                 <tr>
-                  <td style="background-color:#3fb4c6; color:#fff;width:15%;">模型ID</td>
-                  <td style="background-color:#3fb4c6; color:#fff;width:20%;">模型英文名称</td>
-                  <td style="background-color:#3fb4c6; color:#fff;width:10%;">模型中文名称</td>
+                  <td style="background-color:#3fb4c6; color:#fff;width:10%;">元素名称</td>
                   <td style="background-color:#3fb4c6; color:#fff;width:30%;">描述</td>
                   <td style="background-color:#3fb4c6; color:#fff;width:10%;">创建者</td>
-                  <td style="background-color:#3fb4c6; color:#fff;">操作</td>
+                  <td style="background-color:#3fb4c6; color:#fff;width:10%;">创建时间</td>
                 </tr>
                 </table>
             </div>
@@ -154,18 +162,13 @@ function checkModel(){
 	       success: function(data) {
 	         if(data!=null){
 	        	for(var i=0;i<data.length;i++){
-	        		 var elementID=data[i].elementID;
 		        	 var EnglishName=data[i].englishName;
-		        	 var ChineseName=data[i].chineseName;
 		        	 var description=data[i].description;
 		        	 var creator=data[i].creator;
-		        	 var url=data[i].fileID;
-		        	 var fileName=url.split("\\").pop();
-		        	 var innerHtml="<tr><td>"+elementID+"</td><td>"+EnglishName+
-		        	 "</td><td>"+ChineseName+"</td><td>"+description+
-		        	 "</td><td>"+creator+"</td><td>"+
-		              "<a href=\"/ModelManage/downloadSDM?elementID="+elementID+"\" download=\""+fileName+"\" class=\"change\"><span class=\"glyphicon glyphicon-pencil\"></span>下载</a>"+
-		              "</td></tr>";
+		        	 var createTime=data[i].createTime;
+		        	 var innerHtml="<tr><td>"+EnglishName+"</td><td>"+description+
+		        	 "</td><td>"+creator+"</td><td>"+createTime+
+		        	 "</td></tr>";
 		        	 $("#element").append(innerHtml);
 	        	}	 
 	       	 	// alert("下载成功！");
@@ -174,20 +177,6 @@ function checkModel(){
 	        	 alert("下载失败！");
 	       }
 	     });
-}
-function oclValidate(elementID){
-	$.ajax({
-	       type: "POST",
-	       url: "/ModelManage/oclValidate",
-	       //dataType:"json",
-	       data: {elementID:elementID},
-	       success: function(data) {
-	    	   alert(data);
-	       },
-	       error: function(data) {
-		   		alert("验证失败");
-	       }
-	});
 }
 
 </script>

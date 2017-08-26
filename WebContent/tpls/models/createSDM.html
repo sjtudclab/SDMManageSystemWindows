@@ -75,36 +75,34 @@
 				</div>
             </div>
             <div class="form-group">
-                <label for="middleClass" class="col-xs-3 control-label"><span style="color:red">*</span>模型层次:</label>
-                <div class="col-xs-3">
-                 	 <select id="middleClass" class="form-control">
-						<option value="3" id="conceptual">概念模型</option>
-						<option value="4" id="logical">逻辑模型</option>
-						<option value="5" id="paltform">平台模型</option>
+                <label for="middleClass" class="col-xs-3 control-label"><span style="color:red">*</span>模型:</label>
+                <div class="col-xs-5">
+                     <select id="middleClass" class="form-control">
+						<option value="3" id="conceptual">Conceptual_Model</option>
+						<option value="5" id="logical">Logical_Model</option>
 					 </select>
 				</div>
             </div>
           <div class="form-group">
-                <label for="smallClass" class="col-xs-3 control-label"><span style="color:red">*</span>模型层次:</label>
-                <div class="col-xs-3">
+                <label for="smallClass" class="col-xs-3 control-label"><span style="color:red">*</span>类型:</label>
+                <div class="col-xs-5">
                  	 <select id="smallClass" class="form-control">
-						<option value="6" id="observable">可观测量</option>
-						<option value="15" id="conceptualEntity">概念实体</option>
-						<option value="16" id="logicalEntity">逻辑实体</option>
-						
-						<option value="17" id="platformEntity">平台实体</option>
+					<option value="4" id="Observables">Observables</option>
+						<option value="6" id="CoordinateSystems">CoordinateSystems</option>
+						<option value="7" id="LogicalValueTypes">LogicalValueTypes</option>
+						<option value="8" id="Units">Units</option>
+						<option value="9" id="ValueTypeUnits">ValueTypeUnits</option>
+						<option value="10" id="LandMarks">LandMarks</option>
+						<option value="11" id="ReferencePoints">ReferencePoints</option>
+						<option value="12" id="Constraints">Constraints</option>
+						<option value="13" id="MeasurementSystems">MeasurementSystems</option>
+						<option value="14" id="Measurements">Measurements</option>
+						<option value="15" id="Enumerations">Enumerations</option>
 					 </select>
 				</div>
             </div>
-            <div class="form-group" id="div_ChineseName">
-              <label for="ChineseName" class="col-xs-3 control-label"><span style="color:red">*</span>元素中文名称：</label>
-              <div class="col-xs-9">
-                  <input type="text" class="form-control" id="ChineseName" name="ChineseName"  style="width:70%;float:left">
-                  <span class="help-inline" id="help_ChineseName" style="color:red;float:right"></span>
-              </div>
-            </div>
             <div class="form-group" id="div_EnglishName">
-              <label for="EnglishName" class="col-xs-3 control-label"><span style="color:red">*</span>元素英语名称：</label>
+              <label for="EnglishName" class="col-xs-3 control-label"><span style="color:red">*</span>元素名称：</label>
               <div class="col-xs-9">
                   <input type="text" class="form-control" id="EnglishName" name="EnglishName" style="width:70%;float:left">
                   <span class="help-inline" id="help_EnglishName" style="color:red;float:right"></span>
@@ -117,11 +115,11 @@
                   <span class="help-inline" id="help_description" style="color:red;float:right"></span>
               </div>
             </div>
-             <div class="form-group" id="div_SDMFile">
-              <label for="SDMFile" class="col-xs-3 control-label"><span style="color:red">*</span>上传文件：</label>
+            <div class="form-group" id="div_Content">
+              <label for="content" class="col-xs-3 control-label"><span style="color:red">*</span>元素内容：</label>
               <div class="col-xs-9">
-                  <input type="file" id="SDMFile" name="SDMFile" required="required" style="width:70%;float:left">
-                  <span class="help-inline" id="help_SDMFile" style="color:red;float:right"></span>
+                  <input type="text" class="form-control" id="content" name="content"  style="width:70%;float:left">
+                  <span class="help-inline" id="help_Content" style="color:red;float:right"></span>
               </div>
             </div>
             <div class="form-group">
@@ -153,28 +151,22 @@
   })
    function valid() {
 	//一下类型没有生效，不知道为什么
-	document.getElementById("help_ChineseName").innerHTML = "";
 	document.getElementById("help_EnglishName").innerHTML = "";
 	document.getElementById("help_description").innerHTML = "";
-	document.getElementById("help_SDMFile").innerHTML = "";
-	var ChineseName = $("#ChineseName").val().trim();
+	document.getElementById("help_Content").innerHTML = "";
+	var content = $("#content").val().trim();
 	var EnglishName = $("#EnglishName").val().trim();
 	var description = $("#description").val().trim();
-	var ModelFile = $("#SDMFile").val();
-	if (ChineseName == "") {
-		document.getElementById("help_ChineseName").innerHTML = "中文名字不能为空";
-		return false;
-	}
 	if (EnglishName == "") {
-		document.getElementById("help_EnglishName").innerHTML = "英文名字不能为空";
+		document.getElementById("help_EnglishName").innerHTML = "元素名称不能为空";
 		return false;
 	}
 	if (description == "") {
 		document.getElementById("help_description").innerHTML = "描述不能为空";
 		return false;
 	}
-	if (ModelFile == "") {
-		document.getElementById("help_SDMFile").innerHTML = "文件不能为空";
+	if (content == "") {
+		document.getElementById("help_Content").innerHTML = "元素内容不能为空";
 		return false;
 	}
 	return true;
@@ -187,13 +179,11 @@
 			       type: "POST",
 			       url: "/ModelManage/createSDM",    
 			       data: {bigClass:$("#bigClass").val(), middleClass:$("#middleClass").val(),smallClass:$("#smallClass").val(),
-			    	   ChineseName:$("#ChineseName").val(),EnglishName:$("#EnglishName").val(),
-			    	   description:$("#description").val(), creator:getCookie("username"),state:0,fileID:"",createTime:dateString},
+			    	   EnglishName:$("#EnglishName").val(),content:$("#content").val(),
+			    	   description:$("#description").val(), creator:getCookie("username"),state:0,createTime:dateString},
 			       success: function(data) {
 			         if(data!=1){
-			        	 //alert(data);
-			        	 uploadFile(data);
-			       	 	 //alert("创建成功！");
+			       	 	 alert("创建成功！");
 			         }
 			         else 
 			        	 alert("创建失败！");
