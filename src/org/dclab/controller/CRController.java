@@ -1,10 +1,12 @@
 package org.dclab.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.dclab.model.CR;
 import org.dclab.model.Model;
 import org.dclab.service.CRService;
+import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,7 +38,7 @@ public class CRController {
 	}
 
 	@RequestMapping(value="/vote",method=RequestMethod.POST)
-    public int vote(CR cr) throws InterruptedException{
+    public int vote(CR cr) throws InterruptedException, DocumentException, IOException{
     	return crService.vote(cr);
     }
 }

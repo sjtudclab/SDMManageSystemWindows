@@ -82,8 +82,7 @@
               <table class="table table-striped table-bordered" id="element">
                 <tr>
                   <td style="background-color:#3fb4c6; color:#fff;width:10%;">元素名称</td>
-                  <td style="background-color:#3fb4c6; color:#fff;width:15%;">描述</td>
-                  <td style="background-color:#3fb4c6; color:#fff;width:20%;">元素内容</td>
+                  <td style="background-color:#3fb4c6; color:#fff;width:30%;">描述</td>
                   <td style="background-color:#3fb4c6; color:#fff;width:8%;">创建者</td>
                   <td style="background-color:#3fb4c6; color:#fff;width:8%;">创建时间</td>
                   <td style="background-color:#3fb4c6; color:#fff;width:8%;">通过票数</td>
@@ -157,7 +156,7 @@ function checkCR(){
 		        	 var disapprovalNum=data[i].disapprovalNum;
 		        	 var abstainNum=data[i].abstainNum;
 		        	 var CCBVote=data[i].vote;
-		        	 var innerHtml="<tr><td>"+EnglishName+"</td><td>"+description+"</td><td>"+content+
+		        	 var innerHtml="<tr><td>"+EnglishName+"</td><td>"+description+
 		        	 "</td><td>"+creator+"</td><td>"+createTime+
 		        	"</td><td>"+approvalNum+"</td><td>"+disapprovalNum+"</td><td>"+abstainNum+"</td>"
 		        	if(CCBVote!=2)

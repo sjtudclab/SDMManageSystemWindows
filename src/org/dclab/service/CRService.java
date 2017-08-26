@@ -1,13 +1,19 @@
 package org.dclab.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.dclab.mapping.CRMapperI;
+import org.dclab.mapping.ClassMapperI;
 import org.dclab.mapping.ModelMapperI;
 import org.dclab.mapping.UserMapperI;
 import org.dclab.model.CR;
 import org.dclab.model.Model;
+import org.dclab.model.SDMclass;
+import org.dclab.util.SDMaddTool;
+import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +25,12 @@ public class CRService {
     private CRMapperI crMapperI;
 	@Autowired
 	private UserMapperI userMapperI;
+	@Autowired
+	private SDMaddTool SDMaddTools;
+	@Autowired
+	private ClassMapperI classMapperI;
+	private HashMap<Integer,String> nameMap=new HashMap<Integer,String>();
+	
 	public void setCrMapperI(CRMapperI crMapperI) {
 		this.crMapperI = crMapperI;
 	}
@@ -98,7 +110,7 @@ public class CRService {
 		else
 			return null;
 	}
-	public int vote(CR cr) throws InterruptedException{
+	public int vote(CR cr) throws InterruptedException, DocumentException, IOException{
 		int elementID=cr.getEleID();
 		if(crMapperI.getUserState(elementID,cr.getVotor())==0){
 			crMapperI.insertCR(cr);
@@ -107,6 +119,11 @@ public class CRService {
 				int state=crMapperI.getResult(elementID);
 				if(state>0){ //表示审核通过
 					//TODU 调用zookeeper通知用户审核情况
+					getSDMclass();
+					Model model=modelMapperI.getModelByEleID(elementID);
+					System.out.println(nameMap.get(model.getMiddleClass()));
+					System.out.println(nameMap.get(model.getSmallClass()));
+					SDMaddTools.addSDM(model.getContent(), nameMap.get(model.getMiddleClass()), nameMap.get(model.getSmallClass()));
 					return modelMapperI.updateState(elementID,1);
 				}
 				else
@@ -117,5 +134,11 @@ public class CRService {
 			
 		else 
 			return -1;
+	}
+	public void getSDMclass(){
+		List<SDMclass> sdmclasses=classMapperI.getSDMClass();
+		for(int i=0;i<sdmclasses.size();i++){
+			this.nameMap.put(sdmclasses.get(i).getClassID(), sdmclasses.get(i).getEnglishName());
+		}
 	}
 }

@@ -3,7 +3,7 @@ package org.dclab.model;
 public class SDMclass {
 	private int classID;
 	private String ChinsesName;
-	private String EnglishNme;
+	private String EnglishName;
 	
 	public int getClassID() {
 		return classID;
@@ -21,16 +21,17 @@ public class SDMclass {
 		ChinsesName = chinsesName;
 	}
 
-	public String getEnglishNme() {
-		return EnglishNme;
+	public String getEnglishName() {
+		return EnglishName;
 	}
 
-	public void setEnglishNme(String englishNme) {
-		EnglishNme = englishNme;
+	public void setEnglishName(String englishName) {
+		EnglishName = englishName;
 	}
 
 	public SDMclass() {
 		// TODO Auto-generated constructor stub
+		
 	}
 
 }
