@@ -8,6 +8,7 @@ import java.util.List;
 import org.dclab.mapping.CRMapperI;
 import org.dclab.mapping.ClassMapperI;
 import org.dclab.mapping.ModelMapperI;
+import org.dclab.mapping.NameContentMapperI;
 import org.dclab.mapping.UserMapperI;
 import org.dclab.model.CR;
 import org.dclab.model.Model;
@@ -29,6 +30,8 @@ public class CRService {
 	private SDMaddTool SDMaddTools;
 	@Autowired
 	private ClassMapperI classMapperI;
+	@Autowired
+	private NameContentMapperI nameContentMapperI;
 	private HashMap<Integer,String> nameMap=new HashMap<Integer,String>();
 	
 	public void setCrMapperI(CRMapperI crMapperI) {
@@ -121,6 +124,9 @@ public class CRService {
 					//TODU 调用zookeeper通知用户审核情况
 					getSDMclass();
 					Model model=modelMapperI.getModelByEleID(elementID);
+					String content=nameContentMapperI.getContentByName(model.getEnglishName());
+					modelMapperI.updateContent(elementID,content);
+					model.setContent(content);
 					System.out.println(nameMap.get(model.getMiddleClass()));
 					System.out.println(nameMap.get(model.getSmallClass()));
 					SDMaddTools.addSDM(model.getContent(), nameMap.get(model.getMiddleClass()), nameMap.get(model.getSmallClass()));

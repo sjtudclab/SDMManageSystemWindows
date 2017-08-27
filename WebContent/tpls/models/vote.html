@@ -76,12 +76,7 @@
                   <textarea class="form-control" id="description" rows="4" cols="20"></textarea>
               </div>
             </div>
-             <div class="form-group">
-              <label for="content" class="col-xs-3 control-label"><span style="color:red">*</span>元素内容：</label>
-              <div class="col-xs-6">
-                  <textarea class="form-control" id="content" rows="6" cols="40"></textarea>
-              </div>
-            </div>
+           
             <div class="form-group">
               <label for="creator" class="col-xs-3 control-label"><span style="color:red">*</span>创建者：</label>
               <div class="col-xs-6">
@@ -186,7 +181,6 @@
 	         if(data!=null){
 	        	 document.getElementById("englishName").innerHTML=data.englishName;   	
 	        	 document.getElementById("description").innerHTML=data.description;
-	        	 document.getElementById("content").innerHTML=data.content;
 	        	 document.getElementById("creator").innerHTML=data.creator;
 	        	 document.getElementById("createTime").innerHTML=data.createTime;
 	        	 document.getElementById("approvalNum").innerHTML=data.approvalNum;

@@ -116,13 +116,7 @@
                   <span class="help-inline" id="help_description" style="color:red;float:right"></span>
               </div>
             </div>
-            <div class="form-group" id="div_Content">
-              <label for="content" class="col-xs-3 control-label"><span style="color:red">*</span>元素内容：</label>
-              <div class="col-xs-9">
-                  <textarea class="form-control" id="content" rows="6" cols="20" style="width:80%;float:left"></textarea>
-                  <span class="help-inline" id="help_Content" style="color:red;float:right"></span>
-              </div>
-            </div>
+          
             <div class="form-group">
               <div class="col-xs-offset-3 col-xs-10" align="center">
                 <input type="button" onclick="createModel()" class="btn btn-primary"style="font-size:1.5em;text-align:center;" value="确&nbsp;认&nbsp;提&nbsp;交">
@@ -154,8 +148,6 @@
 	//一下类型没有生效，不知道为什么
 	document.getElementById("help_EnglishName").innerHTML = "";
 	document.getElementById("help_description").innerHTML = "";
-	document.getElementById("help_Content").innerHTML = "";
-	var content = $("#content").val().trim();
 	var EnglishName = $("#EnglishName").val().trim();
 	var description = $("#description").val().trim();
 	if (EnglishName == "") {
@@ -164,10 +156,6 @@
 	}
 	if (description == "") {
 		document.getElementById("help_description").innerHTML = "描述不能为空";
-		return false;
-	}
-	if (content == "") {
-		document.getElementById("help_Content").innerHTML = "元素内容不能为空";
 		return false;
 	}
 	return true;
@@ -180,7 +168,7 @@
 			       type: "POST",
 			       url: "/ModelManage/createSDM",    
 			       data: {bigClass:$("#bigClass").val(), middleClass:$("#middleClass").val(),smallClass:$("#smallClass").val(),
-			    	   EnglishName:$("#EnglishName").val(),content:$("#content").val(),
+			    	   EnglishName:$("#EnglishName").val(),
 			    	   description:$("#description").val(), creator:getCookie("username"),state:0,createTime:dateString},
 			       success: function(data) {
 			         if(data!=1){
