@@ -78,6 +78,7 @@
                 <label for="middleClass" class="col-xs-3 control-label"><span style="color:red">*</span>模型:</label>
                 <div class="col-xs-5">
                      <select id="middleClass" class="form-control">
+                     	<option value='0'>请选择</option>
 						<option value="3" id="conceptual">Conceptual_Model</option>
 						<option value="5" id="logical">Logical_Model</option>
 					 </select>
@@ -87,17 +88,7 @@
                 <label for="smallClass" class="col-xs-3 control-label"><span style="color:red">*</span>类型:</label>
                 <div class="col-xs-5">
                  	 <select id="smallClass" class="form-control">
-					<option value="4" id="Observables">Observables</option>
-						<option value="6" id="CoordinateSystems">CoordinateSystems</option>
-						<option value="7" id="LogicalValueTypes">LogicalValueTypes</option>
-						<option value="8" id="Units">Units</option>
-						<option value="9" id="ValueTypeUnits">ValueTypeUnits</option>
-						<option value="10" id="LandMarks">LandMarks</option>
-						<option value="11" id="ReferencePoints">ReferencePoints</option>
-						<option value="12" id="Constraints">Constraints</option>
-						<option value="13" id="MeasurementSystems">MeasurementSystems</option>
-						<option value="14" id="Measurements">Measurements</option>
-						<option value="15" id="Enumerations">Enumerations</option>
+						<option value='0'>请选择</option>
 					 </select>
 				</div>
             </div>
@@ -143,6 +134,35 @@
 				  		$("."+i).remove();
 		  }  
   }
+	  //找到下拉框
+		 //给下拉框注册事件 
+		 $("#middleClass").change(function(){ 
+		  var middleValue = $(this).val(); 
+		  if( middleValue == 3){ 
+			   $("#smallClass").empty();
+			   $("#smallClass").prepend("<option value='0'>请选择</option>");   //为Select插入一个Option(第一个位置)   
+			   $("#smallClass").append("<option value='4' id='Observables'>Observables</option>");
+			 
+		  }else if(middleValue == 5){
+			  $("#smallClass").empty();
+			  $("#smallClass").prepend("<option value='0'>请选择</option>");   //为Select插入一个Option(第一个位置)   
+			  $("#smallClass").append("<option value='6' id='CoordinateSystems'>CoordinateSystems</option>");
+			  $("#smallClass").append("<option value='7' id='LogicalValueTypes'>LogicalValueTypes</option>");
+			  $("#smallClass").append("<option value='8' id='Units'>Units</option>");
+			  $("#smallClass").append("<option value='9' id='ValueTypeUnits'>ValueTypeUnits</option>");
+			  $("#smallClass").append("<option value='10' id='LandMarks'>LandMarks</option>");
+			  $("#smallClass").append("<option value='11' id='ReferencePoints'>ReferencePoints</option>");
+			  $("#smallClass").append("<option value='12' id='Constraints'>Constraints</option>");
+			  $("#smallClass").append("<option value='13' id='MeasurementSystems'>MeasurementSystems</option>");
+			  $("#smallClass").append("<option value='14' id='Measurements'>Measurements</option>");
+			  $("#smallClass").append("<option value='15' id='Enumerations'>Enumerations</option>");
+		  }
+		  else{ 
+		   //carnameValue为空的情况，隐藏第二个下拉框 
+		   	  $("#smallClass").empty();
+			  $("#smallClass").empty();
+		  } 
+		 })
   })
    function valid() {
 	//一下类型没有生效，不知道为什么
@@ -171,10 +191,12 @@
 			    	   EnglishName:$("#EnglishName").val(),
 			    	   description:$("#description").val(), creator:getCookie("username"),state:0,createTime:dateString},
 			       success: function(data) {
-			         if(data!=1){
-			       	 	 alert("创建成功！");
+			         if(data==-2){
+			       	 	 alert("名字输入错误！");
 			         }
-			         else 
+			         else if(data>=0) 
+			        	 alert("创建成功！");
+			         else
 			        	 alert("创建失败！");
 			       }
 			     }); 

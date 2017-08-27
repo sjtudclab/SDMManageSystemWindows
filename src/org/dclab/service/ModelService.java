@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.dclab.mapping.ModelMapperI;
 import org.dclab.mapping.MyModelMapperI;
+import org.dclab.mapping.NameContentMapperI;
 import org.dclab.model.Model;
 import org.dclab.model.MyModel;
 import org.dclab.model.ProjectList; 
@@ -29,6 +30,8 @@ public class ModelService {
 	private ModelMapperI modelMapperI;
 	@Autowired
 	private MyModelMapperI myModelMapperI;
+	@Autowired
+	private NameContentMapperI nameContentMapperI;
 	public static int CLIENT_PORT = 2181;
 	public static int TIME_OUT = 2000;
 
@@ -78,6 +81,9 @@ public class ModelService {
 	}
 	public int createSDM(Model model) throws Exception {
 		System.out.println("here:" + model.getDescription());
+		if(nameContentMapperI.getContentByName(model.getEnglishName())==null){
+			return -2;
+		}
 		if (modelMapperI.insertModel(model) == 1) {
 			System.out.println("sucess");
 			return model.getElementID();
