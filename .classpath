@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.0">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.web"/>
@@ -61,5 +56,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dom4j-2.0.1-sources.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dom4j-2.0.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jaxen-1.1.6.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

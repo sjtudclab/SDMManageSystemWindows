@@ -36,10 +36,14 @@ public class SDMaddTool {
 	    			 Element element2 = (Element) iterator.next();
 	    			 if(element2.attributeValue("name").equals(smallclass)){
 	    				 element2.addText(content);
+	    				 System.out.println("content:"+element2.getText());
 	    				 Writer fiWriter = new FileWriter(dir);
 	    				 /*OutputFormat format = OutputFormat.createPrettyPrint();
 	    				 format.setEncoding("gb2312");*/
+	    				 
+	    				 
 	    				 XMLWriter xmlWriter = new XMLWriter(fiWriter);
+	    				 xmlWriter.setEscapeText(false);
 	    				 xmlWriter.write(document);
 	    				 xmlWriter.flush();
 	    				 xmlWriter.close();

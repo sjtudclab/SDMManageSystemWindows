@@ -35,7 +35,7 @@ public interface MyModelMapperI {
 	@Select("SELECT fileUrl FROM `model` WHERE elementID=#{elementId}")
 	public String getFileIDByEId(int elementId);
 	
-	@Select("SELECT EnglishName,fileID,elementID FROM `model` WHERE creator=#{username}")
+	@Select("SELECT EnglishName,fileUrl,elementID FROM `model` WHERE creator=#{username}")
 	public List<ProjectList> getProjectlist(String username);
 }
 

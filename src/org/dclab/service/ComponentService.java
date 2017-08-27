@@ -25,16 +25,19 @@ public class ComponentService {
 			String SourceComponentType,String DestinationConponentType,String IOname,String IOtype,HttpServletResponse response) throws InterruptedException, IOException{	
 		String dir = System.getProperty("project.root") + "files";
 		String dir1 = dir + File.separator + "newDemo_TMP";
+		System.out.println("dir1:"+dir1);
 		File fileDir=new File(dir1);
 		deleteDir(fileDir);
 		String filename = "Demo.zip";
 		response.setHeader("content-disposition", "attachment;filename="  
                 + URLEncoder.encode(filename, "UTF-8"));
-		ZipTool.unzip(dir+File.separator+"newDemo_IO_TMP.zip","newDemo_TMP");
+		ZipTool.unzip(dir+File.separator+"newDemo_TMP.zip",dir);
 		fileDir=new File(dir1);
 		Process process = null;
 		String command1 = "python " + "cg.py "+ DestinationConponent+" "+SourceComponent+" "+MessageType+" "+TSStype+" "+IOname+" "+IOtype;
 		System.out.println("command1:" + command1);
+		System.out.println("dir1:"+dir1);
+		String command2 = "python fff.py";
 		process = Runtime.getRuntime().exec(command1, null, new File(dir1));
 		process.waitFor();
 		File file = new File(dir1);
@@ -52,7 +55,6 @@ public class ComponentService {
 				ex.printStackTrace();
 			}
 		}
-		deleteDir(fileDir);
 	}
 
     /**
