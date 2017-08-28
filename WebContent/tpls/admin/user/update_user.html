@@ -146,9 +146,9 @@
 	         if(data==1){
 	        	 setCookie("phone",$("#phone").val(),1);
 	        	 setCookie("email",$("#email").val(),1);
-	        	 //document.getElementById("email").value=$("#email").val();
-	       	 	 //document.getElementById("phone").value=$("#phone").val();
-	       	 	 location.reload;
+	        	 document.getElementById("email").value=$("#email").val();
+	       	 	 document.getElementById("phone").value=$("#phone").val();
+	       	 	 location.reload(true);
 	       	 	 alert("修改成功！");
 	         }
 	         else 

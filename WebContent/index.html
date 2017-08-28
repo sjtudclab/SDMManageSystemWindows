@@ -70,7 +70,7 @@
        dataType:"json",
        data: {username:$("#username").val(), password:$("#password").val()},
        success: function(data) {
-         if(data!=null){
+         if(data!=null&&data.lenth!=0){
         	//alert(data['user'].username);
         	 setCookie("username",data['user'].username,1);
         	 setCookie("phone",data['user'].phone,1);
